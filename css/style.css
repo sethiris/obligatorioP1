@@ -1,0 +1,27 @@
+label {
+  text-align: center;
+
+}
+
+.tab{
+  padding-top: 20px;
+}
+
+.ui-grid-solo {
+  margin-top: 10%;
+  margin-left: 15%;
+  margin-right: 15%;
+  margin-bottom: 10%;
+
+}
+
+@media screen and (min-width: 720px){
+  /* con esto definimos un margen diferente cuando la pantalla esta por encima de 720px     */
+  .ui-grid-solo {
+    margin-top: 10%;
+    margin-left: 40%;
+    margin-right: 40%;
+    margin-bottom: 10%;
+
+  }
+}

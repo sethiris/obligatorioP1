@@ -2,13 +2,42 @@
 <html>
   <head>
     <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Traking System</title>
-    <link rel="stylesheet" href="/css/style.css" media="screen" title="no title">
-    <script src="script/jQuery.js" charset="utf-8"></script>
+    <link rel="stylesheet" href="css/style.css" media="screen" title="no title">
+    <link rel="stylesheet" href="css/jquery.mobile-1.4.5.min.css">
+    <script src="script/jquery.min.js" charset="utf-8"></script>
+    <script src="script/jquery.mobile-1.4.5.js" ></script>
     <script src="script/validaciones.js" charset="utf-8"></script>
     <script src="script/iniciar.js" charset="utf-8"></script>
   </head>
   <body>
-    
+    <div data-role="header"><h3>Correo Tracking System</h3></div><br> <br>
+    <div id="divLogin">
+      <div class="ui-grid-solo">
+        <div class="ui-bar ui-bar-a">
+            <label><h2>Usuario</h2></label><input type="text" id="txtUsuario">
+            <label><h2>Contraseña</h2></label> <input type="text" id="txtPass"><br>
+            <input type="button" id="btnLogin" value="Login">
+          </div>
+        </div>
+    </div>
+  </div>
+    <div data-role="tabs" id="divMenu">
+      <div data-role="navbar">
+        <ul>
+          <li><a href="#divConsultar">Consultas</a></li>
+          <li><a href="#divNuevo">Nuevo Paquete </a></li>
+          <li><a href="#divAsignar">Asignar Paquete</a></li>
+          <li><a href="#divReporte">Reportes</a></li>
+          <li><a href="#divLogout" id="Logout">Logout</a></li>
+        </ul>
+        <div class="tab" id="divConsultar">Consultas</div>
+        <div class="tab" id="divNuevo">Ingresar nuevo paquete</div>
+        <div class="tab" id="divAsignar">Asignar Paquete a cadete</div>
+        <div class="tab" id="divReporte">Reporte</div>
+        <div class="tab" id="divLogout">Logout</div>
+      </div>
+    </div>
   </body>
 </html>
