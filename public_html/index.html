@@ -1,77 +1,78 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Traking</title>
-    <link rel="stylesheet" href="css/jquery.mobile-1.4.5.min.css">
-    <link rel="stylesheet" href="css/style.css" media="screen" title="no title">
-    <script src="script/jquery.min.js" charset="utf-8"></script>
-    <script src="script/jquery.mobile-1.4.5.js" ></script>
-    <script src="script/validaciones.js" charset="utf-8"></script>
-    <script src="script/usuarios.js" charset="utf-8"></script>
-    <script src="script/iniciar.js" charset="utf-8"></script>
-  </head>
-  <body>
-    <div data-role="header" class="banner"><h3>Tracking</h3></div>
-    <div id="divLogin">
-      <div class="ui-grid-solo">
-        <div class="ui-bar ui-bar-a">
-          <label><h2>Usuario</h2></label><input type="text" id="txtUsuario">
-          <label><h2>Contraseña</h2></label> <input type="password" id="txtClave"><br>
-          <input type="button" id="btnLogin" value="Login">
-          <div id="divMsgLogin" class="error"></div>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Traking</title>
+        <link rel="stylesheet" href="css/jquery.mobile-1.4.5.min.css">
+        <link rel="stylesheet" href="css/style.css" media="screen" title="no title">
+        <script src="script/jquery.min.js" charset="utf-8"></script>
+        <script src="script/jquery.mobile-1.4.5.js" ></script>
+        <script src="script/validaciones.js" charset="utf-8"></script>
+        <script src="script/usuarios.js" charset="utf-8"></script>
+        <script src="script/iniciar.js" charset="utf-8"></script>
+    </head>
+    <body>
+        <div data-role="header" class="banner"><h3>Tracking</h3></div>
+        <div id="divLogin">
+            <div class="ui-grid-solo">
+                <div class="ui-bar ui-bar-a">
+                    <label><h2>Usuario</h2></label><input type="text" id="txtUsuario">
+                    <label><h2>Contraseña</h2></label> <input type="password" id="txtClave"><br>
+                    <input type="button" id="btnLogin" value="Login">
+                    <div id="divMsgLogin" class="error"></div>
+                </div>
+            </div>
         </div>
-      </div>
-    </div>
-  </div>
 
-    <div data-role="tabs" id="divMenu">
-      <div data-role="navbar">
-        <ul id="ulMenu1">
-          <li><a id="iniciar"href="#divConsultar">Consultas</a></li>
-          <li><a href="#divNuevo">Nuevo Paquete </a></li>
-          <li><a href="#divAsignar">Asignar Paquete</a></li>
-          <li><a href="#divReporte">Reportes</a></li>
-          <li><a href="#divLogout" class="Logout">Logout</a></li>
-        </ul>
-        <ul id="ulMenu2">
-          <li><a id="iniciar2" href="#divConsultar">Consultas</a></li>
-          <li><a href="#divLogout" class="Logout">Logout</a></li>
-        </ul>
-        <div class="tab" id="divConsultar">Consultas</div>
-        <div class="tab" id="divNuevo">
-            <div data-role="header"><h2> Ingreso nuevo paquete </h2></div>
-            <div data-role="header">Remitente</div>
-            <label >CI </label><input type="text" id="txtCIRemitente">
-            <div class="ui-grid-a">
-            <div class="ui-block-a">
-            <label >Nombre </label><input type="text" id="txtNombreRemitente">
-            </div>
-            <div class="ui-block-b">
-            <label >Apellido</label><input type="text" id="txtApellidoRemitente">
-            </div>
-          </div>
-            <div data-role="header">Destinatario</div>
-            <label>CI</label><input type="text" id="txtCIDestinatario">
-            <div class="ui-grid-a">
-              <div class="ui-block-a">
-            <label>Nombre</label><input type="text" id="txtNombreDestinatario">
-            </div>
-            <div class="ui-block-b">
-            <label >Apellido</label><input type="text" id="txtApellidoDestinatario">
-          </div>
-            </div>
 
-            <label >Direccion</label><input type="text" id="txtDireccionDestinatario">
-            <div data-role="header">Paquete</div>
-            <label >Peso</label><input type="text">
-            <input type="button" id="btnIngresarNuevo" value="Ingresar nuevo">
-          </div>
-        <div class="tab" id="divAsignar">Asignar Paquete a cadete</div>
-        <div class="tab" id="divReporte">Reporte</div>
-        <div class="tab" id="divLogout"></div>
-      </div>
-    </div>
-  </body>
+        <div data-role="tabs" id="divMenu">
+            <div data-role="navbar">
+                <ul id="ulMenu1">
+                    <li><a id="iniciar" href="#divConsultar">Consultas</a></li>
+                    <li><a href="#divNuevo">Nuevo Paquete </a></li>
+                    <li><a href="#divAsignar">Asignar Paquete</a></li>
+                    <li><a href="#divReporte">Reportes</a></li>
+                    <li><a href="#divLogout" class="Logout">Logout</a></li>
+                </ul>
+                <ul id="ulMenu2">
+                    <li><a id="iniciar2" href="#divConsultar">Consultas</a></li>
+                    <li><a href="#divLogout" class="Logout">Logout</a></li>
+                </ul>
+                <!--Acá empieza el contenido de las pestañas -->
+                <div class="tab" id="divConsultar">Consultas</div>
+                <div class="tab" id="divNuevo">
+                    <div data-role="header"><h2> Ingreso nuevo paquete </h2></div>
+                    <div data-role="header">Remitente</div>
+                    <label >CI </label><input type="text" id="txtCIRemitente">
+                    <div class="ui-grid-a">
+                        <div class="ui-block-a">
+                            <label >Nombre </label><input type="text" id="txtNombreRemitente">
+                        </div>
+                        <div class="ui-block-b">
+                            <label >Apellido</label><input type="text" id="txtApellidoRemitente">
+                        </div>
+                    </div>
+                    <div data-role="header">Destinatario</div>
+                    <label>CI</label><input type="text" id="txtCIDestinatario">
+                    <div class="ui-grid-a">
+                        <div class="ui-block-a">
+                            <label>Nombre</label><input type="text" id="txtNombreDestinatario">
+                        </div>
+                        <div class="ui-block-b">
+                            <label >Apellido</label><input type="text" id="txtApellidoDestinatario">
+                        </div>
+                    </div>
+
+                    <label >Direccion</label><input type="text" id="txtDireccionDestinatario">
+                    <div data-role="header">Paquete</div>
+                    <label >Peso</label><input type="text">
+                    <input type="button" id="btnIngresarNuevo" value="Ingresar nuevo">
+                </div>
+                <div class="tab" id="divAsignar">Asignar Paquete a cadete</div>
+                <div class="tab" id="divReporte">Reporte</div>
+                <div class="tab" id="divLogout"></div>
+            </div>
+        </div>
+    </body>
 </html>

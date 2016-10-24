@@ -77,3 +77,14 @@ function validoCI(pCI) {
     }
     return CIValida;
 }
+//valida que elpeso este dentro del limite permitido para cargar por la empresa
+function validarPeso(pPeso) {
+    var valido = false;
+    if (validarNumPositivo(pPeso)) {
+        var pPesoNum = parseFloat(pPeso);
+        if (pPesoNum <= 1000) {
+            valido = true;
+        }
+    }
+    return valido;
+}
