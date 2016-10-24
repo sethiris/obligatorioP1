@@ -7,10 +7,35 @@ label {
   padding-top: 20px;
 }
 
+.banner{
+  height:100px;
+  background-color: red;
+}
+.ui-bar-inherit{
+
+  background-color: RED;
+}
+
 .ui-grid-solo {
   margin-top: 10%;
   margin-left: 15%;
   margin-right: 15%;
+  margin-bottom: 10%;
+
+}
+.error {
+  color: red;
+  text-align: center;
+}
+
+#divMenu {
+  margin-left: 20%;
+  margin-right: 20%;
+
+}
+#divNuevo {
+  margin-left: 20%;
+  margin-right: 20%;
   margin-bottom: 10%;
 
 }

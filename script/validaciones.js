@@ -11,7 +11,7 @@ function validarNum(pNumero){
     return retorno;
 }
 
-function esPositivo(pNumero){
+function validarNumPositivo(pNumero){
   //valida si es numero positivo, dependencia de validarNum
   // devuelve falso si una de esas dos condiciones no se cumple
   var retorno=true;
@@ -23,7 +23,7 @@ function esPositivo(pNumero){
 
 //------------------------Strings----------------------------------//
 
-function esSinNumeros(pTexto){
+function validarSoloTexto(pTexto){
   var errores=0;
   var retorno=true;
   if (esTexto(pTexto)) {
@@ -43,7 +43,7 @@ function esSinNumeros(pTexto){
   return retorno;
 }
 
-function esTexto(pTexto){
+function validarTexto(pTexto){
   var retorno=false;
   if(isNaN(pTexto) && pTexto.length>0){
     retorno=true;
@@ -51,7 +51,3 @@ function esTexto(pTexto){
   return retorno;
 }
 //------------------------Especiales----------------------------------//
-
-function validarCI(pCI){
-
-}
