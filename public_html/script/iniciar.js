@@ -4,6 +4,12 @@ function iniciarPrograma() {
     $("#divMenu").hide();
     $("#btnLogin").click(login);
     $(".Logout").click(logout);
+    $("#txtClave").keyup(function(e){ //se crea funcion anonima que toma como parametro el evento de keyup
+    if(e.keyCode == 13) // 13 corresponde al codigo ascii del enter
+    {
+      login();
+    }
+});
     //$("#txtCIRemitente").blur(validarRemitente); hacer la funcionalidad para todos los campos
 }
 
