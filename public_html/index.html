@@ -6,11 +6,15 @@
         <title>Traking</title>
         <link rel="stylesheet" href="css/jquery.mobile-1.4.5.min.css">
         <link rel="stylesheet" href="css/style.css" media="screen" title="no title">
+        <link rel="stylesheet" href="font/css/font-awesome.min.css">
         <script src="script/jquery.min.js" charset="utf-8"></script>
         <script src="script/jquery.mobile-1.4.5.js" ></script>
         <script src="script/validaciones.js" charset="utf-8"></script>
         <script src="script/usuarios.js" charset="utf-8"></script>
+        <script src="script/paquetes.js" charset="utf-8"></script>
+        <script src="script/repartidores.js" charset="utf-8"></script>
         <script src="script/iniciar.js" charset="utf-8"></script>
+
     </head>
     <body>
         <div data-role="header" class="banner"><h3>Tracking</h3></div>
@@ -29,11 +33,11 @@
         <div data-role="tabs" id="divMenu">
             <div data-role="navbar">
                 <ul id="ulMenu1">
-                    <li><a id="iniciar" href="#divConsultar">Consultas</a></li>
-                    <li><a href="#divNuevo">Nuevo Paquete </a></li>
-                    <li><a href="#divAsignar">Asignar Paquete</a></li>
-                    <li><a href="#divReporte">Reportes</a></li>
-                    <li><a href="#divLogout" class="Logout">Logout</a></li>
+                    <li><a id="iniciar" href="#divConsultar"><i class="fa fa-search" aria-hidden="true"></i> Consultas</a></li>
+                    <li><a href="#divNuevo"> <i class="fa fa-cube" aria-hidden="true"></i> Nuevo Paquete </a></li>
+                    <li><a href="#divAsignar" id="liAsignar"> <i class="fa fa-truck" aria-hidden="true"></i> Asignar Paquete</a></li>
+                    <li><a href="#divReporte"> <i class="fa fa-bar-chart" aria-hidden="true"></i> Reportes</a></li>
+                    <li><a href="#divLogout" class="Logout"> <i class="fa fa-sign-out" aria-hidden="true"></i>Logout</a></li>
                 </ul>
                 <ul id="ulMenu2">
                     <li><a id="iniciar2" href="#divConsultar">Consultas</a></li>
@@ -73,8 +77,22 @@
 
                 <!--Pestaña asignar paquete -->
                 <div class="tab" id="divAsignar">
-                  Asignar Paquete a cadete
-                  
+                  <p id="liMoto">Seleccione un repartidor disponible o un paquete pendiente para asignar </p>
+                  <div class="ui-grid-a">
+                    <div class="ui-block-a">
+                   <ul data-role="listview" id="ulRepartidoresDisponibles" data-inset="true">
+                     <li ><a></a></li>
+
+                   </ul>
+                 </div>
+                 <div class="ui-block-b">
+                   <ul data-role="listview" id="ulPaquetesPendientes">
+                     <li data-role='list-divider'>Paquetes Pendientes</li>
+
+                   </ul>
+                 </div>
+                 </div>
+                  <input type="button" id="btnAsignar" value="Asignar">
                 </div>
 
                 <div class="tab" id="divReporte">Reporte</div>
