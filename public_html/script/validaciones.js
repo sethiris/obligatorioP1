@@ -27,7 +27,6 @@ function validarNumPositivo(pNumero) {
 
 function validarSoloTexto(pTexto) {//valida que no haya ningún número dentro del campo de texto
     var errores = 0;
-<<<<<<< HEAD
     var esTexto = true;
     if (validarTexto(pTexto)) {
         var i = 0;
@@ -36,30 +35,14 @@ function validarSoloTexto(pTexto) {//valida que no haya ningún número dentro d
                 if (pTexto.charAt(i) != " ") {
                     esTexto=false;
                 }
-=======
-    var soloTexto = true;
-    if (validarTexto(pTexto)) {
-        for (var i = 0; i < pTexto.length; i++) {
-            if (!(pTexto.charCodeAt(i) > 64 && pTexto.charCodeAt(i) < 91) ||
-                    !(pTexto.charCodeAt(i) > 96 && pTexto.charCodeAt(i) < 123) || pTexto.charAt(i) !== " ") {
-                //de 65 a 90 son letras mayúsculas; de 97 a 122 son letras minúsculas
-                errores++;
->>>>>>> origin/master
             }
             i++;
         }
     }
-<<<<<<< HEAD
     else{
       esTexto=false;
     }
     return esTexto;
-=======
-    if (errores !== 0) {
-        soloTexto = false;
-    }
-    return soloTexto;
->>>>>>> origin/master
 }
 
 function validarTexto(pTexto) {
