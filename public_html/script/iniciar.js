@@ -4,8 +4,63 @@ function iniciarPrograma() {
     $("#divMenu").hide();
     $("#btnLogin").click(login);
     $(".Logout").click(logout);
+<<<<<<< HEAD
     $("#btnIngresarNuevoPaquete").click(ingresarNuevoPaquete);
+=======
+    $("#txtClave").keyup(function(e){ //se crea funcion anonima que toma como parametro el evento de keyup
+    if(e.keyCode == 13) // 13 corresponde al codigo ascii del enter
+    {
+      login();
+    }});
+
+   $("#liAsignar").click(mostrarDisponibles);
+>>>>>>> 969e423fd2897a50e3db68511d04303ebf41aa3d
     //$("#txtCIRemitente").blur(validarRemitente); hacer la funcionalidad para todos los campos
+}
+function mostrarDisponibles(){
+    $("#ulRepartidoresDisponibles").html("<li data-role='list-divider'>Repartidores</li>");
+    var disponibles= repartidoresDisponibles();
+    for (var x in disponibles) {
+      switch (disponibles[x].medio) {
+        case "Moto":
+          $("#ulRepartidoresDisponibles").append("<li id=li"+ disponibles[x].codigo + "> <i class='fa fa-motorcycle' aria-hidden='true'></i> " + disponibles[x].nombre + "</li>");
+          break;
+        case "Camioneta":
+          $("#ulRepartidoresDisponibles").append("<li id=li"+ disponibles[x].codigo + "> <i class='fa fa-car' aria-hidden='true'></i> " + disponibles[x].nombre + "</li>");
+          break;
+          case "Bicicleta":
+            $("#ulRepartidoresDisponibles").append("<li id=li"+ disponibles[x].codigo + "> <i class='fa fa-bicycle' aria-hidden='true'></i> " + disponibles[x].nombre + "</li>");
+            break;
+        default:
+
+      }
+
+      $('#li'+ disponibles[x].codigo ).bind('click', { codigo: disponibles[x].codigo }, hola);
+
+
+    }
+    $("#ulRepartidoresDisponibles").listview('refresh');
+    //
+
+}
+
+function hola (pCodigo) {
+  var repartidor=getRepartidor(pCodigo.data.codigo);
+  switch (repartidor.medio) {
+    case "Moto":
+      alert("Seleccione un paquete de la lista para asignar: (Se muestran solo los paquetes hasta 50 kilos)");
+      break;
+      case "Camioneta":
+        alert("Seleccione un paquete de la lista para asignar: (Se muestran solo los paquetes hasta 1000 kilos)");
+        break;
+        case "Bicicleta":
+          alert("Seleccione un paquete de la lista para asignar: (Se muestran solo los paquetes hasta 20 kilos)");
+          break;
+    default:
+
+  }
+
+
 }
 
 function login() {
@@ -21,8 +76,8 @@ function login() {
             mensaje = "El usuario no existe";
             break;
         case 1:
-            $("#divMenu").show();
             $("#divLogin").hide();
+            $("#divMenu").show();
             $("#ulMenu2").hide();
             $("#ulMenu1").show();
             $("#divMsgLogin").hide();

@@ -30,7 +30,6 @@ function validarSoloTexto(pTexto) {//valida que no haya ningún número dentro d
     var soloTexto = true;
     if (validarTexto(pTexto)) {
         for (var i = 0; i < pTexto.length; i++) {
-            if (!(pTexto.charCodeAt(i) > 64 && pTexto.charCodeAt(i) < 91) || 
             if (!(pTexto.charCodeAt(i) > 64 && pTexto.charCodeAt(i) < 91) ||
                     !(pTexto.charCodeAt(i) > 96 && pTexto.charCodeAt(i) < 123) || pTexto.charAt(i) !== " ") {
                 //de 65 a 90 son letras mayúsculas; de 97 a 122 son letras minúsculas
