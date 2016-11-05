@@ -4,17 +4,15 @@ function iniciarPrograma() {
     $("#divMenu").hide();
     $("#btnLogin").click(login);
     $(".Logout").click(logout);
-<<<<<<< HEAD
     $("#btnIngresarNuevoPaquete").click(ingresarNuevoPaquete);
-=======
     $("#txtClave").keyup(function(e){ //se crea funcion anonima que toma como parametro el evento de keyup
-    if(e.keyCode == 13) // 13 corresponde al codigo ascii del enter
+    if(e.keyCode === 13) // 13 corresponde al codigo ascii del enter
     {
       login();
     }});
 
    $("#liAsignar").click(mostrarDisponibles);
->>>>>>> 969e423fd2897a50e3db68511d04303ebf41aa3d
+
     //$("#txtCIRemitente").blur(validarRemitente); hacer la funcionalidad para todos los campos
 }
 function mostrarDisponibles(){
