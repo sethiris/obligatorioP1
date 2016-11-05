@@ -5,14 +5,25 @@ function iniciarPrograma() {
     $("#btnLogin").click(login);
     $(".Logout").click(logout);
     $("#txtClave").keyup(function(e){ //se crea funcion anonima que toma como parametro el evento de keyup
-    if(e.keyCode == 13) // 13 corresponde al codigo ascii del enter
+    if(e.keyCode === 13) // 13 corresponde al codigo ascii del enter
     {
       login();
     }});
 
    $("#liAsignar").click(mostrarDisponibles);
-    //$("#txtCIRemitente").blur(validarRemitente); hacer la funcionalidad para todos los campos
+  $("#txtNombreDestinatario").blur(validarNombreDestinatario);
+
 }
+
+function validarNombreDestinatario(){
+    var nombreD=$("#txtNombreDestinatario").val();
+    if (validarSoloTexto(nombreD)) {
+
+    } else {
+      alert("Nombre no valido");
+    }
+}
+
 function mostrarDisponibles(){
     $("#ulRepartidoresDisponibles").html("<li data-role='list-divider'>Repartidores</li>");
     var disponibles= repartidoresDisponibles();
@@ -31,7 +42,7 @@ function mostrarDisponibles(){
 
       }
 
-      $('#li'+ disponibles[x].codigo ).bind('click', { codigo: disponibles[x].codigo }, hola);
+      $('#li'+ disponibles[x].codigo ).click(SeleccionarRepartidor);
 
 
     }
@@ -40,7 +51,7 @@ function mostrarDisponibles(){
 
 }
 
-function hola (pCodigo) {
+function asignar (pCodigo) {
   var repartidor=getRepartidor(pCodigo.data.codigo);
   switch (repartidor.medio) {
     case "Moto":
