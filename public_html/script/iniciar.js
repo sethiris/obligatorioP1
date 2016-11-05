@@ -4,6 +4,7 @@ function iniciarPrograma() {
     $("#divMenu").hide();
     $("#btnLogin").click(login);
     $(".Logout").click(logout);
+    $("#btnIngresarNuevoPaquete").click(ingresarNuevoPaquete);
     //$("#txtCIRemitente").blur(validarRemitente); hacer la funcionalidad para todos los campos
 }
 
@@ -48,4 +49,24 @@ function logout() {
     $("#divLogin").show();
     $("#divMsgLogin").show();
 
+}
+
+function validarRemitente(pCI, pNom, pApell) {
+    var valido = false;
+    if (validoCI(pCI) && validarSoloTexto(pNom) && validarSoloTexto(pApell)) {
+        valido = true;
+    }
+    return valido;
+}
+
+var paquete = new Array();
+
+function ingresarNuevoPaquete() {
+    var CI = parseInt($("#txtCIRemitente").val());
+    var nom = $("#txtNombreRemitente").val();
+    var apellido = $("#txtApellidoRemitente").val();
+    if (validarRemitente(CI,nom,apellido)){
+        paquete.push("0001");
+    }
+    
 }

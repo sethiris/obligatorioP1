@@ -31,6 +31,7 @@ function validarSoloTexto(pTexto) {//valida que no haya ningún número dentro d
     if (validarTexto(pTexto)) {
         for (var i = 0; i < pTexto.length; i++) {
             if (!(pTexto.charCodeAt(i) > 64 && pTexto.charCodeAt(i) < 91) || 
+            if (!(pTexto.charCodeAt(i) > 64 && pTexto.charCodeAt(i) < 91) ||
                     !(pTexto.charCodeAt(i) > 96 && pTexto.charCodeAt(i) < 123) || pTexto.charAt(i) !== " ") {
                 //de 65 a 90 son letras mayúsculas; de 97 a 122 son letras minúsculas
                 errores++;
@@ -56,6 +57,7 @@ function validarTexto(pTexto) {
 
 function validoCI(pCI) {
     var CIValida = false;
+    pCI = pCI.toString();
     if (pCI.length === 8) {
         var digito1 = parseInt(pCI.charAt(0));
         var digito2 = parseInt(pCI.charAt(1));
