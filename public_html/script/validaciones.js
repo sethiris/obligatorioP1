@@ -4,27 +4,30 @@
 //------------------------Numeros----------------------------------//
 
 function validarNum(pNumero) {
-    var retorno = true;
+    var numValido = true;
     if (isNaN(pNumero) || pNumero.length === 0) {
-        retorno = false;
+        numValido = false;
     }
-    return retorno;
+    return numValido;
 }
 
 function validarNumPositivo(pNumero) {
     //valida si es numero positivo, dependencia de validarNum
     // devuelve falso si una de esas dos condiciones no se cumple
-    var retorno = true;
-    if (!validarNum(num) || num < 0) {
-        retorno = false;
+    var numPositivo = false;
+    if (validarNum(pNumero)) {
+        if (pNumero >= 0) {
+            numPositivo = true;
+        }
     }
-    return retorno;
+    return numPositivo;
 }
 
 //------------------------Strings----------------------------------//
 
-function validarSoloTexto(pTexto) {
+function validarSoloTexto(pTexto) {//valida que no haya ningún número dentro del campo de texto
     var errores = 0;
+<<<<<<< HEAD
     var esTexto = true;
     if (validarTexto(pTexto)) {
         var i = 0;
@@ -33,29 +36,53 @@ function validarSoloTexto(pTexto) {
                 if (pTexto.charAt(i) != " ") {
                     esTexto=false;
                 }
+=======
+    var soloTexto = true;
+    if (validarTexto(pTexto)) {
+        for (var i = 0; i < pTexto.length; i++) {
+            if (!(pTexto.charCodeAt(i) > 64 && pTexto.charCodeAt(i) < 91) ||
+                    !(pTexto.charCodeAt(i) > 96 && pTexto.charCodeAt(i) < 123) || pTexto.charAt(i) !== " ") {
+                //de 65 a 90 son letras mayúsculas; de 97 a 122 son letras minúsculas
+                errores++;
+>>>>>>> origin/master
             }
             i++;
         }
     }
+<<<<<<< HEAD
     else{
       esTexto=false;
     }
     return esTexto;
+=======
+    if (errores !== 0) {
+        soloTexto = false;
+    }
+    return soloTexto;
+>>>>>>> origin/master
 }
 
 function validarTexto(pTexto) {
-    var retorno = false;
-    if (isNaN(pTexto) && pTexto.length > 0) {
-        retorno = true;
+    var txtValido = false;
+    if (pTexto.length > 0) {
+        txtValido = true;
     }
-    return retorno;
+    return txtValido;
 }
 //------------------------Especiales----------------------------------//
 
 function validoCI(pCI) {
     var CIValida = false;
+    pCI = pCI.toString();
     if (pCI.length === 8) {
-        var calculo = pCI.charAt(0) * 2 + pCI.charAt(1) * 9 + pCI.charAt(2) * 8 + pCI.charAt(3) * 7 + pCI.charAt(4) * 6 + pCI.charAt(5) * 3 + pCI.charAt(6) * 4;
+        var digito1 = parseInt(pCI.charAt(0));
+        var digito2 = parseInt(pCI.charAt(1));
+        var digito3 = parseInt(pCI.charAt(2));
+        var digito4 = parseInt(pCI.charAt(3));
+        var digito5 = parseInt(pCI.charAt(4));
+        var digito6 = parseInt(pCI.charAt(5));
+        var digito7 = parseInt(pCI.charAt(6));
+        var calculo = digito1 * 2 + digito2 * 9 + digito3 * 8 + digito4 * 7 + digito5 * 6 + digito6 * 3 + digito7 * 4;
         //se toman los primeros 7 números y se multiplican cada uno por 2987634
         var verificadorUsuario = parseInt(pCI.charAt(pCI.length - 1));
         //convierto a num el ultimo digito ingresado por el usuario para comparar
@@ -77,7 +104,7 @@ function validoCI(pCI) {
     }
     return CIValida;
 }
-//valida que elpeso este dentro del limite permitido para cargar por la empresa
+//valida que el peso este dentro del límite permitido para cargar por la empresa
 function validarPeso(pPeso) {
     var valido = false;
     if (validarNumPositivo(pPeso)) {
