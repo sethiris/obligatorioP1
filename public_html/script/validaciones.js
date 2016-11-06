@@ -26,23 +26,11 @@ function validarNumPositivo(pNumero) {
 //------------------------Strings----------------------------------//
 
 function validarSoloTexto(pTexto) {//valida que no haya ningún número dentro del campo de texto
-    var errores = 0;
-    var esTexto = true;
-    if (validarTexto(pTexto)) {
-        var i = 0;
-        while( i < pTexto.length && esTexto) {
-            if (!(pTexto.charCodeAt(i) > 64 && pTexto.charCodeAt(i) < 91) && !(pTexto.charCodeAt(i) > 96 && pTexto.charCodeAt(i) < 123)) {
-                if (pTexto.charAt(i) != " ") {
-                    esTexto=false;
-                }
-            }
-            i++;
-        }
+    var soloTxt = false;
+    if (validarTexto(pTexto) && isNaN(pTexto)) {
+        soloTxt = true;
     }
-    else{
-      esTexto=false;
-    }
-    return esTexto;
+    return soloTxt;
 }
 
 function validarTexto(pTexto) {
@@ -54,7 +42,7 @@ function validarTexto(pTexto) {
 }
 //------------------------Especiales----------------------------------//
 
-function validoCI(pCI) {
+function validarCI(pCI) {
     var CIValida = false;
     pCI = pCI.toString();
     if (pCI.length === 8) {

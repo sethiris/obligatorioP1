@@ -1,30 +1,30 @@
 label {
-  text-align: center;
+    text-align: center;
 
 }
 
 .tab{
-  padding-top: 20px;
+    padding-top: 20px;
 }
 
 .banner{
-  height:100px;
-  background-color: red;
+    height:100px;
+    background-color: red;
 }
 .ui-bar-inherit{
 
-  background-color: RED;
+    background-color: RED;
 }
 
 .ui-grid-solo {
-  margin-top: 10%;
-  margin-left: 15%;
-  margin-right: 15%;
-  margin-bottom: 10%;
+    margin-top: 10%;
+    margin-left: 15%;
+    margin-right: 15%;
+    margin-bottom: 10%;
 
 }
 .error {
-  color: red;
+   color: red;
   text-align: center;
   border: 2px;
   border-color: red;
@@ -32,27 +32,28 @@ label {
 .RepartidorSeleccionado {
   background: #38c !important;
   color: white !important;
+
 }
 
 #divMenu {
-  margin-left: 20%;
-  margin-right: 20%;
+    margin-left: 20%;
+    margin-right: 20%;
 
 }
 #divNuevo {
-  margin-left: 20%;
-  margin-right: 20%;
-  margin-bottom: 10%;
+    margin-left: 20%;
+    margin-right: 20%;
+    margin-bottom: 10%;
 
 }
 
 @media screen and (min-width: 720px){
-  /* con esto definimos un margen diferente cuando la pantalla esta por encima de 720px     */
-  .ui-grid-solo {
-    margin-top: 10%;
-    margin-left: 40%;
-    margin-right: 40%;
-    margin-bottom: 10%;
+    /* con esto definimos un margen diferente cuando la pantalla esta por encima de 720px     */
+    .ui-grid-solo {
+        margin-top: 10%;
+        margin-left: 40%;
+        margin-right: 40%;
+        margin-bottom: 10%;
 
-  }
+    }
 }
