@@ -6,16 +6,20 @@ repartidores=  [{"codigo":1, "nombre":"Juan Perez","medio":"Moto"},
 function repartidoresDisponibles(){
   var disponibles = new Array();
   var encontrado= false;
+  var i=0;
   for( var x in repartidores){
-    for ( var i in paquetes){
+    while( i< paquetes.length && !encontrado){
       if (paquetes[i].repartidor === repartidores[x].codigo) {
         encontrado=true;
       }
+      i++;
     }
       if (encontrado) {
         encontrado= false;
+        i=0;
       } else {
         disponibles.push(repartidores[x]);
+        i=0;
       }
   }
   return disponibles;

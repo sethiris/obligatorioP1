@@ -1,6 +1,7 @@
 
 var usuarios =[{"cedula":12345678, "clave":"pass001","tipo":1},
-{"cedula":23456781, "clave": "pass002","tipo":2}];
+{"cedula":23456781, "clave": "pass002","tipo":2},
+  {"cedula":1, "clave": "1","tipo":1}];
 
 function cargaInicial(){
 

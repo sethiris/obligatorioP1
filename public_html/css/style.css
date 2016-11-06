@@ -26,6 +26,12 @@ label {
 .error {
   color: red;
   text-align: center;
+  border: 2px;
+  border-color: red;
+}
+.RepartidorSeleccionado {
+  background: #38c !important;
+  color: white !important;
 }
 
 #divMenu {

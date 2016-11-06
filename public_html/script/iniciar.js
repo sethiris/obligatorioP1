@@ -25,48 +25,35 @@ function validarNombreDestinatario(){
 }
 
 function mostrarDisponibles(){
-    $("#ulRepartidoresDisponibles").html("<li data-role='list-divider'>Repartidores</li>");
     var disponibles= repartidoresDisponibles();
-    for (var x in disponibles) {
-      switch (disponibles[x].medio) {
-        case "Moto":
-          $("#ulRepartidoresDisponibles").append("<li id=li"+ disponibles[x].codigo + "> <i class='fa fa-motorcycle' aria-hidden='true'></i> " + disponibles[x].nombre + "</li>");
-          break;
-        case "Camioneta":
-          $("#ulRepartidoresDisponibles").append("<li id=li"+ disponibles[x].codigo + "> <i class='fa fa-car' aria-hidden='true'></i> " + disponibles[x].nombre + "</li>");
-          break;
-          case "Bicicleta":
-            $("#ulRepartidoresDisponibles").append("<li id=li"+ disponibles[x].codigo + "> <i class='fa fa-bicycle' aria-hidden='true'></i> " + disponibles[x].nombre + "</li>");
-            break;
-        default:
-
-      }
-
-      $('#li'+ disponibles[x].codigo ).click(SeleccionarRepartidor);
-
-
-    }
+    var pendientes = paqueteSinRepartir();
+    $("#ulRepartidoresDisponibles").html(mostrarRepartidores(disponibles));
     $("#ulRepartidoresDisponibles").listview('refresh');
-    //
+    $("#ulPaquetesPendientes").html(mostrarPaquetes(pendientes));
+    $("#ulPaquetesPendientes").listview('refresh');
 
 }
 
-function asignar (pCodigo) {
-  var repartidor=getRepartidor(pCodigo.data.codigo);
-  switch (repartidor.medio) {
-    case "Moto":
-      alert("Seleccione un paquete de la lista para asignar: (Se muestran solo los paquetes hasta 50 kilos)");
-      break;
-      case "Camioneta":
-        alert("Seleccione un paquete de la lista para asignar: (Se muestran solo los paquetes hasta 1000 kilos)");
-        break;
-        case "Bicicleta":
-          alert("Seleccione un paquete de la lista para asignar: (Se muestran solo los paquetes hasta 20 kilos)");
-          break;
-    default:
+function seleccionarRepartidor(id) {
+  var repartidor=getRepartidor(id);
+  var paquetesDisponibles= new Array();
+  $(".RepartidorSeleccionado").removeClass("RepartidorSeleccionado");
+  $("#"+id).addClass("RepartidorSeleccionado");
+switch (repartidor.medio) {
+  case "Moto":
+  paquetesDisponibles= disponiblesPorPeso(paqueteSinRepartir(),50);
+  break;
+  case "Camioneta":
+  paquetesDisponibles= disponiblesPorPeso(paqueteSinRepartir(),1000);
+  break;
+  case "Bicicleta":
+  paquetesDisponibles= disponiblesPorPeso(paqueteSinRepartir(),20);
+  break;
+  default:
 
   }
-
+  $("#ulPaquetesPendientes").html(mostrarPaquetes(paquetesDisponibles));
+  $("#ulPaquetesPendientes").listview('refresh');
 
 }
 
