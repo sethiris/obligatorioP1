@@ -35,6 +35,12 @@ label {
 
 }
 
+.PaqueteSeleccionado {
+  background: #38c !important;
+  color: white !important;
+
+}
+
 #divMenu {
     margin-left: 20%;
     margin-right: 20%;

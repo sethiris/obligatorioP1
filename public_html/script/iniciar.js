@@ -14,7 +14,7 @@ function iniciarPrograma() {
 
     $("#liAsignar").click(mostrarDisponibles);
     $("#btnNuevoPaquete").click(ingresarNuevoPaquete);
-    $("#btnAsignarPaquete").click(asignarRepartidor);
+    $("#btnAsignarRepartidor").click(asignarRepartidor);
 
 }
 
@@ -140,25 +140,66 @@ function mostrarDisponibles(){
 
 
 function seleccionarRepartidor(id) {
-  var repartidor=getRepartidor(id);
+  var repartidor=getRepartidor(parseInt(id));
+  var idPaquete= quitarLetraID($(".PaqueteSeleccionado").attr("id"))
   var paquetesDisponibles= new Array();
   $(".RepartidorSeleccionado").removeClass("RepartidorSeleccionado");
   $("#"+id).addClass("RepartidorSeleccionado");
-switch (repartidor.medio) {
-  case "Moto":
-  paquetesDisponibles= disponiblesPorPeso(paqueteSinRepartir(),50);
-  break;
-  case "Camioneta":
-  paquetesDisponibles= disponiblesPorPeso(paqueteSinRepartir(),1000);
-  break;
-  case "Bicicleta":
-  paquetesDisponibles= disponiblesPorPeso(paqueteSinRepartir(),20);
-  break;
-  default:
-
+  if (!validarNum(idPaquete)) {
+    paquetesDisponibles= disponiblesPorPeso(paqueteSinRepartir(),repartidor.medio);
+    $("#ulPaquetesPendientes").html(mostrarPaquetes(paquetesDisponibles));
+    $("#ulPaquetesPendientes").listview('refresh');
   }
-  $("#ulPaquetesPendientes").html(mostrarPaquetes(paquetesDisponibles));
-  $("#ulPaquetesPendientes").listview('refresh');
+
+
+}
+var entregas = new Array();
+
+function asignarRepartidor(){
+  var idPaquete= quitarLetraID($(".PaqueteSeleccionado").attr("id"));
+  var idRepartidor = quitarLetraID($(".RepartidorSeleccionado").attr("id"));
+  var mensaje="";
+  var tiempo = new Date();
+  if (validarNum(idPaquete)) {
+    if(validarNum(idRepartidor)){
+        entregas.push({"paquete":idPaquete,"repartidor":idRepartidor,"ER":tiempo.getHours() + ":" + tiempo.getMinutes() })
+        mensaje= "Entregado a repartidor correctamente";
+        mostrarDisponibles();
+      }else {
+        mensaje="Debe seleccionar un repartidor"
+      }
+  } else {
+     mensaje= "Debe seleccionar un paquete y un repartidor";
+  }
+  alert(mensaje);
+}
+
+function quitarLetraID(_string){
+   // esta funcion es usada para quitar la letra de identificacion
+   //en las listas del ID del objeto, para poder asignar
+   //la clase cuando esta seleccionado
+  var sinletra="";
+  for (var x in _string) {
+      if (!isNaN(_string[x])) {
+        sinletra+=_string[x];
+      }
+  }
+  return sinletra;
+}
+
+function seleccionarPaquete(id){
+  var identificador=parseInt(quitarLetraID(id));
+  var repartidor= $(".RepartidorSeleccionado").attr("id");
+  $(".PaqueteSeleccionado").removeClass("PaqueteSeleccionado");
+  var mensaje="";
+  $("#P"+identificador).addClass("PaqueteSeleccionado");
+
+    var paquete=getElementoPorParametro(paquetes,"codigo",identificador);
+    var repartidores=repartidoresDisponiblesPeso(paquete.peso);
+    $("#ulRepartidoresDisponibles").html(mostrarRepartidores(repartidores));
+    $("#ulRepartidoresDisponibles").listview('refresh');
+    $("#"+repartidor).addClass("RepartidorSeleccionado");
+  
 
 }
 
@@ -222,8 +263,4 @@ function ingresarNuevoPaquete() {
         mensaje = "Favor complete todos los campos";
     }
     $("#divMsgNuevoPaquete").html(mensaje);
-}
-
-function asignarRepartidor(){
-    agregarRepartidor(numPaquete,)
 }

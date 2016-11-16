@@ -18,8 +18,8 @@ function mostrarPaquetes(_array){
   var mensaje="<li data-role='list-divider'>Paquetes</li>";
   var icono="";
   for (var x in _array) {
-  mensaje+="<li id="+ _array[x].codigo + " onclick='seleccionarPaquete(this.id)'> " + icono;
-  mensaje+= "  " + _array[x].codigo + "</li>";
+  mensaje+="<li id=P"+ _array[x].codigo + " onclick='seleccionarPaquete(this.id)'> " + icono;
+  mensaje+= " Codigo:" + _array[x].codigo + " Remitente: "+ _array[x].ciRemitente + " Destinatario:" + _array[x].ciDestinatario + "</li>";
   }
   return mensaje;
 }

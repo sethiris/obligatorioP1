@@ -1,7 +1,7 @@
 var paquetes = new Array();
-paquetes.push({"codigo":1,"ER":null,"peso":20});
-paquetes.push({"codigo":2,"ER":null,"peso":50});
-paquetes.push({"codigo":3,"ER":null,"peso":1000});
+paquetes.push({"codigo":1,"ciRemitente":50555867,"ciDestinatario":12345678,"ER":null,"peso":20});
+paquetes.push({"codigo":2,"ciRemitente":12345678,"ciDestinatario":12345678,"ER":null,"peso":50});
+paquetes.push({"codigo":3,"ciRemitente":1,"ciDestinatario":12345678,"ER":null,"peso":1000});
 
 
 
@@ -25,9 +25,9 @@ function agregarPaquete(pCIRemitente, pNomRemitente, pApeRemitente, pCIDestinat,
             && validarSoloTexto(pNomDestinat) && validarSoloTexto(pApeDestinat) &&
             validarTexto(pDirDestinat) && validarPeso(pPeso)) {
         numPaquete++;
-        var paquete = new Array();
-        /*paquete.Codigo = numPaquete;
-         paquete.CiRemitente = pCIRemitente;
+        var paquete = {};
+         paquete.codigo = numPaquete;
+         paquete.ciRemitente = pCIRemitente;
          paquete.nomRemitente = pNomRemitente;
          paquete.apeRemitente = pApeRemitente;
          paquete.ciDestinatario = pCIDestinat;
@@ -35,13 +35,13 @@ function agregarPaquete(pCIRemitente, pNomRemitente, pApeRemitente, pCIDestinat,
          paquete.apeDestinatario = pApeDestinat;
          paquete.dirDestinatario = pDirDestinat;
          paquete.peso = pPeso;
-         paquetes.repartidor = null;*/
-        //paquetes.push(paquete);
-
+         paquete.repartidor = null;
+        paquetes.push(paquete);
+/*
         paquete.push({"codigo": numPaquete, "ciRemitente": pCIRemitente, "nomRemitente": pNomRemitente,
             "apeRemitente": pApeRemitente, "ciDestinatario": pCIDestinat, "nomDestinatario": pNomDestinat,
             "apeDestinatario": pApeDestinat, "dirDestinatario": pDirDestinat, "peso": pPeso, "repartidor": null});
-        paquetes.push(paquete);
+        paquetes.push(paquete);*/
         paqueteAgregado = true;
     }
     return paqueteAgregado;
@@ -76,10 +76,20 @@ function paqueteSinRepartir(){
   return sinRepartir;
 }
 
-function disponiblesPorPeso(_paquetes,peso){
+function disponiblesPorPeso(_paquetes,medio){
       var filtrados = new Array();
+      var desde=0;
+      var hasta=0;
+      for(var x in limitesPaquetes){
+        for(var i in limitesPaquetes[x]){
+        if (i===medio) {
+          desde=limitesPaquetes[x][i].desde;
+          hasta=limitesPaquetes[x][i].hasta;
+        }
+      }
+      }
       for (var x in _paquetes) {
-        if (_paquetes[x].peso<= peso) {
+        if (_paquetes[x].peso<= hasta && _paquetes[x].peso>= desde) {
           filtrados.push(_paquetes[x]);
         }
       }
