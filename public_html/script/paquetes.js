@@ -61,9 +61,10 @@ function agregarPaquete(pCIRemitente, pNomRemitente, pApeRemitente, pCIDestinat,
 
 function paqueteSinRepartir() {
     var sinRepartir = new Array();
-    for (var x in entregas) {
+    var ite=0;
+  for (var x in entregas) {
         if (entregas[x].ER === null) {
-            sinRepartir.push(entregas[x]);
+            sinRepartir.push(getElementoPorParametro(paquetes,"codigo",entregas[x].paquete));
         }
     }
     return sinRepartir;
