@@ -1,6 +1,7 @@
 $('document').ready(iniciarPrograma);
 
 function iniciarPrograma() {
+    precargaUsuarios();
     $("#divMenu").hide();
     $("#btnLogin").click(login);
     $(".Logout").click(logout);
@@ -11,7 +12,8 @@ function iniciarPrograma() {
         }
     });
     precargaBlur();//asigna todas las validaciones con blur al cargar el sitio
-
+    precargaPaquetes();
+    precargaRepartidores();
     $("#liAsignar").click(mostrarDisponibles);
     $("#btnNuevoPaquete").click(ingresarNuevoPaquete);
     $("#btnAsignarPaquete").click(asignarRepartidor);
@@ -128,8 +130,8 @@ function validarPesoPaquete() {//función que avisa si el peso ingresado por el 
 }
 
 
-function mostrarDisponibles(){
-    var disponibles= repartidoresDisponibles();
+function mostrarDisponibles() {
+    var disponibles = repartidoresDisponibles();
     var pendientes = paqueteSinRepartir();
     $("#ulRepartidoresDisponibles").html(mostrarRepartidores(disponibles));
     $("#ulRepartidoresDisponibles").listview('refresh');
@@ -140,25 +142,25 @@ function mostrarDisponibles(){
 
 
 function seleccionarRepartidor(id) {
-  var repartidor=getRepartidor(id);
-  var paquetesDisponibles= new Array();
-  $(".RepartidorSeleccionado").removeClass("RepartidorSeleccionado");
-  $("#"+id).addClass("RepartidorSeleccionado");
-switch (repartidor.medio) {
-  case "Moto":
-  paquetesDisponibles= disponiblesPorPeso(paqueteSinRepartir(),50);
-  break;
-  case "Camioneta":
-  paquetesDisponibles= disponiblesPorPeso(paqueteSinRepartir(),1000);
-  break;
-  case "Bicicleta":
-  paquetesDisponibles= disponiblesPorPeso(paqueteSinRepartir(),20);
-  break;
-  default:
+    var repartidor = getRepartidor(id);
+    var paquetesDisponibles = new Array();
+    $(".RepartidorSeleccionado").removeClass("RepartidorSeleccionado");
+    $("#" + id).addClass("RepartidorSeleccionado");
+    switch (repartidor.medio) {
+        case "Moto":
+            paquetesDisponibles = disponiblesPorPeso(paqueteSinRepartir(), 50);
+            break;
+        case "Camioneta":
+            paquetesDisponibles = disponiblesPorPeso(paqueteSinRepartir(), 1000);
+            break;
+        case "Bicicleta":
+            paquetesDisponibles = disponiblesPorPeso(paqueteSinRepartir(), 20);
+            break;
+        default:
 
-  }
-  $("#ulPaquetesPendientes").html(mostrarPaquetes(paquetesDisponibles));
-  $("#ulPaquetesPendientes").listview('refresh');
+    }
+    $("#ulPaquetesPendientes").html(mostrarPaquetes(paquetesDisponibles));
+    $("#ulPaquetesPendientes").listview('refresh');
 
 }
 
@@ -224,6 +226,6 @@ function ingresarNuevoPaquete() {
     $("#divMsgNuevoPaquete").html(mensaje);
 }
 
-function asignarRepartidor(){
-    agregarRepartidor(numPaquete,)
+function asignarRepartidor() {
+    //agregarRepartidor(numPaquete,d)
 }
