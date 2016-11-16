@@ -1,6 +1,7 @@
 $('document').ready(iniciarPrograma);
 
 function iniciarPrograma() {
+    precargaUsuarios();
     $("#divMenu").hide();
     $("#btnLogin").click(login);
     $(".Logout").click(logout);
@@ -11,7 +12,8 @@ function iniciarPrograma() {
         }
     });
     precargaBlur();//asigna todas las validaciones con blur al cargar el sitio
-
+    precargaPaquetes();
+    precargaRepartidores();
     $("#liAsignar").click(mostrarDisponibles);
     $("#btnNuevoPaquete").click(ingresarNuevoPaquete);
     $("#btnAsignarRepartidor").click(asignarRepartidor);
@@ -128,8 +130,8 @@ function validarPesoPaquete() {//función que avisa si el peso ingresado por el 
 }
 
 
-function mostrarDisponibles(){
-    var disponibles= repartidoresDisponibles();
+function mostrarDisponibles() {
+    var disponibles = repartidoresDisponibles();
     var pendientes = paqueteSinRepartir();
     $("#ulRepartidoresDisponibles").html(mostrarRepartidores(disponibles));
     $("#ulRepartidoresDisponibles").listview('refresh');
@@ -199,7 +201,7 @@ function seleccionarPaquete(id){
     $("#ulRepartidoresDisponibles").html(mostrarRepartidores(repartidores));
     $("#ulRepartidoresDisponibles").listview('refresh');
     $("#"+repartidor).addClass("RepartidorSeleccionado");
-  
+
 
 }
 

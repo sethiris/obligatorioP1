@@ -1,9 +1,12 @@
-var repartidores=new Array();
-repartidores=  [{"codigo":1, "nombre":"Juan Perez","medio":"Moto"},
-   {"codigo":2, "nombre": "Ana Gomez","medio":"Camioneta"},
-   {"codigo":3, "nombre": "Juan José","medio":"Bicicleta"},
-   {"codigo":4, "nombre": "seth","medio":"Bicicleta"}
-  ];
+var repartidores = new Array();
+
+function precargaRepartidores() {
+    repartidores.push({"codigo": 1, "nombre": "Juan Perez", "medio": "Moto"},
+            {"codigo": 2, "nombre": "Ana Gomez", "medio": "Camioneta"},
+            {"codigo": 3, "nombre": "Juan José", "medio": "Bicicleta"},
+            {"codigo": 4, "nombre": "Carlos", "medio": "Moto"});
+
+}
 
   limitesPaquetes = [{"Bicicleta":{"desde":0, "hasta":20, "costo": 100}},
    {"Moto":{"desde":21, "hasta":50, "costo":200}},
@@ -14,8 +17,8 @@ function repartidoresDisponibles(){
   var encontrado= false;
   var i=0;
   for( var x in repartidores){
-    while( i< paquetes.length && !encontrado){
-      if (paquetes[i].repartidor === repartidores[x].codigo) {
+    while( i< entregas.length && !encontrado){
+      if (entregas[i].repartidor === repartidores[x].codigo) {
         encontrado=true;
       }
       i++;
@@ -30,6 +33,7 @@ function repartidoresDisponibles(){
   }
   return disponibles;
 }
+
 function repartidoresDisponiblesPeso(peso){
    var disponibles = new Array();
    var todos= repartidoresDisponibles();
@@ -48,19 +52,15 @@ function repartidoresDisponiblesPeso(peso){
    return disponibles;
 }
 
-function getRepartidor(pCodigo){
-  var repartidor= new Array();
-  for(var x in repartidores){
-    if (repartidores[x].codigo === parseInt(pCodigo)) {
-      repartidor= repartidores[x];
+
+
+function getRepartidor(pCodigo) {
+    var repartidor = new Array();
+    for (var x in repartidores) {
+        if (repartidores[x].codigo === parseInt(pCodigo)) {
+            repartidor = repartidores[x];
+        }
+
     }
-
-  }
-  return repartidor;
-}
-
-function asignarPaquete(codigoRepartidor, codigoPaquete){
-
-
-
+    return repartidor;
 }

@@ -1,16 +1,18 @@
 var paquetes = new Array();
-paquetes.push({"codigo":1,"ciRemitente":50555867,"ciDestinatario":12345678,"ER":null,"peso":20});
-paquetes.push({"codigo":2,"ciRemitente":12345678,"ciDestinatario":12345678,"ER":null,"peso":50});
-paquetes.push({"codigo":3,"ciRemitente":1,"ciDestinatario":12345678,"ER":null,"peso":1000});
-
-
-
-
-
-
-
-
-
+function precargaPaquetes() {
+    var paquete1 = agregarPaquete(41987376, "Matias", "Gonzalez", 50555867, "Juan Jose", "Sethiris", "Amezaga 2230", 500);
+    var paquete2 = agregarPaquete(55996612, "David", "Finzer", 41987376, "Matias", "Gonzalez", "8 de octubre 2211", 200);
+    var paquete3 = agregarPaquete(50555867, "Juan Jose", "Sethiris", 41987376, "Matias", "Gonzalez", "8 de octubre 2211", 1000);
+    var paquete4 = agregarPaquete(55996612, "David", "Finzer", 50555867, "Juan Jose", "Sethiris", "Benito Chain 1123", 20);
+    var paquete5 = agregarPaquete(25311195, "Javier", "Lopez", 50555867, "Juan Jose", "Sethiris", "Uruguay 897", 17);
+    var paquete6 = agregarPaquete(41987376, "Matias", "Gonzalez", 55996612, "David", "Finzer", "Cno Carrasco 111", 1);
+    var paquete7 = agregarPaquete(55996612, "David", "Finzer", 25311195, "Javier", "Lopez", "Propios 1312", 789);
+    var paquete8 = agregarPaquete(50555867, "Juan Jose", "Sethiris", 25311195, "Javier", "Lopez", "Propios 1312", 544);
+    var paquete9 = agregarPaquete(55996612, "David", "Finzer", 25311195, "Javier", "Lopez", "Propios 1312", 789);
+    var paquete10 = agregarPaquete(55996612, "David", "Finzer", 41987376, "Matias", "Gonzalez", "Benito Lamas 2611", 260);
+    var paquete11 = agregarPaquete(41987376, "Matias", "Gonzalez", 50555867, "Juan Jose", "Sethiris", "Uruguay 897", 717);
+    var paquete12 = agregarPaquete(41987376, "Matias", "Gonzalez", 55996612, "David", "Finzer", "Benito Lamas 2611", 999);
+}
 //array indexado que contiene todos los paquetes y
 //sus datos que fueron ingresados.
 //Cada paquete es un array asociativo
@@ -43,19 +45,10 @@ function agregarPaquete(pCIRemitente, pNomRemitente, pApeRemitente, pCIDestinat,
             "apeDestinatario": pApeDestinat, "dirDestinatario": pDirDestinat, "peso": pPeso, "repartidor": null});
         paquetes.push(paquete);*/
         paqueteAgregado = true;
+        var fechaActual = new Date();
+        entregas.push({"paquete": numPaquete, "repartidor": null, "RE": fechaActual.getHours() + ":" + fechaActual.getMinutes(), "ER": null, "EV": null, "ED": null});
     }
     return paqueteAgregado;
-}
-
-function agregarRepartidor(pCodPaquete, pRepartidor) {
-    for (var ite = 0; ite < paquetes.length; ite++) {
-
-        for (codigo in paquete) {
-            if (paquetes.repartidor === null) {
-                paquetes.repartidor = pRepartidor;
-            }
-        }
-    }
 }
 
 
@@ -66,15 +59,16 @@ function agregarRepartidor(pCodPaquete, pRepartidor) {
 // EV  en viaje
 // ED entregado a destinatario
 
-function paqueteSinRepartir(){
-    var sinRepartir= new Array();
-    for (var x in paquetes) {
-        if (paquetes[x].ER === null) {
-          sinRepartir.push(paquetes[x]);
+function paqueteSinRepartir() {
+    var sinRepartir = new Array();
+    for (var x in entregas) {
+        if (entregas[x].ER === null) {
+            sinRepartir.push(entregas[x]);
         }
     }
-  return sinRepartir;
+    return sinRepartir;
 }
+
 
 function disponiblesPorPeso(_paquetes,medio){
       var filtrados = new Array();
@@ -92,7 +86,7 @@ function disponiblesPorPeso(_paquetes,medio){
         if (_paquetes[x].peso<= hasta && _paquetes[x].peso>= desde) {
           filtrados.push(_paquetes[x]);
         }
-      }
-      return filtrados;
+    }
+    return filtrados;
 
 }
