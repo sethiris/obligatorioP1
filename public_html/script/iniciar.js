@@ -17,7 +17,33 @@ function iniciarPrograma() {
     $("#liAsignar").click(mostrarDisponibles);
     $("#btnNuevoPaquete").click(ingresarNuevoPaquete);
     $("#btnAsignarRepartidor").click(asignarRepartidor);
+    $("#btnBuscarPaquete").click(buscarPaquete)
+}
+function buscarPaquete(){
+  var mensaje ="";
+  var codigo = parseInt($("#txtBuscarPaquete").val());
+  var encontrado= false;
+  if(validarNum(codigo)){
+    var paquete= getElementosPorParametro(paquetes,"codigo",codigo);
+    var entrega= getElementosPorParametro(entregas,"paquete",codigo);
+    mensaje= mostrarReportePaquete(paquete,entrega,usuarioActual.tipo);
+    if(mensaje!= null){
+      encontrado=true;
+    }else{
+      mensaje="No existe el paquete buscado";
+    }
+  }else{
+    mensaje="Debe ingresar un codigo de paquete";
+  }
 
+  if(encontrado){
+    $("#ulBuscarPaquete").html(mensaje);
+    $("#ulBuscarPaquete").listview('refresh');
+    $("#divMsgBuscarPaquete").html("");
+  } else {
+    $("#divMsgBuscarPaquete").html(mensaje);
+    $("#ulBuscarPaquete").html("");
+  }
 }
 
 function precargaBlur() {
@@ -135,14 +161,20 @@ function mostrarDisponibles() {
     var pendientes = paqueteSinRepartir();
     $("#ulRepartidoresDisponibles").html(mostrarRepartidores(disponibles));
     $("#ulRepartidoresDisponibles").listview('refresh');
+    for(var x in disponibles ){
+      $("#" + disponibles[x].codigo).click(seleccionarRepartidor);
+    }
     $("#ulPaquetesPendientes").html(mostrarPaquetes(pendientes));
     $("#ulPaquetesPendientes").listview('refresh');
-
+    for(var x in pendientes ){
+      $("#P" + pendientes[x].codigo).click(seleccionarPaquete);
+    }
 }
 
 
-function seleccionarRepartidor(id) {
-  var repartidor=getRepartidor(parseInt(id));
+function seleccionarRepartidor() {
+  var id=parseInt($(this).attr("id"));
+  var repartidor=getRepartidor(id);
   var idPaquete= quitarLetraID($(".PaqueteSeleccionado").attr("id"))
   var paquetesDisponibles= new Array();
   $(".RepartidorSeleccionado").removeClass("RepartidorSeleccionado");
@@ -151,6 +183,9 @@ function seleccionarRepartidor(id) {
     paquetesDisponibles= disponiblesPorPeso(paqueteSinRepartir(),repartidor.medio);
     $("#ulPaquetesPendientes").html(mostrarPaquetes(paquetesDisponibles));
     $("#ulPaquetesPendientes").listview('refresh');
+    for(var x in paquetesDisponibles ){
+      $("#P" + paquetesDisponibles[x].codigo).click(seleccionarPaquete);
+    }
   }
 
 
@@ -189,8 +224,8 @@ function quitarLetraID(_string){
   return sinletra;
 }
 
-function seleccionarPaquete(id){
-  var identificador=parseInt(quitarLetraID(id));
+function seleccionarPaquete(){
+  var identificador=parseInt(quitarLetraID($(this).attr("id")));
   var repartidor= $(".RepartidorSeleccionado").attr("id");
   $(".PaqueteSeleccionado").removeClass("PaqueteSeleccionado");
   var mensaje="";
@@ -200,6 +235,9 @@ function seleccionarPaquete(id){
     var repartidores=repartidoresDisponiblesPeso(paquete.peso);
     $("#ulRepartidoresDisponibles").html(mostrarRepartidores(repartidores));
     $("#ulRepartidoresDisponibles").listview('refresh');
+    for(var x in repartidores ){
+      $("#" + repartidores[x].codigo).click(seleccionarRepartidor);
+    }
     $("#"+repartidor).addClass("RepartidorSeleccionado");
 
 
@@ -218,6 +256,7 @@ function login() {
             mensaje = "El usuario no existe";
             break;
         case 1:
+            usuarioActual=getElementoPorParametro(usuarios,"cedula",usuario);
             $("#divLogin").hide();
             $("#divMenu").show();
             $("#ulMenu2").hide();
@@ -226,10 +265,10 @@ function login() {
             $("#iniciar").click(); //Para que inicie  siempre en la primera pestaña
             break;
         case 2:
+            usuarioActual=getElementoPorParametro(usuarios,"cedula",usuario);
             $("#divMenu").show();
             $("#ulMenu1").hide();
             $("#ulMenu2").show();
-
             $("#divMsgLogin").hide();
             $("#divLogin").hide();
             $("#iniciar2").click();

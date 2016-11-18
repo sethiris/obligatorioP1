@@ -43,12 +43,23 @@
                     <li><a href="#divLogout" class="Logout"> <i class="fa fa-sign-out" aria-hidden="true"></i>Logout</a></li>
                 </ul>
                 <ul id="ulMenu2">
-                    <li><a id="iniciar2" href="#divConsultar">Consultas</a></li>
-                    <li><a href="#divLogout" class="Logout">Logout</a></li>
+                    <li><a id="iniciar" href="#divConsultar"><i class="fa fa-search" aria-hidden="true"></i>Consultas</a></li>
+                    <li><a href="#divLogout" class="Logout"><i class="fa fa-sign-out" aria-hidden="true"></i>Logout</a></li>
                 </ul>
 
                 <!--Acá empieza el contenido de las pestañas -->
-                <div class="tab" id="divConsultar">Consultas</div>
+                <div class="tab" id="divConsultar">
+                <div data-role="header"><h2> Seguimiento de paquetes</h2></div>
+                <label>Codigo:</label><input type="text" id="txtBuscarPaquete">
+                <input type="button" id="btnBuscarPaquete" value="Buscar">
+                <div id="divMsgBuscarPaquete"></div>
+                  <ul data-role='listview'  data-inset='true' id='ulBuscarPaquete'>
+                   <a></a>
+                  </ul>
+
+                </div>
+
+                <!--pestaña ingresar paquete-->
                 <div class="tab" id="divNuevo">
                     <div data-role="header"><h2> Ingreso nuevo paquete </h2></div>
                     <div data-role="header">Remitente</div>
@@ -85,17 +96,14 @@
                     <p id="liMoto">Seleccione un repartidor disponible o un paquete pendiente para asignar </p>
                     <div class="ui-grid-a">
                         <div class="ui-block-a">
-                            <ul data-role="listview" id="ulRepartidoresDisponibles" data-inset="true">
-                                <li ><a></a></li>
-
+                            <ul data-role='listview'  data-inset='true' id='ulRepartidoresDisponibles'>
+                            <a></a>
                             </ul>
                         </div>
                         <div class="ui-block-b">
-                            <ul data-role="listview" id="ulPaquetesPendientes">
-                                <li data-role='list-divider'>Paquetes Pendientes</li>
-
-                            </ul>
-                        </div>
+                          <ul data-role='listview'  data-inset='true' id='ulPaquetesPendientes'>
+                              <a></a>
+                          </ul>
                     </div>
                     <input type="button" id="btnAsignarRepartidor" value="Asignar">
                 </div>
