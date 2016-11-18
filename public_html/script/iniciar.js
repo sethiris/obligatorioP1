@@ -172,6 +172,7 @@ function mostrarDisponibles() {
 }
 
 
+
 function seleccionarRepartidor() {
   var id=parseInt($(this).attr("id"));
   var repartidor=getRepartidor(id);
@@ -188,41 +189,57 @@ function seleccionarRepartidor() {
     }
   }
 
-
 }
 var entregas = new Array();
 
-function asignarRepartidor(){
-  var idPaquete= quitarLetraID($(".PaqueteSeleccionado").attr("id"));
-  var idRepartidor = quitarLetraID($(".RepartidorSeleccionado").attr("id"));
-  var mensaje="";
-  var tiempo = new Date();
-  if (validarNum(idPaquete)) {
-    if(validarNum(idRepartidor)){
-        entregas.push({"paquete":idPaquete,"repartidor":idRepartidor,"ER":tiempo.getHours() + ":" + tiempo.getMinutes() })
-        mensaje= "Entregado a repartidor correctamente";
-        mostrarDisponibles();
-      }else {
-        mensaje="Debe seleccionar un repartidor"
-      }
-  } else {
-     mensaje= "Debe seleccionar un paquete y un repartidor";
-  }
-  alert(mensaje);
+function asignarRepartidor() {
+    var idPaqueteTxt = quitarLetraID($(".PaqueteSeleccionado").attr("id"));
+    var idRepartidorTxt = $(".RepartidorSeleccionado").attr("id");
+    var mensaje = "";
+    var tiempo = new Date();
+    if (validarNum(idPaqueteTxt)) {
+        if (validarNum(idRepartidorTxt)) {
+            var idPaquete = parseInt(idPaqueteTxt);
+            var idRepartidor = parseInt(idRepartidorTxt);
+            var ite = 0;
+            while (ite < entregas.length) {
+                var paqueteActual = entregas[ite];
+
+                for (var i in paqueteActual) {
+                    if (i === "paquete") {
+                        if (paqueteActual[i] === idPaquete) {
+                            paqueteActual["repartidor"] = idRepartidor;
+                            paqueteActual["ER"] = agregarHoraActual();
+                        }
+                    }
+                }
+                ite++;
+            }
+
+            mensaje = "Entregado a repartidor correctamente";
+            mostrarDisponibles();
+        } else {
+            mensaje = "Debe seleccionar un repartidor"
+        }
+    } else {
+        mensaje = "Debe seleccionar un paquete y un repartidor";
+    }
+    $("#divMsgAsignar").html(mensaje);
 }
 
-function quitarLetraID(_string){
-   // esta funcion es usada para quitar la letra de identificacion
-   //en las listas del ID del objeto, para poder asignar
-   //la clase cuando esta seleccionado
-  var sinletra="";
-  for (var x in _string) {
-      if (!isNaN(_string[x])) {
-        sinletra+=_string[x];
-      }
-  }
-  return sinletra;
+function quitarLetraID(_string) {
+    // esta funcion es usada para quitar la letra de identificacion
+    //en las listas del ID del objeto, para poder asignar
+    //la clase cuando esta seleccionado
+    var sinletra = "";
+    for (var x in _string) {
+        if (!isNaN(_string[x])) {
+            sinletra += _string[x];
+        }
+    }
+    return sinletra;
 }
+
 
 function seleccionarPaquete(){
   var identificador=parseInt(quitarLetraID($(this).attr("id")));
@@ -230,15 +247,15 @@ function seleccionarPaquete(){
   $(".PaqueteSeleccionado").removeClass("PaqueteSeleccionado");
   var mensaje="";
   $("#P"+identificador).addClass("PaqueteSeleccionado");
-
-    var paquete=getElementoPorParametro(paquetes,"codigo",identificador);
-    var repartidores=repartidoresDisponiblesPeso(paquete.peso);
+    var paquete = getElementoPorParametro(paquetes, "codigo", identificador);
+    var repartidores = repartidoresDisponiblesPeso(paquete.peso);
     $("#ulRepartidoresDisponibles").html(mostrarRepartidores(repartidores));
     $("#ulRepartidoresDisponibles").listview('refresh');
     for(var x in repartidores ){
       $("#" + repartidores[x].codigo).click(seleccionarRepartidor);
     }
-    $("#"+repartidor).addClass("RepartidorSeleccionado");
+    $("#"+ repartidor).addClass("RepartidorSeleccionado");
+
 
 
 }
@@ -304,4 +321,20 @@ function ingresarNuevoPaquete() {
         mensaje = "Favor complete todos los campos";
     }
     $("#divMsgNuevoPaquete").html(mensaje);
+}
+
+function agregarHoraActual() {
+    var tiempoActual = new Date();
+    var horaActual = tiempoActual.getHours();
+    var minActual = tiempoActual.getMinutes();
+    if (horaActual < 10) {
+        horaActual.toString();
+        horaActual = "0" + horaActual;
+    }
+    if (minActual < 10) {
+        minActual.toString();
+        minActual = "0" + minActual;
+    }
+    var tiempo = horaActual + ":" + minActual;
+    return tiempo;
 }
