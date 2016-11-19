@@ -17,7 +17,7 @@ function iniciarPrograma() {
     $("#liAsignar").click(mostrarDisponibles);
     $("#btnNuevoPaquete").click(ingresarNuevoPaquete);
     $("#btnAsignarRepartidor").click(asignarRepartidor);
-
+    mostrarPendEntrega();
 }
 
 function precargaBlur() {
