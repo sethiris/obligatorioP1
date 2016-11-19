@@ -19,32 +19,33 @@ function iniciarPrograma() {
     $("#btnAsignarRepartidor").click(asignarRepartidor);
     mostrarPendEntrega();
     $("#btnBuscarPaquete").click(buscarPaquete)
+    $("#btnEntXRepart").click(mostrarEntregadosPorRepart);
 }
-function buscarPaquete(){
-  var mensaje ="";
-  var codigo = parseInt($("#txtBuscarPaquete").val());
-  var encontrado= false;
-  if(validarNum(codigo)){
-    var paquete= getElementosPorParametro(paquetes,"codigo",codigo);
-    var entrega= getElementosPorParametro(entregas,"paquete",codigo);
-    mensaje= mostrarReportePaquete(paquete,entrega,usuarioActual.tipo);
-    if(mensaje!= null){
-      encontrado=true;
-    }else{
-      mensaje="No existe el paquete buscado";
+function buscarPaquete() {
+    var mensaje = "";
+    var codigo = parseInt($("#txtBuscarPaquete").val());
+    var encontrado = false;
+    if (validarNum(codigo)) {
+        var paquete = getElementosPorParametro(paquetes, "codigo", codigo);
+        var entrega = getElementosPorParametro(entregas, "paquete", codigo);
+        mensaje = mostrarReportePaquete(paquete, entrega, usuarioActual.tipo);
+        if (mensaje != null) {
+            encontrado = true;
+        } else {
+            mensaje = "No existe el paquete buscado";
+        }
+    } else {
+        mensaje = "Debe ingresar un codigo de paquete";
     }
-  }else{
-    mensaje="Debe ingresar un codigo de paquete";
-  }
 
-  if(encontrado){
-    $("#ulBuscarPaquete").html(mensaje);
-    $("#ulBuscarPaquete").listview('refresh');
-    $("#divMsgBuscarPaquete").html("");
-  } else {
-    $("#divMsgBuscarPaquete").html(mensaje);
-    $("#ulBuscarPaquete").html("");
-  }
+    if (encontrado) {
+        $("#ulBuscarPaquete").html(mensaje);
+        $("#ulBuscarPaquete").listview('refresh');
+        $("#divMsgBuscarPaquete").html("");
+    } else {
+        $("#divMsgBuscarPaquete").html(mensaje);
+        $("#ulBuscarPaquete").html("");
+    }
 }
 
 function precargaBlur() {
@@ -59,136 +60,36 @@ function precargaBlur() {
     $("#txtPesoPaquete").blur(validarPesoPaquete);
 }
 
-function validarCIRemitente() {//función que avisa si la ci ingresada por el usuario es correcta
-    $("#divMsgNuevoPaquete").empty();
-    var CIRemitente = $("#txtCIRemitente").val();
-    if (!validarCI(CIRemitente)) {
-        var mensaje = "La CI no es correcta";
-        $("#txtCIRemitente").addClass("error");
-    } else {
-        mensaje = "";
-    }
-    $("#divMsgNuevoPaquete").html(mensaje);
-}
-
-function validarNomRemitente() {//función que avisa si el nom ingresadp por el usuario es correcto
-    $("#divMsgNuevoPaquete").empty();
-    var NomRemitente = $("#txtNombreRemitente").val();
-    if (!validarSoloTexto(NomRemitente)) {
-        var mensaje = "El nombre no es correcto";
-        $("#txtNombreRemitente").addClass("error");
-    } else {
-        mensaje = "";
-    }
-    $("#divMsgNuevoPaquete").html(mensaje);
-}
-
-function validarApeRemitente() {//función que avisa si el ape ingresado por el usuario es correcto
-    $("#divMsgNuevoPaquete").empty();
-    var ApeRemitente = $("#txtApellidoRemitente").val();
-    if (!validarSoloTexto(ApeRemitente)) {
-        var mensaje = "El apellido no es correcto";
-        $("#txtApellidoRemitente").addClass("error");
-    } else {
-        mensaje = "";
-    }
-    $("#divMsgNuevoPaquete").html(mensaje);
-}
-
-function validarCIDestinatario() {//función que avisa si la ci ingresada por el usuario es correcta
-    $("#divMsgNuevoPaquete").empty();
-    var CIDestinat = $("#txtCIDestinatario").val();
-    if (!validarCI(CIDestinat)) {
-        var mensaje = "La CI no es correcta";
-        $("#txtCIDestinatario").addClass("error");
-    } else {
-        mensaje = "";
-    }
-    $("#divMsgNuevoPaquete").html(mensaje);
-}
-
-function validarNomDestinatario() {//función que avisa si el nom ingresadp por el usuario es correcto
-    $("#divMsgNuevoPaquete").empty();
-    var NomDestinat = $("#txtNombreDestinatario").val();
-    if (!validarSoloTexto(NomDestinat)) {
-        var mensaje = "El nombre no es correcto";
-        $("#txtNombreDestinatario").addClass("error");
-    } else {
-        mensaje = "";
-    }
-    $("#divMsgNuevoPaquete").html(mensaje);
-}
-
-function validarApeDestinatario() {//función que avisa si el ape ingresado por el usuario es correcto
-    $("#divMsgNuevoPaquete").empty();
-    var ApeDestinat = $("#txtApellidoDestinatario").val();
-    if (!validarSoloTexto(ApeDestinat)) {
-        var mensaje = "El apellido no es correcto";
-        $("#txtApellidoDestinatario").addClass("error");
-    } else {
-        mensaje = "";
-    }
-    $("#divMsgNuevoPaquete").html(mensaje);
-}
-
-function validarDirDestinatario() {//función que avisa si la dir ingresada por el usuario es correcta
-    $("#divMsgNuevoPaquete").empty();
-    var DirDestinat = $("#txtDireccionDestinatario").val();
-    if (!validarSoloTexto(DirDestinat)) {
-        var mensaje = "Ingrese una dirección";
-        $("#txtDireccionDestinatario").addClass("error");
-    } else {
-        mensaje = "";
-    }
-    $("#divMsgNuevoPaquete").html(mensaje);
-}
-
-function validarPesoPaquete() {//función que avisa si el peso ingresado por el usuario es posible enviarlo
-    $("#divMsgNuevoPaquete").empty();
-    var peso = $("#txtPesoPaquete").val();
-    if (!validarPeso(peso)) {
-        var mensaje = "El peso no puede ser superior a 1000kgs.";
-        $("#txtPesoPaquete").addClass("error");
-    } else {
-        mensaje = "";
-    }
-    $("#divMsgNuevoPaquete").html(mensaje);
-
-}
-
-
 function mostrarDisponibles() {
     var disponibles = repartidoresDisponibles();
     var pendientes = paqueteSinRepartir();
     $("#ulRepartidoresDisponibles").html(mostrarRepartidores(disponibles));
     $("#ulRepartidoresDisponibles").listview('refresh');
-    for(var x in disponibles ){
-      $("#" + disponibles[x].codigo).click(seleccionarRepartidor);
+    for (var x in disponibles) {
+        $("#" + disponibles[x].codigo).click(seleccionarRepartidor);
     }
     $("#ulPaquetesPendientes").html(mostrarPaquetes(pendientes));
     $("#ulPaquetesPendientes").listview('refresh');
-    for(var x in pendientes ){
-      $("#P" + pendientes[x].codigo).click(seleccionarPaquete);
+    for (var x in pendientes) {
+        $("#P" + pendientes[x].codigo).click(seleccionarPaquete);
     }
 }
 
-
-
 function seleccionarRepartidor() {
-  var id=parseInt($(this).attr("id"));
-  var repartidor=getRepartidor(id);
-  var idPaquete= quitarLetraID($(".PaqueteSeleccionado").attr("id"))
-  var paquetesDisponibles= new Array();
-  $(".RepartidorSeleccionado").removeClass("RepartidorSeleccionado");
-  $("#"+id).addClass("RepartidorSeleccionado");
-  if (!validarNum(idPaquete)) {
-    paquetesDisponibles= disponiblesPorPeso(paqueteSinRepartir(),repartidor.medio);
-    $("#ulPaquetesPendientes").html(mostrarPaquetes(paquetesDisponibles));
-    $("#ulPaquetesPendientes").listview('refresh');
-    for(var x in paquetesDisponibles ){
-      $("#P" + paquetesDisponibles[x].codigo).click(seleccionarPaquete);
+    var id = parseInt($(this).attr("id"));
+    var repartidor = getRepartidor(id);
+    var idPaquete = quitarLetraID($(".PaqueteSeleccionado").attr("id"));
+    var paquetesDisponibles = new Array();
+    $(".RepartidorSeleccionado").removeClass("RepartidorSeleccionado");
+    $("#" + id).addClass("RepartidorSeleccionado");
+    if (!validarNum(idPaquete)) {
+        paquetesDisponibles = disponiblesPorPeso(paqueteSinRepartir(), repartidor.medio);
+        $("#ulPaquetesPendientes").html(mostrarPaquetes(paquetesDisponibles));
+        $("#ulPaquetesPendientes").listview('refresh');
+        for (var x in paquetesDisponibles) {
+            $("#P" + paquetesDisponibles[x].codigo).click(seleccionarPaquete);
+        }
     }
-  }
 
 }
 var entregas = new Array();
@@ -219,6 +120,7 @@ function asignarRepartidor() {
 
             mensaje = "Entregado a repartidor correctamente";
             mostrarDisponibles();
+            mostrarPendEntrega();
         } else {
             mensaje = "Debe seleccionar un repartidor"
         }
@@ -242,20 +144,20 @@ function quitarLetraID(_string) {
 }
 
 
-function seleccionarPaquete(){
-  var identificador=parseInt(quitarLetraID($(this).attr("id")));
-  var repartidor= $(".RepartidorSeleccionado").attr("id");
-  $(".PaqueteSeleccionado").removeClass("PaqueteSeleccionado");
-  var mensaje="";
-  $("#P"+identificador).addClass("PaqueteSeleccionado");
+function seleccionarPaquete() {
+    var identificador = parseInt(quitarLetraID($(this).attr("id")));
+    var repartidor = $(".RepartidorSeleccionado").attr("id");
+    $(".PaqueteSeleccionado").removeClass("PaqueteSeleccionado");
+    var mensaje = "";
+    $("#P" + identificador).addClass("PaqueteSeleccionado");
     var paquete = getElementoPorParametro(paquetes, "codigo", identificador);
     var repartidores = repartidoresDisponiblesPeso(paquete.peso);
     $("#ulRepartidoresDisponibles").html(mostrarRepartidores(repartidores));
     $("#ulRepartidoresDisponibles").listview('refresh');
-    for(var x in repartidores ){
-      $("#" + repartidores[x].codigo).click(seleccionarRepartidor);
+    for (var x in repartidores) {
+        $("#" + repartidores[x].codigo).click(seleccionarRepartidor);
     }
-    $("#"+ repartidor).addClass("RepartidorSeleccionado");
+    $("#" + repartidor).addClass("RepartidorSeleccionado");
 
 
 
@@ -274,20 +176,22 @@ function login() {
             mensaje = "El usuario no existe";
             break;
         case 1:
-            usuarioActual=getElementoPorParametro(usuarios,"cedula",usuario);
+            usuarioActual = getElementoPorParametro(usuarios, "cedula", usuario);
             $("#divLogin").hide();
             $("#divMenu").show();
             menuShow();
             $("#divMsgLogin").hide();
             $("#liConsultar").click(); //Para que inicie  siempre en la primera pestaña
+            $("#divPendientes").show();
             break;
         case 2:
-            usuarioActual=getElementoPorParametro(usuarios,"cedula",usuario);
+            usuarioActual = getElementoPorParametro(usuarios, "cedula", usuario);
             $("#divLogin").hide();
             $("#divMenu").show();
             menuHide();
             $("#divMsgLogin").hide();
             $("#liConsultar").click();
+            $("#divPendientes").hide();
             break;
         default:
 
@@ -295,15 +199,15 @@ function login() {
     $("#divMsgLogin").html(mensaje);
 
 }
-function menuHide(){
+function menuHide() {
     $("#liNuevo").hide();
     $("#liAsignar").hide();
     $("#liReporte").hide();
 }
-function menuShow(){
-  $("#liNuevo").show();
-  $("#liAsignar").show();
-  $("#liReporte").show();
+function menuShow() {
+    $("#liNuevo").show();
+    $("#liAsignar").show();
+    $("#liReporte").show();
 }
 
 function logout() {
@@ -311,14 +215,14 @@ function logout() {
     $("#divLogin").show();
     $("#divMsgLogin").show();
     limpiar();
-    usuarioActual=null;
+    usuarioActual = null;
 }
 
-function limpiar(){
-  $("#divMsgBuscarPaquete").html("");
-  $("#divMsgNuevoPaquete").html("");
-  $("#ulBuscarPaquete").html("<a></a>");
-  $("input").val("");
+function limpiar() {
+    $("#divMsgBuscarPaquete").html("");
+    $("#divMsgNuevoPaquete").html("");
+    $("#ulBuscarPaquete").html("<a></a>");
+    $("input").val("");
 }
 
 function ingresarNuevoPaquete() {

@@ -46,13 +46,13 @@
 
                 <!--Acá empieza el contenido de las pestañas -->
                 <div class="tab" id="divConsultar">
-                <div data-role="header"><h2> Seguimiento de paquetes</h2></div>
-                <label>Codigo:</label><input type="text" id="txtBuscarPaquete">
-                <input type="button" id="btnBuscarPaquete" value="Buscar">
-                <div id="divMsgBuscarPaquete"></div>
-                  <ul data-role='listview'  data-inset='true' id='ulBuscarPaquete'>
-                   <a></a>
-                  </ul>
+                    <div data-role="header"><h2> Seguimiento de paquetes</h2></div>
+                    <label>Codigo:</label><input type="text" id="txtBuscarPaquete">
+                    <input type="button" id="btnBuscarPaquete" value="Buscar">
+                    <div id="divMsgBuscarPaquete"></div>
+                    <ul data-role='listview'  data-inset='true' id='ulBuscarPaquete'>
+                        <a></a>
+                    </ul>
 
                 </div>
 
@@ -94,20 +94,23 @@
                     <div class="ui-grid-a">
                         <div class="ui-block-a">
                             <ul data-role='listview'  data-inset='true' id='ulRepartidoresDisponibles'>
-                              <a></a>
+                                <a></a>
                             </ul>
                         </div>
                         <div class="ui-block-b">
-                          <ul data-role='listview'  data-inset='true' id='ulPaquetesPendientes'>
-                              <a></a>
-                          </ul>
+                            <ul data-role='listview'  data-inset='true' id='ulPaquetesPendientes'>
+                                <a></a>
+                            </ul>
                         </div>
                     </div>
                     <input type="button" id="btnAsignarRepartidor" value="Asignar">
 
                 </div>
 
-                <div class="tab" id="divReporte">Reporte</div>
+                <div class="tab" id="divReporte">Reporte
+                    <input type="button" value="Resumen entregas por repartidor" id="btnEntXRepart"/>
+                    <div id="divEntXRep"></div>
+                </div>
                 <div id="divPendientes"></div>
                 <div class="tab" id="divLogout"></div>
             </div>

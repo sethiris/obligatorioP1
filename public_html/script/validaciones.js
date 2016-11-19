@@ -86,3 +86,102 @@ function validarPeso(pPeso) {
     }
     return valido;
 }
+
+//------------------------De ingreso de datos en sistema----------------------------------//
+
+function validarCIRemitente() {//función que avisa si la ci ingresada por el usuario es correcta
+    $("#divMsgNuevoPaquete").empty();
+    var CIRemitente = $("#txtCIRemitente").val();
+    if (!validarCI(CIRemitente)) {
+        var mensaje = "La CI no es correcta";
+        $("#txtCIRemitente").addClass("error");
+    } else {
+        mensaje = "";
+    }
+    $("#divMsgNuevoPaquete").html(mensaje);
+}
+
+function validarNomRemitente() {//función que avisa si el nom ingresadp por el usuario es correcto
+    $("#divMsgNuevoPaquete").empty();
+    var NomRemitente = $("#txtNombreRemitente").val();
+    if (!validarSoloTexto(NomRemitente)) {
+        var mensaje = "El nombre no es correcto";
+        $("#txtNombreRemitente").addClass("error");
+    } else {
+        mensaje = "";
+    }
+    $("#divMsgNuevoPaquete").html(mensaje);
+}
+
+function validarApeRemitente() {//función que avisa si el ape ingresado por el usuario es correcto
+    $("#divMsgNuevoPaquete").empty();
+    var ApeRemitente = $("#txtApellidoRemitente").val();
+    if (!validarSoloTexto(ApeRemitente)) {
+        var mensaje = "El apellido no es correcto";
+        $("#txtApellidoRemitente").addClass("error");
+    } else {
+        mensaje = "";
+    }
+    $("#divMsgNuevoPaquete").html(mensaje);
+}
+
+function validarCIDestinatario() {//función que avisa si la ci ingresada por el usuario es correcta
+    $("#divMsgNuevoPaquete").empty();
+    var CIDestinat = $("#txtCIDestinatario").val();
+    if (!validarCI(CIDestinat)) {
+        var mensaje = "La CI no es correcta";
+        $("#txtCIDestinatario").addClass("error");
+    } else {
+        mensaje = "";
+    }
+    $("#divMsgNuevoPaquete").html(mensaje);
+}
+
+function validarNomDestinatario() {//función que avisa si el nom ingresadp por el usuario es correcto
+    $("#divMsgNuevoPaquete").empty();
+    var NomDestinat = $("#txtNombreDestinatario").val();
+    if (!validarSoloTexto(NomDestinat)) {
+        var mensaje = "El nombre no es correcto";
+        $("#txtNombreDestinatario").addClass("error");
+    } else {
+        mensaje = "";
+    }
+    $("#divMsgNuevoPaquete").html(mensaje);
+}
+
+function validarApeDestinatario() {//función que avisa si el ape ingresado por el usuario es correcto
+    $("#divMsgNuevoPaquete").empty();
+    var ApeDestinat = $("#txtApellidoDestinatario").val();
+    if (!validarSoloTexto(ApeDestinat)) {
+        var mensaje = "El apellido no es correcto";
+        $("#txtApellidoDestinatario").addClass("error");
+    } else {
+        mensaje = "";
+    }
+    $("#divMsgNuevoPaquete").html(mensaje);
+}
+
+function validarDirDestinatario() {//función que avisa si la dir ingresada por el usuario es correcta
+    $("#divMsgNuevoPaquete").empty();
+    var DirDestinat = $("#txtDireccionDestinatario").val();
+    if (!validarSoloTexto(DirDestinat)) {
+        var mensaje = "Ingrese una dirección";
+        $("#txtDireccionDestinatario").addClass("error");
+    } else {
+        mensaje = "";
+    }
+    $("#divMsgNuevoPaquete").html(mensaje);
+}
+
+function validarPesoPaquete() {//función que avisa si el peso ingresado por el usuario es posible enviarlo
+    $("#divMsgNuevoPaquete").empty();
+    var peso = $("#txtPesoPaquete").val();
+    if (!validarPeso(peso)) {
+        var mensaje = "El peso no puede ser superior a 1000kgs.";
+        $("#txtPesoPaquete").addClass("error");
+    } else {
+        mensaje = "";
+    }
+    $("#divMsgNuevoPaquete").html(mensaje);
+
+}
