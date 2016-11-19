@@ -73,7 +73,7 @@ function mostrarReportePaquete(paquetes,entregas,usuario){
     mensaje+= "<div class='ui-block-c'>En viaje" + enViaje + "</div>";
     mensaje+= "<div class='ui-block-d'> Entregado:" + entregado + "</div>";
     mensaje+= "</div> ";
-    if (usuario ===1) mensaje+="</li><li><input class='ui-btn ui shadow' id='btnGuardarEstados' type='button' value='Guardar'></input>";
+    if (usuario ===1) mensaje+="</li><li><input class='ui-btn ui shadow' id='btnGuardarEstados"+ paquetes[x].codigo + "' type='button' value='Guardar'></input>";
     }
     mensaje+="</div></li>";
   } else {

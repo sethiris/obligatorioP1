@@ -280,19 +280,17 @@ function login() {
             usuarioActual=getElementoPorParametro(usuarios,"cedula",usuario);
             $("#divLogin").hide();
             $("#divMenu").show();
-            $("#ulMenu2").hide();
-            $("#ulMenu1").show();
+            menuShow();
             $("#divMsgLogin").hide();
-            $("#iniciar").click(); //Para que inicie  siempre en la primera pestaña
+            $("#liConsultar").click(); //Para que inicie  siempre en la primera pestaña
             break;
         case 2:
             usuarioActual=getElementoPorParametro(usuarios,"cedula",usuario);
-            $("#divMenu").show();
-            $("#ulMenu1").hide();
-            $("#ulMenu2").show();
-            $("#divMsgLogin").hide();
             $("#divLogin").hide();
-            $("#iniciar2").click();
+            $("#divMenu").show();
+            menuHide();
+            $("#divMsgLogin").hide();
+            $("#liConsultar").click();
             break;
         default:
 
@@ -300,12 +298,30 @@ function login() {
     $("#divMsgLogin").html(mensaje);
 
 }
+function menuHide(){
+    $("#liNuevo").hide();
+    $("#liAsignar").hide();
+    $("#liReporte").hide();
+}
+function menuShow(){
+  $("#liNuevo").show();
+  $("#liAsignar").show();
+  $("#liReporte").show();
+}
 
 function logout() {
     $("#divMenu").hide();
     $("#divLogin").show();
     $("#divMsgLogin").show();
+    limpiar();
+    usuarioActual=null;
+}
 
+function limpiar(){
+  $("#divMsgBuscarPaquete").html("");
+  $("#divMsgNuevoPaquete").html("");
+  $("#ulBuscarPaquete").html("<a></a>");
+  $("input").val("");
 }
 
 function ingresarNuevoPaquete() {
