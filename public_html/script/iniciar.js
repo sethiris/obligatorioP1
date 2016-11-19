@@ -17,9 +17,7 @@ function iniciarPrograma() {
     $("#liAsignar").click(mostrarDisponibles);
     $("#btnNuevoPaquete").click(ingresarNuevoPaquete);
     $("#btnAsignarRepartidor").click(asignarRepartidor);
-<<<<<<< HEAD
     mostrarPendEntrega();
-=======
     $("#btnBuscarPaquete").click(buscarPaquete)
 }
 function buscarPaquete(){
@@ -47,7 +45,6 @@ function buscarPaquete(){
     $("#divMsgBuscarPaquete").html(mensaje);
     $("#ulBuscarPaquete").html("");
   }
->>>>>>> origin/master
 }
 
 function precargaBlur() {
