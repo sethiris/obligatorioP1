@@ -86,3 +86,48 @@ function validarPeso(pPeso) {
     }
     return valido;
 }
+
+function keyHora(keyCode,hora){
+  var validado=true;
+  if (keyCode!=8 && keyCode!=9){
+    if (hora.length<2) {
+      if(hora.length===0) {
+         if(keyCode<48 || keyCode>50) validado=false;
+      }
+      else {
+          if(hora[0]==="2"){
+                  if(keyCode<48 || keyCode>51) validado=false;
+          }else {
+                  if(keyCode<48 || keyCode>57) validado=false;
+          }
+
+      }
+     }
+    else {
+        validado=false;
+    }
+
+    }
+  return validado;
+}
+
+
+function keyMinutos(keyCode,hora){
+  var validado=true;
+  if (keyCode!=8 && keyCode!=9){
+    if (hora.length<2) {
+      if(hora.length===0) {
+         if(keyCode<48 || keyCode>53) validado=false;
+      }
+      else {
+          if(keyCode<48 || keyCode>57) validado=false;
+
+      }
+     }
+    else {
+        validado=false;
+    }
+
+    }
+  return validado;
+}

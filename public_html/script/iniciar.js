@@ -11,6 +11,9 @@ function iniciarPrograma() {
             login();
         }
     });
+
+
+
     precargaBlur();//asigna todas las validaciones con blur al cargar el sitio
     precargaPaquetes();
     precargaRepartidores();
@@ -18,8 +21,37 @@ function iniciarPrograma() {
     $("#btnNuevoPaquete").click(ingresarNuevoPaquete);
     $("#btnAsignarRepartidor").click(asignarRepartidor);
     mostrarPendEntrega();
-    $("#btnBuscarPaquete").click(buscarPaquete)
+    $("#btnBuscarPaquete").click(buscarPaquete);
+
 }
+
+function filtroHora(e){
+
+}
+
+function guardarEstado(){
+   var codigo = parseInt(quitarLetraID($(this).attr("id")));
+   var entrega = getElementoPorParametro(entregas,"paquete",codigo);
+   var enViajeHora= $("#txtEnViajeHora").val();
+   var enViajeMin= $("#txtEnViajeMin").val();
+   var entregadoHora= $("#txtEntregadoHora").val();
+   var entregadoMin= $("#txtEntregadoMin").val();
+   if (validarNumPositivo(enViajeHora) && validarNumPositivo(enViajeMin)){
+     entrega.EV= enViajeHora + ":" + enViajeMin;
+     $("#txtBuscarPaquete").val(codigo);
+     $("#btnBuscarPaquete").click();
+   }
+   if (validarNumPositivo(entregadoHora) && validarNumPositivo(entregadoMin)) {
+      entrega.ED= entregadoHora + ":" + entregadoMin;
+      $("#txtBuscarPaquete").val(codigo);
+      $("#btnBuscarPaquete").click();
+      mostrarPendEntrega();
+   }
+
+
+
+}
+
 function buscarPaquete(){
   var mensaje ="";
   var codigo = parseInt($("#txtBuscarPaquete").val());
@@ -28,6 +60,8 @@ function buscarPaquete(){
     var paquete= getElementosPorParametro(paquetes,"codigo",codigo);
     var entrega= getElementosPorParametro(entregas,"paquete",codigo);
     mensaje= mostrarReportePaquete(paquete,entrega,usuarioActual.tipo);
+
+
     if(mensaje!= null){
       encontrado=true;
     }else{
@@ -41,6 +75,32 @@ function buscarPaquete(){
     $("#ulBuscarPaquete").html(mensaje);
     $("#ulBuscarPaquete").listview('refresh');
     $("#divMsgBuscarPaquete").html("");
+    $("#btnGuardarEstados"+ codigo).click(guardarEstado);
+    $("#txtEnViajeHora").keydown(function(e){
+          var hora=$(this).val();
+          if(!keyHora(e.keyCode,hora)){
+            e.preventDefault();
+          }
+        });
+    $("#txtEnViajeMin").keydown(function(e){
+              var hora=$(this).val();
+              if(!keyMinutos(e.keyCode,hora)){
+                e.preventDefault();
+              }
+    });
+    $("#txtEntregadoHora").keydown(function(e){
+          var hora=$(this).val();
+          if(!keyHora(e.keyCode,hora)){
+            e.preventDefault();
+          }
+        });
+    $("#txtEntregadoMin").keydown(function(e){
+              var hora=$(this).val();
+              if(!keyMinutos(e.keyCode,hora)){
+                e.preventDefault();
+              }
+    });
+
   } else {
     $("#divMsgBuscarPaquete").html(mensaje);
     $("#ulBuscarPaquete").html("");
@@ -219,6 +279,7 @@ function asignarRepartidor() {
 
             mensaje = "Entregado a repartidor correctamente";
             mostrarDisponibles();
+            mostrarPendEntrega();
         } else {
             mensaje = "Debe seleccionar un repartidor"
         }
