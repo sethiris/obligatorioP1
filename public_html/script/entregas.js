@@ -2,7 +2,7 @@ var entregas = new Array();
 
 function ListarPendEntrega() {
     var cantPend = 0;
-    var mensaje = "<b>Paquetes pendientes de entrega</b><br><br>";
+    var mensaje = "<li>Pendientes de entrega</li>";
     var pendientes = new Array();
 
     for (var ite = 0; ite < entregas.length; ite++) {
@@ -12,17 +12,30 @@ function ListarPendEntrega() {
             cantPend++;
         }
     }
-    if (mostrarPaquetes(pendientes) === null) {
-        mensaje += "<br><br>" + "Total de paquetes pendientes de entrega: " + cantPend;
-    } else {
-        mensaje += mostrarPaquetes(pendientes) + "<br><br>" + "Total de paquetes pendientes de entrega: " + cantPend;
+    if (mostrarPaquetes(pendientes) != null) {
+      mensaje += mostrarPaquetes(pendientes) + "<li>Total: " + cantPend + "</li>";
     }
     return mensaje;
 }
 
 function mostrarPendEntrega() {
     var paquetesPend = ListarPendEntrega();
-    $("#divPendientes").html(paquetesPend);
+    $("#ulPendientes").html(paquetesPend);
+    $("#ulPendientes").listview("refresh");
+}
+function calcularCostoEntrega(_entrega){
+    var costo=0;
+    var importeTotal=0;
+    var repartidor = getElementoPorParametro(repartidores,"codigo",_entrega.repartidor);
+    var paquete = getElementoPorParametro(paquetes,"codigo",_entrega.paquete);
+    for(var x in limitesPaquetes){
+        for(var i in limitesPaquetes[x])
+            if(i === repartidor.medio){
+                costo= parseInt(limitesPaquetes[x][i].costo);
+            }
+    }
+    importeTotal= parseInt(paquete.peso) * costo;
+    return importeTotal;
 }
 
 function calcularCostoEnvio(pPaquete, pMedio) {
@@ -30,18 +43,19 @@ function calcularCostoEnvio(pPaquete, pMedio) {
     var kilos;
     var importeTotal;
     var ite = 0;
-    while (ite < limitesPaquetes.length) {
+    var encontrado= false;
+    while (ite < limitesPaquetes.length && !encontrado) {
         var medioActual = limitesPaquetes[ite];
         if (medioActual === pMedio) {
             costo = medioActual.costo;
         }
         ite++;
     }
-
+    encontrado=false;
     var iteB = 0;
-    while (iteB < paquetes.length) {
+    while (iteB < paquetes.length && !encontrado) {
         var paqueteActual = paquetes[iteB];
-        if (medioActual === pMedio) {
+        if (paqueteActual=== pPaquete) {
             kilos = paqueteActual.peso;
         }
         iteB++;

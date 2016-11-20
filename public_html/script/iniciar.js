@@ -2,7 +2,9 @@ $('document').ready(iniciarPrograma);
 
 function iniciarPrograma() {
     precargaUsuarios();
+    $(".banner").hide();
     $("#divMenu").hide();
+    $("#divPendientes").hide();
     $("#btnLogin").click(login);
     $(".Logout").click(logout);
     $("#txtClave").keyup(function (e) { //se crea funcion anonima que toma como parametro el evento de keyup
@@ -21,14 +23,16 @@ function iniciarPrograma() {
     $("#btnNuevoPaquete").click(ingresarNuevoPaquete);
     $("#btnAsignarRepartidor").click(asignarRepartidor);
     mostrarPendEntrega();
-<<<<<<< HEAD
     $("#btnBuscarPaquete").click(buscarPaquete);
     $("#btnEntXRepart").click(mostrarEntregadosPorRepart);
+    $("#liConsultar").click(limpiarBusqueda);
 }
 
-function filtroHora(e){
-
+function limpiarBusqueda(){
+  $("#ulBuscarPaquete").html("<a><a>");
+  $("#ulBuscarPaquete").listview('refresh');
 }
+
 
 function guardarEstado(){
    var codigo = parseInt(quitarLetraID($(this).attr("id")));
@@ -44,6 +48,7 @@ function guardarEstado(){
    }
    if (validarNumPositivo(entregadoHora) && validarNumPositivo(entregadoMin)) {
       entrega.ED= entregadoHora + ":" + entregadoMin;
+      entrega.costo= calcularCostoEntrega(entrega);
       $("#txtBuscarPaquete").val(codigo);
       $("#btnBuscarPaquete").click();
       mostrarPendEntrega();
@@ -236,6 +241,7 @@ function login() {
             break;
         case 1:
             usuarioActual = getElementoPorParametro(usuarios, "cedula", usuario);
+            $(".banner").show();
             $("#divLogin").hide();
             $("#divMenu").show();
             menuShow();
@@ -245,6 +251,7 @@ function login() {
             break;
         case 2:
             usuarioActual = getElementoPorParametro(usuarios, "cedula", usuario);
+            $(".banner").show();
             $("#divLogin").hide();
             $("#divMenu").show();
             menuHide();
@@ -262,15 +269,19 @@ function menuHide() {
     $("#liNuevo").hide();
     $("#liAsignar").hide();
     $("#liReporte").hide();
+    $("#divPendientes").hide();
 }
 function menuShow() {
     $("#liNuevo").show();
     $("#liAsignar").show();
     $("#liReporte").show();
+    $("#divPendientes").show();
 }
 
 function logout() {
     $("#divMenu").hide();
+    $("#divPendientes").hide();
+    $(".banner").hide();
     $("#divLogin").show();
     $("#divMsgLogin").show();
     limpiar();

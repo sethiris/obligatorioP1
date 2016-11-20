@@ -62,7 +62,8 @@ function mostrarReportePaquete(_paquetes,_entregas,_usuario){
           enViaje= _entregas[x].EV;
           entregado = _entregas[x].ED;
           icono+="style='color:green'";
-          var costo = 999;
+          
+         var costo = _entregas[x].costo;
         }
       }
     }
@@ -74,16 +75,16 @@ function mostrarReportePaquete(_paquetes,_entregas,_usuario){
     mensaje+= " <div class='ui-block-b'>Remitente: "+ _paquetes[x].ciRemitente+"</div>";
     mensaje+= " <div class='ui-block-c'>Destinatario:" + _paquetes[x].ciDestinatario +"</div>";
     if (costo>0) {
-      mensaje+= " <div class='ui-block-d'>Costo:" + costo +"</div></li>";
+      mensaje+= " <div class='ui-block-d'>Costo:$" + costo +"</div></li>";
     }
     mensaje+="<li>";
     mensaje+="<div id='divEstados'class='ui-grid-c'>";
     mensaje+="<div class='ui-block-a'> Recibido:"+ _entregas[x].RE +"</div>";
-    mensaje+= "<div class='ui-block-b'> Entregado a repartidor:"+ entregadoR + "</div>";
-    mensaje+= "<div class='ui-block-c'>En viaje" + enViaje + "</div>";
+    mensaje+= "<div class='ui-block-b'> Asignado a repartidor:"+ entregadoR + "</div>";
+    mensaje+= "<div class='ui-block-c'> En viaje" + enViaje + "</div>";
     mensaje+= "<div class='ui-block-d'> Entregado:" + entregado + "</div>";
     mensaje+= "</div> ";
-    if (_usuario ===1) mensaje+="</li><li><input class='ui-btn ui shadow' id='btnGuardarEstados"+ _paquetes[x].codigo + "' type='button' value='Guardar'></input>";
+    if (_usuario ===1 && _entregas[x].ED=== null && _entregas[x].ER !==null) mensaje+="</li><li><input class='ui-btn ui shadow' id='btnGuardarEstados"+ _paquetes[x].codigo + "' type='button' value='Guardar'></input>";
     }
     mensaje+="</div></li>";
   } else {

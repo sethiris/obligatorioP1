@@ -2,14 +2,29 @@ label {
     text-align: center;
 
 }
-
+body{
+  background: url(../images/bg3.jpg) !important;
+   background-repeat: no-repeat !important;
+    background-position:center center !important;
+    background-attachment:scroll !important;
+    background-size:100% 100% !important;
+    background-color: #e9e9e9 !important;
+}
+.ui-page {
+    background: transparent;
+}
+/*.ui-content{
+    background: transparent;
+}
+*/
 .tab{
     padding-top: 20px;
 }
 
 .banner{
-    height:100px;
+    height:150px;
     background-color: red;
+    opacity: 0.6;
 }
 .ui-bar-inherit{
 
@@ -21,7 +36,7 @@ label {
     margin-left: 15%;
     margin-right: 15%;
     margin-bottom: 10%;
-
+    opacity: 0.8
 }
 .error {
    color: red;
@@ -42,9 +57,15 @@ label {
 }
 
 #divMenu {
-    margin-left: 20%;
-    margin-right: 20%;
+    margin-left: 5%;
+    margin-right: 0%;
+    width: 70% !important;
+    background: #e9e9e9;
 
+}
+#divPendientes{
+  padding-left: 2%;
+  width: 25% !important;
 }
 #divNuevo {
     margin-left: 20%;

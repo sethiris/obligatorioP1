@@ -45,7 +45,7 @@ function agregarPaquete(pCIRemitente, pNomRemitente, pApeRemitente, pCIDestinat,
          paquetes.push(paquete);*/
         paqueteAgregado = true;
         var fechaActual = new Date();
-        entregas.push({"paquete": numPaquete, "repartidor": null, "RE": agregarHoraActual(), "ER": null, "EV": null, "ED": null});
+        entregas.push({"paquete": numPaquete, "repartidor": null, "RE": agregarHoraActual(), "ER": null, "EV": null, "ED": null,"costo":null});
     }
     return paqueteAgregado;
 }

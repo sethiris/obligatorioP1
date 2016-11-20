@@ -20,7 +20,7 @@
 
     </head>
     <body>
-        <div data-role="header" class="banner"><h3>Tracking</h3></div>
+        <div data-role="header" class="banner"></div>
         <div id="divLogin">
             <div class="ui-grid-solo">
                 <div class="ui-bar ui-bar-a">
@@ -32,8 +32,8 @@
             </div>
         </div>
 
-
-        <div data-role="tabs" id="divMenu">
+        <div class="ui-grid-a">
+        <div class="ui-block-a" data-role="tabs" id="divMenu">
             <div data-role="navbar">
 
                 <ul id="ulMenu1">
@@ -90,7 +90,8 @@
 
                 <!--Pestaña asignar paquete -->
                 <div class="tab" id="divAsignar">
-                    <div id="divMsgAsignar">Seleccione un repartidor disponible o un paquete pendiente para asignar </div>
+                   <div data-role="header"><h3>Seleccione repartidor y un paquete</h3></div>
+                    <div id="divMsgAsignar"></div>
                     <div class="ui-grid-a">
                         <div class="ui-block-a">
                             <ul data-role='listview'  data-inset='true' id='ulRepartidoresDisponibles'>
@@ -112,11 +113,18 @@
                     <input type="button" value="Resumen entregas por repartidor" id="btnEntXRepart"/>
                     <div id="divEntXRep"></div>
                 </div>
-                <div id="divPendientes"></div>
+
 
                 <div class="tab" id="divLogout"></div>
-                <div id="divPendientes"></div>
+
             </div>
+
         </div>
+        <div class="ui-block-b" id="divPendientes">
+          <ul data-role='listview'  data-inset='true' id='ulPendientes'>
+              <a></a>
+          </ul>
+        </div>
+      </div>
     </body>
 </html>
