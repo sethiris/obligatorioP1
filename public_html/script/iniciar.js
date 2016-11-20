@@ -41,20 +41,44 @@ function guardarEstado(){
    var enViajeMin= $("#txtEnViajeMin").val();
    var entregadoHora= $("#txtEntregadoHora").val();
    var entregadoMin= $("#txtEntregadoMin").val();
+   var mensaje="";
    if (validarNumPositivo(enViajeHora) && validarNumPositivo(enViajeMin)){
-     entrega.EV= enViajeHora + ":" + enViajeMin;
-     $("#txtBuscarPaquete").val(codigo);
-     $("#btnBuscarPaquete").click();
+     var horaFormato=enViajeHora + ":" + enViajeMin;
+     if (ordenarFechas(horaFormato,entrega.ER)=== -1) {
+       entrega.EV=horaFormato;
+       $("#txtBuscarPaquete").val(codigo);
+       $("#btnBuscarPaquete").click();
+       mensaje="Estado en viaje ingresado Correctamente";
+     }
+     else{
+       mensaje+="El estado de en viaje debe ser posterior al de entregado al repartidor";
+     }
+
    }
-   if (validarNumPositivo(entregadoHora) && validarNumPositivo(entregadoMin)) {
+   if (validarNumPositivo(entregadoHora) && validarNumPositivo(entregadoMin) && entrega.EV!==null) {
+     var entregadoFormato=entregadoHora + ":" + entregadoMin;
+     if (ordenarFechas(entregadoFormato,entrega.EV)=== -1) {
       entrega.ED= entregadoHora + ":" + entregadoMin;
       entrega.costo= calcularCostoEntrega(entrega);
       $("#txtBuscarPaquete").val(codigo);
       $("#btnBuscarPaquete").click();
       mostrarPendEntrega();
-   }
+      mensaje="Entregado correctamente";
+      }
+     else {
+        mensaje+= "<br>El estado Entregado debe ser posterior a todos los anteriores";
+
+       }
+     }
+    else {
+      if (mensaje ==="") {
+        mensaje+= "<br>Para asignar como entregado deben estar todos los estados";
+      }
+
+    }
 
 
+   $("#divMsgBuscarPaquete").html(mensaje);
 
 }
 
@@ -66,9 +90,7 @@ function buscarPaquete(){
     var paquete= getElementosPorParametro(paquetes,"codigo",codigo);
     var entrega= getElementosPorParametro(entregas,"paquete",codigo);
     mensaje= mostrarReportePaquete(paquete,entrega,usuarioActual.tipo);
-
-
-    if(mensaje!= null){
+    if(mensaje!== null){
       encontrado=true;
     }else{
       mensaje="No existe el paquete buscado";
@@ -77,34 +99,40 @@ function buscarPaquete(){
         mensaje = "Debe ingresar un codigo de paquete";
     }
   if(encontrado){
-    $("#ulBuscarPaquete").html(mensaje);
-    $("#ulBuscarPaquete").listview('refresh');
-    $("#divMsgBuscarPaquete").html("");
-    $("#btnGuardarEstados"+ codigo).click(guardarEstado);
-    $("#txtEnViajeHora").keydown(function(e){
-          var hora=$(this).val();
-          if(!keyHora(e.keyCode,hora)){
-            e.preventDefault();
-          }
-        });
-    $("#txtEnViajeMin").keydown(function(e){
-              var hora=$(this).val();
-              if(!keyMinutos(e.keyCode,hora)){
-                e.preventDefault();
-              }
-    });
-    $("#txtEntregadoHora").keydown(function(e){
-          var hora=$(this).val();
-          if(!keyHora(e.keyCode,hora)){
-            e.preventDefault();
-          }
-        });
-    $("#txtEntregadoMin").keydown(function(e){
-              var hora=$(this).val();
-              if(!keyMinutos(e.keyCode,hora)){
-                e.preventDefault();
-              }
-    });
+    if (usuarioActual.tipo===1|| usuarioActual.cedula ===paquete[0].ciRemitente|| usuarioActual.cedula===paquete[0].ciDestinatario ) {
+      $("#ulBuscarPaquete").html(mensaje);
+      $("#ulBuscarPaquete").listview('refresh');
+      $("#divMsgBuscarPaquete").html("");
+      $("#btnGuardarEstados"+ codigo).click(guardarEstado);
+      $("#txtEnViajeHora").keydown(function(e){
+            var hora=$(this).val();
+            if(!keyHora(e.keyCode,hora)){
+              e.preventDefault();
+            }
+          });
+      $("#txtEnViajeMin").keydown(function(e){
+                var hora=$(this).val();
+                if(!keyMinutos(e.keyCode,hora)){
+                  e.preventDefault();
+                }
+      });
+      $("#txtEntregadoHora").keydown(function(e){
+            var hora=$(this).val();
+            if(!keyHora(e.keyCode,hora)){
+              e.preventDefault();
+            }
+          });
+      $("#txtEntregadoMin").keydown(function(e){
+                var hora=$(this).val();
+                if(!keyMinutos(e.keyCode,hora)){
+                  e.preventDefault();
+                }
+      });
+    } else {
+        mensaje="Numero de paquete no encontrado";
+        $("#divMsgBuscarPaquete").html(mensaje);
+        $("#ulBuscarPaquete").html("");
+    }
 
   } else {
     $("#divMsgBuscarPaquete").html(mensaje);

@@ -18,7 +18,7 @@ function repartidoresDisponibles(){
   var i=0;
   for( var x in repartidores){
     while( i< entregas.length && !encontrado){
-      if (entregas[i].repartidor === repartidores[x].codigo) {
+      if (entregas[i].repartidor === repartidores[x].codigo && entregas[i].ED === null) {
         encontrado=true;
       }
       i++;

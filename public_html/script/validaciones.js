@@ -230,3 +230,39 @@ function keyMinutos(keyCode,hora){
     }
   return validado;
 }
+
+function ordenarFechas(pHora1, pHora2){
+    var fecha = separarTiempo(pHora1);
+    var fecha2= separarTiempo(pHora2);
+    var orden = null;
+      if (fecha[0]>fecha2[0]) {
+          orden=-1;
+        }else {
+          if (fecha[0]===fecha2[0]) {
+              if (fecha[1]>fecha2[1]) {
+                orden=-1;
+              } else {
+                if (fecha[1]===fecha2[1]) {
+                  orden=0;
+                } else {
+                    orden=1;
+                }
+
+              }
+
+          }else {
+            orden=1;
+          }
+
+      }
+      return orden;
+}
+
+function separarTiempo(string){
+    var hora = parseInt(string[0] + string[1]);
+    var minutos = parseInt(string[3]+ string[4]);
+    var tiempo = new Array();
+    tiempo.push(hora);
+    tiempo.push(minutos);
+    return tiempo;
+}
