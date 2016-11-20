@@ -33,98 +33,99 @@
         </div>
 
         <div class="ui-grid-a">
-        <div class="ui-block-a" data-role="tabs" id="divMenu">
-            <div data-role="navbar">
+            <div class="ui-block-a" data-role="tabs" id="divMenu">
+                <div data-role="navbar">
 
-                <ul id="ulMenu1">
-                    <li><a id="liConsultar" href="#divConsultar"><i class="fa fa-search" aria-hidden="true"></i> Consultas</a></li>
-                    <li><a id="liNuevo" href="#divNuevo"> <i class="fa fa-cube" aria-hidden="true"></i> Nuevo Paquete </a></li>
-                    <li><a id="liAsignar" href="#divAsignar" id="liAsignar"> <i class="fa fa-truck" aria-hidden="true"></i> Asignar Paquete</a></li>
-                    <li><a id="liReporte" href="#divReporte"> <i class="fa fa-bar-chart" aria-hidden="true"></i> Reportes</a></li>
-                    <li><a href="#divLogout" class="Logout"> <i class="fa fa-sign-out" aria-hidden="true"></i>Logout</a></li>
-                </ul>
-
-                <!--Acá empieza el contenido de las pestañas -->
-                <div class="tab" id="divConsultar">
-                    <div data-role="header"><h2> Seguimiento de paquetes</h2></div>
-                    <label>Codigo:</label><input type="text" id="txtBuscarPaquete">
-                    <input type="button" id="btnBuscarPaquete" value="Buscar">
-                    <div id="divMsgBuscarPaquete"></div>
-                    <ul data-role='listview'  data-inset='true' id='ulBuscarPaquete'>
-                        <a></a>
+                    <ul id="ulMenu1">
+                        <li><a id="liConsultar" href="#divConsultar"><i class="fa fa-search" aria-hidden="true"></i> Consultas</a></li>
+                        <li><a id="liNuevo" href="#divNuevo"> <i class="fa fa-cube" aria-hidden="true"></i> Nuevo Paquete </a></li>
+                        <li><a id="liAsignar" href="#divAsignar"> <i class="fa fa-truck" aria-hidden="true"></i> Asignar Paquete</a></li>
+                        <li><a id="liReporte" href="#divReporte"> <i class="fa fa-bar-chart" aria-hidden="true"></i> Reportes</a></li>
+                        <li><a href="#divLogout" class="Logout"> <i class="fa fa-sign-out" aria-hidden="true"></i>Logout</a></li>
                     </ul>
 
-                </div>
-
-                <!--pestaña ingresar paquete-->
-                <div class="tab" id="divNuevo">
-                    <div data-role="header"><h2> Ingreso nuevo paquete </h2></div>
-                    <div data-role="header">Remitente</div>
-                    <div id="divMsgNuevoPaquete" class="error"></div>
-                    <label >CI </label><input type="text" id="txtCIRemitente">
-                    <div class="ui-grid-a">
-                        <div class="ui-block-a">
-                            <label >Nombre </label><input type="text" id="txtNombreRemitente">
-                        </div>
-                        <div class="ui-block-b">
-                            <label >Apellido</label><input type="text" id="txtApellidoRemitente">
-                        </div>
-                    </div>
-                    <div data-role="header">Destinatario</div>
-                    <label>CI</label><input type="text" id="txtCIDestinatario">
-                    <div class="ui-grid-a">
-                        <div class="ui-block-a">
-                            <label>Nombre</label><input type="text" id="txtNombreDestinatario">
-                        </div>
-                        <div class="ui-block-b">
-                            <label >Apellido</label><input type="text" id="txtApellidoDestinatario">
-                        </div>
+                    <!--Acá empieza el contenido de las pestañas -->
+                    <div class="tab" id="divConsultar">
+                        <div data-role="header"><h2> Seguimiento de paquetes</h2></div>
+                        <label>Codigo:</label><input type="text" id="txtBuscarPaquete">
+                        <input type="button" id="btnBuscarPaquete" value="Buscar">
+                        <div id="divMsgBuscarPaquete"></div>
+                        <ul data-role='listview'  data-inset='true' id='ulBuscarPaquete'>
+                            <a></a>
+                        </ul>
 
                     </div>
 
-                    <label >Direccion</label><input type="text" id="txtDireccionDestinatario">
-                    <div data-role="header">Paquete</div>
-                    <label >Peso</label><input type="text" id="txtPesoPaquete">
-                    <input type="button" id="btnNuevoPaquete" value="Ingresar nuevo">
-                </div>
+                    <!--pestaña ingresar paquete-->
+                    <div class="tab" id="divNuevo">
+                        <div data-role="header"><h2> Ingreso nuevo paquete </h2></div>
+                        <div data-role="header">Remitente</div>
+                        <div id="divMsgNuevoPaquete" class="error"></div>
+                        <label >CI </label><input type="text" id="txtCIRemitente">
+                        <div class="ui-grid-a">
+                            <div class="ui-block-a">
+                                <label >Nombre </label><input type="text" id="txtNombreRemitente">
+                            </div>
+                            <div class="ui-block-b">
+                                <label >Apellido</label><input type="text" id="txtApellidoRemitente">
+                            </div>
+                        </div>
+                        <div data-role="header">Destinatario</div>
+                        <label>CI</label><input type="text" id="txtCIDestinatario">
+                        <div class="ui-grid-a">
+                            <div class="ui-block-a">
+                                <label>Nombre</label><input type="text" id="txtNombreDestinatario">
+                            </div>
+                            <div class="ui-block-b">
+                                <label >Apellido</label><input type="text" id="txtApellidoDestinatario">
+                            </div>
 
-                <!--Pestaña asignar paquete -->
-                <div class="tab" id="divAsignar">
-                   <div data-role="header"><h3>Seleccione repartidor y un paquete</h3></div>
-                    <div id="divMsgAsignar"></div>
-                    <div class="ui-grid-a">
-                        <div class="ui-block-a">
-                            <ul data-role='listview'  data-inset='true' id='ulRepartidoresDisponibles'>
-                                <a></a>
-                            </ul>
                         </div>
-                        <div class="ui-block-b">
-                            <ul data-role='listview'  data-inset='true' id='ulPaquetesPendientes'>
-                                <a></a>
-                            </ul>
-                        </div>
+
+                        <label >Direccion</label><input type="text" id="txtDireccionDestinatario">
+                        <div data-role="header">Paquete</div>
+                        <label >Peso</label><input type="text" id="txtPesoPaquete">
+                        <input type="button" id="btnNuevoPaquete" value="Ingresar nuevo">
                     </div>
-                    <input type="button" id="btnAsignarRepartidor" value="Asignar">
+
+                    <!--Pestaña asignar paquete -->
+                    <div class="tab" id="divAsignar">
+                        <div data-role="header"><h3>Seleccione repartidor y un paquete</h3></div>
+                        <div id="divMsgAsignar"></div>
+                        <div class="ui-grid-a">
+                            <div class="ui-block-a">
+                                <ul data-role='listview'  data-inset='true' id='ulRepartidoresDisponibles'>
+                                    <a></a>
+                                </ul>
+                            </div>
+                            <div class="ui-block-b">
+                                <ul data-role='listview'  data-inset='true' id='ulPaquetesPendientes'>
+                                    <a></a>
+                                </ul>
+                            </div>
+                        </div>
+                        <input type="button" id="btnAsignarRepartidor" value="Asignar">
+
+                    </div>
+
+                    <div class="tab" id="divReporte">Reporte
+
+                        <input type="button" value="Resumen entregas por repartidor" id="btnEntXRepart"/>
+                        <div id="divRepart"></div>
+                        <div id="divEntXRep"></div>
+                    </div>
+
+
+                    <div class="tab" id="divLogout"></div>
 
                 </div>
-
-                <div class="tab" id="divReporte">Reporte
-
-                    <input type="button" value="Resumen entregas por repartidor" id="btnEntXRepart"/>
-                    <div id="divEntXRep"></div>
-                </div>
-
-
-                <div class="tab" id="divLogout"></div>
 
             </div>
-
+            <div class="ui-block-b" id="divPendientes">
+                <ul data-role='listview'  data-inset='true' id='ulPendientes'>
+                    <a></a>
+                </ul>
+            </div>
         </div>
-        <div class="ui-block-b" id="divPendientes">
-          <ul data-role='listview'  data-inset='true' id='ulPendientes'>
-              <a></a>
-          </ul>
-        </div>
-      </div>
     </body>
 </html>

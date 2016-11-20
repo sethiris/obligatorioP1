@@ -12,8 +12,8 @@ function ListarPendEntrega() {
             cantPend++;
         }
     }
-    if (mostrarPaquetes(pendientes) != null) {
-      mensaje += mostrarPaquetes(pendientes) + "<li>Total: " + cantPend + "</li>";
+    if (mostrarPaquetes(pendientes) !== null) {
+        mensaje += mostrarPaquetes(pendientes) + "<li>Total: " + cantPend + "</li>";
     }
     return mensaje;
 }
@@ -23,59 +23,65 @@ function mostrarPendEntrega() {
     $("#ulPendientes").html(paquetesPend);
     $("#ulPendientes").listview("refresh");
 }
-function calcularCostoEntrega(_entrega){
-    var costo=0;
-    var importeTotal=0;
-    var repartidor = getElementoPorParametro(repartidores,"codigo",_entrega.repartidor);
-    var paquete = getElementoPorParametro(paquetes,"codigo",_entrega.paquete);
-    for(var x in limitesPaquetes){
-        for(var i in limitesPaquetes[x])
-            if(i === repartidor.medio){
-                costo= parseInt(limitesPaquetes[x][i].costo);
+function calcularCostoEntrega(_entrega) {
+    var costo = 0;
+    var importeTotal = 0;
+    var repartidor = getElementoPorParametro(repartidores, "codigo", _entrega.repartidor);
+    var paquete = getElementoPorParametro(paquetes, "codigo", _entrega.paquete);
+    for (var x in limitesPaquetes) {
+        for (var i in limitesPaquetes[x])
+            if (i === repartidor.medio) {
+                costo = parseInt(limitesPaquetes[x][i].costo);
             }
     }
-    importeTotal= parseInt(paquete.peso) * costo;
+    importeTotal = parseInt(paquete.peso) * costo;
     return importeTotal;
 }
-
-function calcularCostoEnvio(pPaquete, pMedio) {
-    var costo;
-    var kilos;
-    var importeTotal;
-    var ite = 0;
-    var encontrado= false;
-    while (ite < limitesPaquetes.length && !encontrado) {
-        var medioActual = limitesPaquetes[ite];
-        if (medioActual === pMedio) {
-            costo = medioActual.costo;
-        }
-        ite++;
-    }
-    encontrado=false;
-    var iteB = 0;
-    while (iteB < paquetes.length && !encontrado) {
-        var paqueteActual = paquetes[iteB];
-        if (paqueteActual=== pPaquete) {
-            kilos = paqueteActual.peso;
-        }
-        iteB++;
-    }
-    importeTotal = costo * kilos;
-    return importeTotal;
-}
-
+/*
+ function calcularCostoEnvio(pPaquete, pMedio) {
+ var costo;
+ var kilos;
+ var importeTotal;
+ var ite = 0;
+ var encontrado= false;
+ while (ite < limitesPaquetes.length && !encontrado) {
+ var medioActual = limitesPaquetes[ite];
+ if (medioActual === pMedio) {
+ costo = medioActual.costo;
+ }
+ ite++;
+ }
+ encontrado=false;
+ var iteB = 0;
+ while (iteB < paquetes.length && !encontrado) {
+ var paqueteActual = paquetes[iteB];
+ if (paqueteActual=== pPaquete) {
+ kilos = paqueteActual.peso;
+ }
+ iteB++;
+ }
+ importeTotal = costo * kilos;
+ return importeTotal;
+ }
+ */
 
 function entregadosPorRepartidor(pRepartidor) {
     var mensaje = "<b>Paquetes entregados por repartidor:</b><br><br>";
     var entregados = new Array();
-    for (var ite = 0; entregas.length; ite++) {
+    for (var ite = 0; ite < entregas.length; ite++) {
         var entregaActual = entregas[ite];
         if (entregaActual.repartidor === pRepartidor && entregaActual.ED !== null) {
-            entregados.paquete = entregaActual.paquete;
-            entregados.hora = entregaActual.ED;
-            entregados.costo = entregaActual.costo;
+            entregados.push({"paquete": entregaActual.paquete, "hora": entregaActual.ED, "costo": entregaActual.costo})
         }
     }
+    var hora = "";
+    var min = "";
+    for (var ite = 0; ite < entregados.length; ite++) {
+        hora = parseInt(entregados[ite]["hora"].substring(0, 2));
+        min = parseInt(entregados[ite]["hora"].substring(3, 5));
+
+    }
+
     entregados.sort(ordenarXHoraDescendente);
 
     mensaje += crearTabla(entregados);
@@ -84,11 +90,23 @@ function entregadosPorRepartidor(pRepartidor) {
 }
 
 function mostrarEntregadosPorRepart() {
-    crearTabla(repartidores);
-    var repartidor = $(this).attr();
-    var entregados = entregadosPorRepartidor(repartidor);
-    $("#divEntXRep").append(entregados);
+    //crearTabla(repartidores);
+    /*var repartidor = $(this).attr();
+     var entregados = entregadosPorRepartidor(repartidor);*/
+    $("#divRepart").html(mostrarRepartidores(repartidores));
+    for (var i in repartidores) {
+        var repartidorActual = repartidores[i];
+        $("#" + repartidorActual.codigo).click(hola);
+    }
+    //$("#divEntXRep").html(crearTabla(repartidores));
 }
+
+function hola() {
+    var seleccionado = parseInt($(this).attr("id"));
+    $("#divEntXRep").html(entregadosPorRepartidor(seleccionado));
+
+}
+
 function ordenarXHoraDescendente(pHoraA, pMinA, pHoraB, pMinB) {
     var orden = 0;
     if (pHoraA > pHoraB) {
@@ -124,7 +142,7 @@ function crearTabla(pArray) {
 //para cada elemento, creo una fila
         tablaDatos += "<div class='Row'>";
         //en cada celda voy a msotrar un dato de ese elemento por cada clave
-        for (var clave in pArrayAsoc) {
+        for (var clave in pArray[ite]) {
             tablaDatos += "<div class='Cell'>" + pArray[ite][clave] + "</div>";
         }
         tablaDatos += "</div>";

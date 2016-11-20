@@ -3,8 +3,8 @@ label {
 
 }
 body{
-  background: url(../images/bg3.jpg) !important;
-   background-repeat: no-repeat !important;
+    background: url(../images/bg3.jpg) !important;
+    background-repeat: no-repeat !important;
     background-position:center center !important;
     background-attachment:scroll !important;
     background-size:100% 100% !important;
@@ -39,20 +39,20 @@ body{
     opacity: 0.8
 }
 .error {
-   color: red;
-  text-align: center;
-  border: 2px;
-  border-color: red;
+    color: red;
+    text-align: center;
+    border: 2px;
+    border-color: red;
 }
 .RepartidorSeleccionado {
-  background: #38c !important;
-  color: white !important;
+    background: #38c !important;
+    color: white !important;
 
 }
 
 .PaqueteSeleccionado {
-  background: #38c !important;
-  color: white !important;
+    background: #38c !important;
+    color: white !important;
 
 }
 
@@ -64,8 +64,8 @@ body{
 
 }
 #divPendientes{
-  padding-left: 2%;
-  width: 25% !important;
+    padding-left: 2%;
+    width: 25% !important;
 }
 #divNuevo {
     margin-left: 20%;
@@ -84,3 +84,44 @@ body{
 
     }
 }
+
+/*para tablas*/
+
+.Table  
+
+{  
+    display: table;  
+}  
+
+.Title  
+
+{  
+    display: table-caption;  
+    text-align: center;  
+    font-weight: bold;  
+    font-size: larger;  
+}  
+
+.Heading  
+
+{  
+    display: table-row;  
+    font-weight: bold;  
+    text-align: center;  
+}  
+
+.Row  
+
+{  
+    display: table-row;  
+}  
+
+.Cell  
+
+{  
+    display: table-cell;  
+    border: solid;  
+    border-width: thin;  
+    padding-left: 5px;  
+    padding-right: 5px;  
+}  

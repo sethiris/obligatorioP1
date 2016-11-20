@@ -1,16 +1,16 @@
 var paquetes = new Array();
 function precargaPaquetes() {
     var paquete1 = agregarPaquete(41987376, "Matias", "Gonzalez", 50555867, "Juan Jose", "Sethiris", "Amezaga 2230", 500);
-    var paquete2 = agregarPaquete(55996612, "David", "Finzer", 41987376, "Matias", "Gonzalez", "8 de octubre 2211", 200);
+    var paquete2 = agregarPaquete(55996612, "David", "Finzer", 41987376, "Matias", "Gonzalez", "8 de octubre 2211", 20);
     var paquete3 = agregarPaquete(50555867, "Juan Jose", "Sethiris", 41987376, "Matias", "Gonzalez", "8 de octubre 2211", 1000);
     var paquete4 = agregarPaquete(55996612, "David", "Finzer", 50555867, "Juan Jose", "Sethiris", "Benito Chain 1123", 21);
     var paquete5 = agregarPaquete(25311195, "Javier", "Lopez", 50555867, "Juan Jose", "Sethiris", "Uruguay 897", 17);
     var paquete6 = agregarPaquete(41987376, "Matias", "Gonzalez", 55996612, "David", "Finzer", "Cno Carrasco 111", 1);
-    var paquete7 = agregarPaquete(55996612, "David", "Finzer", 25311195, "Javier", "Lopez", "Propios 1312", 789);
+    var paquete7 = agregarPaquete(55996612, "David", "Finzer", 25311195, "Javier", "Lopez", "Propios 1312", 50);
     var paquete8 = agregarPaquete(50555867, "Juan Jose", "Sethiris", 25311195, "Javier", "Lopez", "Propios 1312", 544);
-    var paquete9 = agregarPaquete(55996612, "David", "Finzer", 25311195, "Javier", "Lopez", "Propios 1312", 789);
+    var paquete9 = agregarPaquete(55996612, "David", "Finzer", 25311195, "Javier", "Lopez", "Propios 1312", 33);
     var paquete10 = agregarPaquete(55996612, "David", "Finzer", 41987376, "Matias", "Gonzalez", "Benito Lamas 2611", 260);
-    var paquete11 = agregarPaquete(41987376, "Matias", "Gonzalez", 50555867, "Juan Jose", "Sethiris", "Uruguay 897", 717);
+    var paquete11 = agregarPaquete(41987376, "Matias", "Gonzalez", 50555867, "Juan Jose", "Sethiris", "Uruguay 897", 13);
     var paquete12 = agregarPaquete(41987376, "Matias", "Gonzalez", 55996612, "David", "Finzer", "Benito Lamas 2611", 999);
 }
 //array indexado que contiene todos los paquetes y
