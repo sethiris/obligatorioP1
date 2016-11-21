@@ -7,7 +7,7 @@ function iniciarPrograma() {
     $("#divPendientes").hide();
     $("#btnLogin").click(login);
     $(".Logout").click(logout);
-    $("#txtClave").keyup(function (e) { //se crea funcion anonima que toma como parametro el evento de keyup
+    $("#txtClave").keyup(function(e) { //se crea funcion anonima que toma como parametro el evento de keyup
         if (e.keyCode === 13) // 13 corresponde al codigo ascii del enter
         {
             login();
@@ -16,7 +16,7 @@ function iniciarPrograma() {
 
 
 
-    precargaBlur();//asigna todas las validaciones con blur al cargar el sitio
+    precargaBlur(); //asigna todas las validaciones con blur al cargar el sitio
     precargaPaquetes();
     precargaRepartidores();
     $("#liAsignar").click(mostrarDisponibles);
@@ -28,116 +28,113 @@ function iniciarPrograma() {
     $("#liConsultar").click(limpiarBusqueda);
 }
 
-function limpiarBusqueda(){
-  $("#ulBuscarPaquete").html("<a><a>");
-  $("#ulBuscarPaquete").listview('refresh');
+function limpiarBusqueda() {
+    $("#ulBuscarPaquete").html("<a><a>");
+    $("#ulBuscarPaquete").listview('refresh');
 }
 
 
-function guardarEstado(){
-   var codigo = parseInt(quitarLetraID($(this).attr("id")));
-   var entrega = getElementoPorParametro(entregas,"paquete",codigo);
-   var enViajeHora= $("#txtEnViajeHora").val();
-   var enViajeMin= $("#txtEnViajeMin").val();
-   var entregadoHora= $("#txtEntregadoHora").val();
-   var entregadoMin= $("#txtEntregadoMin").val();
-   var mensaje="";
-   if (validarNumPositivo(enViajeHora) && validarNumPositivo(enViajeMin)){
-     var horaFormato=enViajeHora + ":" + enViajeMin;
-     if (ordenarFechas(horaFormato,entrega.ER)=== -1) {
-       entrega.EV=horaFormato;
-       $("#txtBuscarPaquete").val(codigo);
-       $("#btnBuscarPaquete").click();
-       mensaje="Estado en viaje ingresado Correctamente";
-     }
-     else{
-       mensaje+="El estado de en viaje debe ser posterior al de entregado al repartidor";
-     }
+function guardarEstado() {
+    var codigo = parseInt(quitarLetraID($(this).attr("id")));
+    var entrega = getElementoPorParametro(entregas, "paquete", codigo);
+    var enViajeHora = $("#txtEnViajeHora").val();
+    var enViajeMin = $("#txtEnViajeMin").val();
+    var entregadoHora = $("#txtEntregadoHora").val();
+    var entregadoMin = $("#txtEntregadoMin").val();
+    var mensaje = "";
+    if (validarNumPositivo(enViajeHora) && validarNumPositivo(enViajeMin)) {
+        var horaFormato = enViajeHora + ":" + enViajeMin;
+        if (ordenarFechas(horaFormato, entrega.ER) === -1) {
+            entrega.EV = horaFormato;
+            $("#txtBuscarPaquete").val(codigo);
+            $("#btnBuscarPaquete").click();
+            mensaje = "Estado en viaje ingresado Correctamente";
+        } else {
+            mensaje += "El estado de en viaje debe ser posterior al de entregado al repartidor";
+        }
 
-   }
-   if (validarNumPositivo(entregadoHora) && validarNumPositivo(entregadoMin) && entrega.EV!==null) {
-     var entregadoFormato=entregadoHora + ":" + entregadoMin;
-     if (ordenarFechas(entregadoFormato,entrega.EV)=== -1) {
-      entrega.ED= entregadoHora + ":" + entregadoMin;
-      entrega.costo= calcularCostoEntrega(entrega);
-      $("#txtBuscarPaquete").val(codigo);
-      $("#btnBuscarPaquete").click();
-      mostrarPendEntrega();
-      mensaje="Entregado correctamente";
-      }
-     else {
-        mensaje+= "<br>El estado Entregado debe ser posterior a todos los anteriores";
+    }
+    if (validarNumPositivo(entregadoHora) && validarNumPositivo(entregadoMin) && entrega.EV !== null) {
+        var entregadoFormato = entregadoHora + ":" + entregadoMin;
+        if (ordenarFechas(entregadoFormato, entrega.EV) === -1) {
+            entrega.ED = entregadoHora + ":" + entregadoMin;
+            entrega.costo = calcularCostoEntrega(entrega);
+            $("#txtBuscarPaquete").val(codigo);
+            $("#btnBuscarPaquete").click();
+            mostrarPendEntrega();
+            mensaje = "Entregado correctamente";
+        } else {
+            mensaje += "<br>El estado Entregado debe ser posterior a todos los anteriores";
 
-       }
-     }
-    else {
-      if (mensaje ==="") {
-        mensaje+= "<br>Para asignar como entregado deben estar todos los estados";
-      }
+        }
+    } else {
+        if (mensaje === "") {
+            mensaje += "<br>Para asignar como entregado deben estar todos los estados";
+        }
 
     }
 
 
-   $("#divMsgBuscarPaquete").html(mensaje);
+    $("#divMsgBuscarPaquete").html(mensaje);
 
 }
 
-function buscarPaquete(){
-  var mensaje ="";
-  var codigo = parseInt($("#txtBuscarPaquete").val());
-  var encontrado= false;
-  if(validarNum(codigo)){
-    var paquete= getElementosPorParametro(paquetes,"codigo",codigo);
-    var entrega= getElementosPorParametro(entregas,"paquete",codigo);
-    mensaje= mostrarReportePaquete(paquete,entrega,usuarioActual.tipo);
-    if(mensaje!== null){
-      encontrado=true;
-    }else{
-      mensaje="No existe el paquete buscado";
-      }
+function buscarPaquete() {
+    var mensaje = "";
+    var codigo = parseInt($("#txtBuscarPaquete").val());
+    var encontrado = false;
+    if (validarNum(codigo)) {
+        var paquete = getElementosPorParametro(paquetes, "codigo", codigo);
+        var entrega = getElementosPorParametro(entregas, "paquete", codigo);
+        mensaje = mostrarReportePaquete(paquete, entrega, usuarioActual.tipo);
+        if (mensaje !== null) {
+            encontrado = true;
+        } else {
+            mensaje = "No existe el paquete buscado";
+        }
     } else {
         mensaje = "Debe ingresar un codigo de paquete";
     }
-  if(encontrado){
-    if (usuarioActual.tipo===1|| usuarioActual.cedula ===paquete[0].ciRemitente|| usuarioActual.cedula===paquete[0].ciDestinatario ) {
-      $("#ulBuscarPaquete").html(mensaje);
-      $("#ulBuscarPaquete").listview('refresh');
-      $("#divMsgBuscarPaquete").html("");
-      $("#btnGuardarEstados"+ codigo).click(guardarEstado);
-      $("#txtEnViajeHora").keydown(function(e){
-            var hora=$(this).val();
-            if(!keyHora(e.keyCode,hora)){
-              e.preventDefault();
-            }
-          });
-      $("#txtEnViajeMin").keydown(function(e){
-                var hora=$(this).val();
-                if(!keyMinutos(e.keyCode,hora)){
-                  e.preventDefault();
+    if (encontrado) {
+        if (usuarioActual.tipo === 1 || usuarioActual.cedula === paquete[0].ciRemitente || usuarioActual.cedula === paquete[0].ciDestinatario) {
+            $("#ulBuscarPaquete").html(mensaje);
+            $("#ulBuscarPaquete").listview('refresh');
+            $("#divMsgBuscarPaquete").html("");
+            $("#btnGuardarEstados" + codigo).click(guardarEstado);
+            $("#txtEnViajeHora").keydown(function(e) {
+                var hora = $(this).val();
+                if (!keyHora(e.keyCode, hora)) {
+                    e.preventDefault();
                 }
-      });
-      $("#txtEntregadoHora").keydown(function(e){
-            var hora=$(this).val();
-            if(!keyHora(e.keyCode,hora)){
-              e.preventDefault();
-            }
-          });
-      $("#txtEntregadoMin").keydown(function(e){
-                var hora=$(this).val();
-                if(!keyMinutos(e.keyCode,hora)){
-                  e.preventDefault();
+            });
+            $("#txtEnViajeMin").keydown(function(e) {
+                var hora = $(this).val();
+                if (!keyMinutos(e.keyCode, hora)) {
+                    e.preventDefault();
                 }
-      });
+            });
+            $("#txtEntregadoHora").keydown(function(e) {
+                var hora = $(this).val();
+                if (!keyHora(e.keyCode, hora)) {
+                    e.preventDefault();
+                }
+            });
+            $("#txtEntregadoMin").keydown(function(e) {
+                var hora = $(this).val();
+                if (!keyMinutos(e.keyCode, hora)) {
+                    e.preventDefault();
+                }
+            });
+        } else {
+            mensaje = "Numero de paquete no encontrado";
+            $("#divMsgBuscarPaquete").html(mensaje);
+            $("#ulBuscarPaquete").html("");
+        }
+
     } else {
-        mensaje="Numero de paquete no encontrado";
         $("#divMsgBuscarPaquete").html(mensaje);
         $("#ulBuscarPaquete").html("");
     }
-
-  } else {
-    $("#divMsgBuscarPaquete").html(mensaje);
-    $("#ulBuscarPaquete").html("");
-  }
 }
 
 function precargaBlur() {
@@ -162,8 +159,8 @@ function mostrarDisponibles() {
     }
     $("#ulPaquetesPendientes").html(mostrarPaquetes(pendientes));
     $("#ulPaquetesPendientes").listview('refresh');
-    for (var x in pendientes) {
-        $("#P" + pendientes[x].codigo).click(seleccionarPaquete);
+    for (var i in pendientes) {
+        $("#P" + pendientes[i].codigo).click(seleccionarPaquete);
     }
 }
 
@@ -202,8 +199,8 @@ function asignarRepartidor() {
                 for (var i in paqueteActual) {
                     if (i === "paquete") {
                         if (paqueteActual[i] === idPaquete) {
-                            paqueteActual["repartidor"] = idRepartidor;
-                            paqueteActual["ER"] = agregarHoraActual();
+                            paqueteActual.repartidor = idRepartidor;
+                            paqueteActual.ER = agregarHoraActual();
                         }
                     }
                 }
@@ -214,7 +211,7 @@ function asignarRepartidor() {
             mostrarDisponibles();
             mostrarPendEntrega();
         } else {
-            mensaje = "Debe seleccionar un repartidor"
+            mensaje = "Debe seleccionar un repartidor";
         }
     } else {
         mensaje = "Debe seleccionar un paquete y un repartidor";
@@ -293,12 +290,14 @@ function login() {
     $("#divMsgLogin").html(mensaje);
 
 }
+
 function menuHide() {
     $("#liNuevo").hide();
     $("#liAsignar").hide();
     $("#liReporte").hide();
     $("#divPendientes").hide();
 }
+
 function menuShow() {
     $("#liNuevo").show();
     $("#liAsignar").show();

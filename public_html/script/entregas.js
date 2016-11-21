@@ -7,7 +7,7 @@ function ListarPendEntrega() {
 
     for (var ite = 0; ite < entregas.length; ite++) {
         var entregaActual = entregas[ite];
-        if (entregaActual["ER"] !== null && entregaActual["ED"] === null) {
+        if (entregaActual.ER !== null && entregaActual.ED === null) {
             pendientes.push(getElementoPorParametro(paquetes, "codigo", entregaActual.paquete));
             cantPend++;
         }
@@ -23,6 +23,7 @@ function mostrarPendEntrega() {
     $("#ulPendientes").html(paquetesPend);
     $("#ulPendientes").listview("refresh");
 }
+
 function calcularCostoEntrega(_entrega) {
     var costo = 0;
     var importeTotal = 0;
@@ -71,7 +72,11 @@ function entregadosPorRepartidor(pRepartidor) {
     for (var ite = 0; ite < entregas.length; ite++) {
         var entregaActual = entregas[ite];
         if (entregaActual.repartidor === pRepartidor && entregaActual.ED !== null) {
-            entregados.push({"paquete": entregaActual.paquete, "hora": entregaActual.ED, "costo": entregaActual.costo})
+            entregados.push({
+                "paquete": entregaActual.paquete,
+                "hora": entregaActual.ED,
+                "costo": entregaActual.costo
+            });
         }
     }
     var hora = "";
@@ -132,14 +137,14 @@ function crearTabla(pArray) {
     var tablaDatos = "<div class='Table'>"; //ingreso tabla
 
     for (var ite = 0; ite < pArray.length; ite++) {
-//recorre la cant de elementos del array index. Cada elemento es un length
+        //recorre la cant de elementos del array index. Cada elemento es un length
         tablaDatos += "<div class = 'Heading'>"; //creo los heading de cada columna
-        for (var clave in pArray[ite]) {//creo para cada celda del heading, elnombre de la clave
+        for (var clave in pArray[ite]) { //creo para cada celda del heading, elnombre de la clave
             tablaDatos += "<div class = 'Cell'>" + clave + "</div>";
         }
         tablaDatos += "</div>";
 
-//para cada elemento, creo una fila
+        //para cada elemento, creo una fila
         tablaDatos += "<div class='Row'>";
         //en cada celda voy a msotrar un dato de ese elemento por cada clave
         for (var clave in pArray[ite]) {

@@ -56,6 +56,10 @@ body{
 
 }
 
+.hora{
+  width: 30px !important;
+}
+
 #divMenu {
     margin-left: 5%;
     margin-right: 0%;
@@ -87,41 +91,41 @@ body{
 
 /*para tablas*/
 
-.Table  
+.Table
 
-{  
-    display: table;  
-}  
+{
+    display: table;
+}
 
-.Title  
+.Title
 
-{  
-    display: table-caption;  
-    text-align: center;  
-    font-weight: bold;  
-    font-size: larger;  
-}  
+{
+    display: table-caption;
+    text-align: center;
+    font-weight: bold;
+    font-size: larger;
+}
 
-.Heading  
+.Heading
 
-{  
-    display: table-row;  
-    font-weight: bold;  
-    text-align: center;  
-}  
+{
+    display: table-row;
+    font-weight: bold;
+    text-align: center;
+}
 
-.Row  
+.Row
 
-{  
-    display: table-row;  
-}  
+{
+    display: table-row;
+}
 
-.Cell  
+.Cell
 
-{  
-    display: table-cell;  
-    border: solid;  
-    border-width: thin;  
-    padding-left: 5px;  
-    padding-right: 5px;  
-}  
+{
+    display: table-cell;
+    border: solid;
+    border-width: thin;
+    padding-left: 5px;
+    padding-right: 5px;
+}
