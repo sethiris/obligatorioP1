@@ -152,10 +152,10 @@ function precargaBlur() {
 function mostrarDisponibles() {
     var disponibles = repartidoresDisponibles();
     var pendientes = paqueteSinRepartir();
-    $("#ulRepartidoresDisponibles").html(mostrarRepartidores(disponibles));
+    $("#ulRepartidoresDisponibles").html(mostrarRepartidores(disponibles, "a"));
     $("#ulRepartidoresDisponibles").listview('refresh');
     for (var x in disponibles) {
-        $("#" + disponibles[x].codigo).click(seleccionarRepartidor);
+        $("#a" + disponibles[x].codigo).click(seleccionarRepartidor);
     }
     $("#ulPaquetesPendientes").html(mostrarPaquetes(pendientes));
     $("#ulPaquetesPendientes").listview('refresh');
@@ -165,12 +165,12 @@ function mostrarDisponibles() {
 }
 
 function seleccionarRepartidor() {
-    var id = parseInt($(this).attr("id"));
+    var id = quitarLetraID($(this).attr("id"));
     var repartidor = getRepartidor(id);
     var idPaquete = quitarLetraID($(".PaqueteSeleccionado").attr("id"));
     var paquetesDisponibles = new Array();
     $(".RepartidorSeleccionado").removeClass("RepartidorSeleccionado");
-    $("#" + id).addClass("RepartidorSeleccionado");
+    $("#a" + id).addClass("RepartidorSeleccionado");
     if (!validarNum(idPaquete)) {
         paquetesDisponibles = disponiblesPorPeso(paqueteSinRepartir(), repartidor.medio);
         $("#ulPaquetesPendientes").html(mostrarPaquetes(paquetesDisponibles));
@@ -185,7 +185,7 @@ var entregas = new Array();
 
 function asignarRepartidor() {
     var idPaqueteTxt = quitarLetraID($(".PaqueteSeleccionado").attr("id"));
-    var idRepartidorTxt = $(".RepartidorSeleccionado").attr("id");
+    var idRepartidorTxt = quitarLetraID($(".RepartidorSeleccionado").attr("id"));
     var mensaje = "";
     var tiempo = new Date();
     if (validarNum(idPaqueteTxt)) {
@@ -229,24 +229,24 @@ function quitarLetraID(_string) {
             sinletra += _string[x];
         }
     }
-    return sinletra;
+    return parseInt(sinletra);
 }
 
 
 function seleccionarPaquete() {
-    var identificador = parseInt(quitarLetraID($(this).attr("id")));
-    var repartidor = $(".RepartidorSeleccionado").attr("id");
+    var identificador = quitarLetraID($(this).attr("id"));
+    var repartidor = quitarLetraID($(".RepartidorSeleccionado").attr("id"));
     $(".PaqueteSeleccionado").removeClass("PaqueteSeleccionado");
     var mensaje = "";
     $("#P" + identificador).addClass("PaqueteSeleccionado");
     var paquete = getElementoPorParametro(paquetes, "codigo", identificador);
     var repartidores = repartidoresDisponiblesPeso(paquete.peso);
-    $("#ulRepartidoresDisponibles").html(mostrarRepartidores(repartidores));
+    $("#ulRepartidoresDisponibles").html(mostrarRepartidores(repartidores, "a"));
     $("#ulRepartidoresDisponibles").listview('refresh');
     for (var x in repartidores) {
-        $("#" + repartidores[x].codigo).click(seleccionarRepartidor);
+        $("#a" + repartidores[x].codigo).click(seleccionarRepartidor);
     }
-    $("#" + repartidor).addClass("RepartidorSeleccionado");
+    $("#a" + repartidor).addClass("RepartidorSeleccionado");
 
 
 

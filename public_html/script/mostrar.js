@@ -1,4 +1,4 @@
-function mostrarRepartidores(_array) {
+function mostrarRepartidores(_array, indentificador) {
     var mensaje = "<li data-role='list-divider'>Repartidores</li>";
     var icono = "";
     for (var x in _array) {
@@ -14,18 +14,19 @@ function mostrarRepartidores(_array) {
                 break;
             default:
         }
-        mensaje += "<li id=" + _array[x].codigo + ">" + icono;
+        mensaje += "<li id=" + indentificador + _array[x].codigo + ">" + icono;
         mensaje += "  " + _array[x].nombre + "</li>";
     }
     return mensaje;
 }
 
-function mostrarPaquetes(_array) {
+function mostrarPaquetes(_array, identificador) {
     var mensaje = "<li data-role='list-divider'>Paquetes</li>";
     var icono = "<i class='fa fa-cube' aria-hidden='true'></i>";
+    if (identificador === undefined) identificador = "";
     if (_array.length > 0) {
         for (var x in _array) {
-            mensaje += "<li id=P" + _array[x].codigo + "> " + icono;
+            mensaje += "<li id=P" + identificador + _array[x].codigo + "> " + icono;
             mensaje += " Codigo:" + _array[x].codigo + " Remitente: " + _array[x].ciRemitente + " Destinatario:" + _array[x].ciDestinatario + "</li>";
         }
     } else {

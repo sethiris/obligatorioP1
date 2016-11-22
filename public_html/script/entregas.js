@@ -13,7 +13,7 @@ function ListarPendEntrega() {
         }
     }
     if (mostrarPaquetes(pendientes) !== null) {
-        mensaje += mostrarPaquetes(pendientes) + "<li>Total: " + cantPend + "</li>";
+        mensaje += mostrarPaquetes(pendientes, "pendiente") + "<li>Total: " + cantPend + "</li>";
     }
     return mensaje;
 }
@@ -98,37 +98,23 @@ function mostrarEntregadosPorRepart() {
     //crearTabla(repartidores);
     /*var repartidor = $(this).attr();
      var entregados = entregadosPorRepartidor(repartidor);*/
-    $("#divRepart").html(mostrarRepartidores(repartidores));
+    $("#ulReporte").html(mostrarRepartidores(repartidores, "R"));
     for (var i in repartidores) {
         var repartidorActual = repartidores[i];
-        $("#" + repartidorActual.codigo).click(hola);
+        $("#R" + repartidorActual.codigo).click(seleccionoRepartidor);
     }
+    $("#ulReporte").listview("refresh");
     //$("#divEntXRep").html(crearTabla(repartidores));
 }
 
-function hola() {
-    var seleccionado = parseInt($(this).attr("id"));
+function seleccionoRepartidor() {
+    var seleccionado = quitarLetraID($(this).attr("id"));
     $("#divEntXRep").html(entregadosPorRepartidor(seleccionado));
 
 }
 
-function ordenarXHoraDescendente(pHoraA, pMinA, pHoraB, pMinB) {
-    var orden = 0;
-    if (pHoraA > pHoraB) {
-        orden = -1;
-    }
-    if (pHoraA < pHoraB) {
-        orden = 1;
-    }
-    if (pHoraA < pHoraB) {
-        if (pMinA > pMinB) {
-            orden = -1;
-        }
-        if (pMinA < pMinB) {
-            orden = 1;
-        }
-
-    }
+function ordenarXHoraDescendente(pEntregaA, pEntregaB) {
+    var orden = ordenarFechas(pEntregaA.hora, pEntregaB.hora);
     return orden;
 }
 
