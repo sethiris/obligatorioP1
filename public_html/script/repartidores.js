@@ -17,29 +17,49 @@ function precargaRepartidores() {
         "codigo": 4,
         "nombre": "Carlos",
         "medio": "Moto"
+    }, {
+        "codigo": 5,
+        "nombre": "Yolanda",
+        "medio": "Camioneta"
+    }, {
+        "codigo": 6,
+        "nombre": "Evaristo",
+        "medio": "Bicicleta"
+    }, {
+        "codigo": 7,
+        "nombre": "Elisa",
+        "medio": "Camioneta"
+    }, {
+        "codigo": 8,
+        "nombre": "Arnaldo",
+        "medio": "Bicicleta"
+    }, {
+        "codigo": 9,
+        "nombre": "Yessica",
+        "medio": "Camioneta"
     });
 
 }
 
 limitesPaquetes = [{
-    "Bicicleta": {
-        "desde": 0,
-        "hasta": 20,
-        "costo": 100
-    }
-}, {
-    "Moto": {
-        "desde": 21,
-        "hasta": 50,
-        "costo": 200
-    }
-}, {
-    "Camioneta": {
-        "desde": 51,
-        "hasta": 1000,
-        "costo": 500
-    }
-}];
+        "Bicicleta": {
+            "desde": 0,
+            "hasta": 20,
+            "costo": 100
+        }
+    }, {
+        "Moto": {
+            "desde": 21,
+            "hasta": 50,
+            "costo": 200
+        }
+    }, {
+        "Camioneta": {
+            "desde": 51,
+            "hasta": 1000,
+            "costo": 500
+        }
+    }];
 
 
 function repartidoresDisponibles() {

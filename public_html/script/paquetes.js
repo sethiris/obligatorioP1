@@ -24,9 +24,9 @@ var numPaquete = 0; //creo un contador que determinaré el número de cada paque
 function agregarPaquete(pCIRemitente, pNomRemitente, pApeRemitente, pCIDestinat, pNomDestinat, pApeDestinat, pDirDestinat, pPeso) {
     var paqueteAgregado = false;
     if (validarCI(pCIRemitente) && validarSoloTexto(pNomRemitente) &&
-        validarSoloTexto(pApeRemitente) && validarCI(pCIDestinat) &&
-        validarSoloTexto(pNomDestinat) && validarSoloTexto(pApeDestinat) &&
-        validarTexto(pDirDestinat) && validarPeso(pPeso)) {
+            validarSoloTexto(pApeRemitente) && validarCI(pCIDestinat) &&
+            validarSoloTexto(pNomDestinat) && validarSoloTexto(pApeDestinat) &&
+            validarTexto(pDirDestinat) && validarPeso(pPeso)) {
         numPaquete++;
         var paquete = {};
         paquete.codigo = numPaquete;
@@ -76,13 +76,13 @@ function paqueteSinRepartir() {
 }
 
 
-function disponiblesPorPeso(_paquetes, medio) {
-    var filtrados = new Array();
+function disponiblesPorPeso(_paquetes, _medio) {
+    var paquetesDisponibles = new Array();
     var desde = 0;
     var hasta = 0;
     for (var x = 0; x < limitesPaquetes.length; x++) {
         for (var i in limitesPaquetes[x]) {
-            if (i === medio) {
+            if (i === _medio) {
                 desde = limitesPaquetes[x][i].desde;
                 hasta = limitesPaquetes[x][i].hasta;
             }
@@ -91,9 +91,9 @@ function disponiblesPorPeso(_paquetes, medio) {
 
     for (var x = 0; x < _paquetes.length; x++) {
         if (_paquetes[x].peso <= hasta && _paquetes[x].peso >= desde) {
-            filtrados.push(_paquetes[x]);
+            paquetesDisponibles.push(_paquetes[x]);
         }
     }
-    return filtrados;
+    return paquetesDisponibles;
 
 }

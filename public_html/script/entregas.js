@@ -1,18 +1,18 @@
 var entregas = new Array();
 
 function precargaEntregas() {
-    entregas[0] = {
-        "paquete": 1,
-        "repartidor": null,
-        "RE": "00:00",
-        "ER": null,
-        "EV": null,
-        "ED": null,
-        "costo": null
-    };
-
-
-    //entregas.push({"paquete":, "repartidor":, "RE":, "ER":, "EV":, "ED":, "costo":});
+    entregas[0] = {"paquete": 1, "repartidor": 2, "RE": "00:00", "ER": "09:00", "EV": "11:10", "ED": "11:30", "costo": 250000};
+    entregas[1] = {"paquete": 2, "repartidor": 3, "RE": "00:30", "ER": "09:03", "EV": "10:00", "ED": "10:25", "costo": 2000};
+    entregas[2] = {"paquete": 3, "repartidor": 6, "RE": "01:06", "ER": "11:40", "EV": "11:52", "ED": "12:23", "costo": 500000};
+    entregas[3] = {"paquete": 4, "repartidor": 4, "RE": "09:21", "ER": "11:40", "EV": "17:30", "ED": null, "costo": null};
+    entregas[4] = {"paquete": 5, "repartidor": 3, "RE": "09:42", "ER": "10:05", "EV": "11:10", "ED": null, "costo": null};
+    entregas[5] = {"paquete": 6, "repartidor": 6, "RE": "11:59", "ER": "12:25", "EV": "14:45", "ED": null, "costo": null};
+    entregas[6] = {"paquete": 7, "repartidor": 1, "RE": "12:30", "ER": "14:03", "EV": null, "ED": null, "costo": null};
+    entregas[7] = {"paquete": 8, "repartidor": 2, "RE": "13:02", "ER": "14:56", "EV": null, "ED": null, "costo": null};
+    entregas[8] = {"paquete": 9, "repartidor": null, "RE": "14:05", "ER": null, "EV": null, "ED": null, "costo": null};
+    entregas[9] = {"paquete": 10, "repartidor": 9, "RE": "14:06", "ER": "14:26", "EV": null, "ED": null, "costo": null};
+    entregas[10] = {"paquete": 11, "repartidor": null, "RE": "14:55", "ER": null, "EV": null, "ED": null, "costo": null};
+    entregas[11] = {"paquete": 12, "repartidor": null, "RE": "15:30", "ER": null, "EV": null, "ED": null, "costo": null};
 }
 
 function ListarPendEntrega() {
