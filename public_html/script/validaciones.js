@@ -25,7 +25,7 @@ function validarNumPositivo(pNumero) {
 
 //------------------------Strings----------------------------------//
 
-function validarSoloTexto(pTexto) {//valida que no haya ningún número dentro del campo de texto
+function validarSoloTexto(pTexto) { //valida que no haya ningún número dentro del campo de texto
     var soloTxt = false;
     if (validarTexto(pTexto) && isNaN(pTexto)) {
         soloTxt = true;
@@ -89,7 +89,7 @@ function validarPeso(pPeso) {
 
 //------------------------De ingreso de datos en sistema----------------------------------//
 
-function validarCIRemitente() {//función que avisa si la ci ingresada por el usuario es correcta
+function validarCIRemitente() { //función que avisa si la ci ingresada por el usuario es correcta
     $("#divMsgNuevoPaquete").empty();
     var CIRemitente = $("#txtCIRemitente").val();
     if (!validarCI(CIRemitente)) {
@@ -101,7 +101,7 @@ function validarCIRemitente() {//función que avisa si la ci ingresada por el us
     $("#divMsgNuevoPaquete").html(mensaje);
 }
 
-function validarNomRemitente() {//función que avisa si el nom ingresadp por el usuario es correcto
+function validarNomRemitente() { //función que avisa si el nom ingresadp por el usuario es correcto
     $("#divMsgNuevoPaquete").empty();
     var NomRemitente = $("#txtNombreRemitente").val();
     if (!validarSoloTexto(NomRemitente)) {
@@ -113,7 +113,7 @@ function validarNomRemitente() {//función que avisa si el nom ingresadp por el 
     $("#divMsgNuevoPaquete").html(mensaje);
 }
 
-function validarApeRemitente() {//función que avisa si el ape ingresado por el usuario es correcto
+function validarApeRemitente() { //función que avisa si el ape ingresado por el usuario es correcto
     $("#divMsgNuevoPaquete").empty();
     var ApeRemitente = $("#txtApellidoRemitente").val();
     if (!validarSoloTexto(ApeRemitente)) {
@@ -125,7 +125,7 @@ function validarApeRemitente() {//función que avisa si el ape ingresado por el 
     $("#divMsgNuevoPaquete").html(mensaje);
 }
 
-function validarCIDestinatario() {//función que avisa si la ci ingresada por el usuario es correcta
+function validarCIDestinatario() { //función que avisa si la ci ingresada por el usuario es correcta
     $("#divMsgNuevoPaquete").empty();
     var CIDestinat = $("#txtCIDestinatario").val();
     if (!validarCI(CIDestinat)) {
@@ -137,7 +137,7 @@ function validarCIDestinatario() {//función que avisa si la ci ingresada por el
     $("#divMsgNuevoPaquete").html(mensaje);
 }
 
-function validarNomDestinatario() {//función que avisa si el nom ingresadp por el usuario es correcto
+function validarNomDestinatario() { //función que avisa si el nom ingresadp por el usuario es correcto
     $("#divMsgNuevoPaquete").empty();
     var NomDestinat = $("#txtNombreDestinatario").val();
     if (!validarSoloTexto(NomDestinat)) {
@@ -149,7 +149,7 @@ function validarNomDestinatario() {//función que avisa si el nom ingresadp por 
     $("#divMsgNuevoPaquete").html(mensaje);
 }
 
-function validarApeDestinatario() {//función que avisa si el ape ingresado por el usuario es correcto
+function validarApeDestinatario() { //función que avisa si el ape ingresado por el usuario es correcto
     $("#divMsgNuevoPaquete").empty();
     var ApeDestinat = $("#txtApellidoDestinatario").val();
     if (!validarSoloTexto(ApeDestinat)) {
@@ -161,11 +161,12 @@ function validarApeDestinatario() {//función que avisa si el ape ingresado por 
     $("#divMsgNuevoPaquete").html(mensaje);
 }
 
-function validarDirDestinatario() {//función que avisa si la dir ingresada por el usuario es correcta
+function validarDirDestinatario() { //función que avisa si la dir ingresada por el usuario es correcta
     $("#divMsgNuevoPaquete").empty();
     var DirDestinat = $("#txtDireccionDestinatario").val();
+    var mensaje = "";
     if (!validarSoloTexto(DirDestinat)) {
-        var mensaje = "Ingrese una dirección";
+        mensaje = "Ingrese una dirección";
         $("#txtDireccionDestinatario").addClass("error");
     } else {
         mensaje = "";
@@ -173,11 +174,12 @@ function validarDirDestinatario() {//función que avisa si la dir ingresada por 
     $("#divMsgNuevoPaquete").html(mensaje);
 }
 
-function validarPesoPaquete() {//función que avisa si el peso ingresado por el usuario es posible enviarlo
+function validarPesoPaquete() { //función que avisa si el peso ingresado por el usuario es posible enviarlo
     $("#divMsgNuevoPaquete").empty();
     var peso = $("#txtPesoPaquete").val();
+    var mensaje = "";
     if (!validarPeso(peso)) {
-        var mensaje = "El peso no puede ser superior a 1000kgs.";
+        mensaje = "El peso no puede ser superior a 1000kgs.";
         $("#txtPesoPaquete").addClass("error");
     } else {
         mensaje = "";
@@ -186,81 +188,77 @@ function validarPesoPaquete() {//función que avisa si el peso ingresado por el 
 
 }
 
-function keyHora(keyCode,hora){
-  var validado=true;
-  if (keyCode!=8 && keyCode!=9){
-    if (hora.length<2) {
-      if(hora.length===0) {
-         if(keyCode<48 || keyCode>50) validado=false;
-      }
-      else {
-          if(hora[0]==="2"){
-                  if(keyCode<48 || keyCode>51) validado=false;
-          }else {
-                  if(keyCode<48 || keyCode>57) validado=false;
-          }
-
-      }
-     }
-    else {
-        validado=false;
-    }
-
-    }
-  return validado;
-}
-
-
-function keyMinutos(keyCode,hora){
-  var validado=true;
-  if (keyCode!=8 && keyCode!=9){
-    if (hora.length<2) {
-      if(hora.length===0) {
-         if(keyCode<48 || keyCode>53) validado=false;
-      }
-      else {
-          if(keyCode<48 || keyCode>57) validado=false;
-
-      }
-     }
-    else {
-        validado=false;
-    }
-
-    }
-  return validado;
-}
-
-function ordenarFechas(pHora1, pHora2){
-    var fecha = separarTiempo(pHora1);
-    var fecha2= separarTiempo(pHora2);
-    var orden = null;
-      if (fecha[0]>fecha2[0]) {
-          orden=-1;
-        }else {
-          if (fecha[0]===fecha2[0]) {
-              if (fecha[1]>fecha2[1]) {
-                orden=-1;
-              } else {
-                if (fecha[1]===fecha2[1]) {
-                  orden=0;
+function keyHora(keyCode, hora) {
+    var validado = true;
+    if (keyCode != 8 && keyCode != 9) {
+        if (hora.length < 2) {
+            if (hora.length === 0) {
+                if (keyCode < 48 || keyCode > 50) validado = false;
+            } else {
+                if (hora[0] === "2") {
+                    if (keyCode < 48 || keyCode > 51) validado = false;
                 } else {
-                    orden=1;
+                    if (keyCode < 48 || keyCode > 57) validado = false;
                 }
 
-              }
+            }
+        } else {
+            validado = false;
+        }
 
-          }else {
-            orden=1;
-          }
-
-      }
-      return orden;
+    }
+    return validado;
 }
 
-function separarTiempo(string){
+
+function keyMinutos(keyCode, hora) {
+    var validado = true;
+    if (keyCode != 8 && keyCode != 9) {
+        if (hora.length < 2) {
+            if (hora.length === 0) {
+                if (keyCode < 48 || keyCode > 53) validado = false;
+            } else {
+                if (keyCode < 48 || keyCode > 57) validado = false;
+
+            }
+        } else {
+            validado = false;
+        }
+
+    }
+    return validado;
+}
+
+function ordenarFechas(pHora1, pHora2) {
+    var fecha = separarTiempo(pHora1);
+    var fecha2 = separarTiempo(pHora2);
+    var orden = null;
+    if (fecha[0] > fecha2[0]) {
+        orden = -1;
+    } else {
+        if (fecha[0] === fecha2[0]) {
+            if (fecha[1] > fecha2[1]) {
+                orden = -1;
+            } else {
+                if (fecha[1] === fecha2[1]) {
+                    orden = 0;
+                } else {
+                    orden = 1;
+                }
+
+            }
+
+        } else {
+            orden = 1;
+        }
+
+    }
+    return orden;
+}
+
+function separarTiempo(string) {
     var hora = parseInt(string[0] + string[1]);
-    var minutos = parseInt(string[3]+ string[4]);
+    var minutos = parseInt(string[3] + string[4]);
     var tiempo = new Array();
     tiempo.push(hora);
     tiempo.push(minutos);

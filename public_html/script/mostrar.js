@@ -1,4 +1,5 @@
-function mostrarRepartidores(_array) {
+
+function mostrarRepartidores(_array,pIdentificador) {
     var mensaje = "<li data-role='list-divider'>Repartidores</li>";
     var icono = "";
     for (var x = 0; x < _array.length; x++) {
@@ -14,18 +15,20 @@ function mostrarRepartidores(_array) {
                 break;
             default:
         }
-        mensaje += "<li id=" + _array[x].codigo + ">" + icono;
+        mensaje += "<li id=" + pIdentificador + _array[x].codigo + ">" + icono;
         mensaje += "  " + _array[x].nombre + "</li>";
     }
     return mensaje;
 }
 
-function mostrarPaquetes(_array) {
+
+function mostrarPaquetes(_array, pIdentificador) {
     var mensaje = "<li data-role='list-divider'>Paquetes</li>";
     var icono = "<i class='fa fa-cube' aria-hidden='true'></i>";
+    if (pIdentificador === undefined) pIdentificador = "";
     if (_array.length > 0) {
-        for (var x in _array) {
-            mensaje += "<li id=P" + _array[x].codigo + "> " + icono;
+        for (var x=0;x <_array.length;x++) {
+            mensaje += "<li id=P" + pIdentificador + _array[x].codigo + "> " + icono;
             mensaje += " Codigo:" + _array[x].codigo + " Remitente: " + _array[x].ciRemitente + " Destinatario:" + _array[x].ciDestinatario + "</li>";
         }
     } else {
@@ -68,8 +71,7 @@ function mostrarReportePaquete(_paquetes, _entregas, _usuario) {
                         enViaje = _entregas[x].EV;
                         entregado = _entregas[x].ED;
                         icono += "style='color:green'";
-
-                        var costo = _entregas[x].costo;
+                       var costo = _entregas[x].costo;
                     }
                 }
             }

@@ -1,16 +1,46 @@
 var repartidores = new Array();
 
 function precargaRepartidores() {
-    repartidores.push({"codigo": 1, "nombre": "Juan Perez", "medio": "Moto"},
-            {"codigo": 2, "nombre": "Ana Gomez", "medio": "Camioneta"},
-            {"codigo": 3, "nombre": "Juan José", "medio": "Bicicleta"},
-            {"codigo": 4, "nombre": "Carlos", "medio": "Moto"});
+    repartidores.push({
+        "codigo": 1,
+        "nombre": "Juan Perez",
+        "medio": "Moto"
+    }, {
+        "codigo": 2,
+        "nombre": "Ana Gomez",
+        "medio": "Camioneta"
+    }, {
+        "codigo": 3,
+        "nombre": "Juan José",
+        "medio": "Bicicleta"
+    }, {
+        "codigo": 4,
+        "nombre": "Carlos",
+        "medio": "Moto"
+    });
 
 }
 
-limitesPaquetes = [{"Bicicleta": {"desde": 0, "hasta": 20, "costo": 100}},
-    {"Moto": {"desde": 21, "hasta": 50, "costo": 200}},
-    {"Camioneta": {"desde": 51, "hasta": 1000, "costo": 500}}];
+limitesPaquetes = [{
+    "Bicicleta": {
+        "desde": 0,
+        "hasta": 20,
+        "costo": 100
+    }
+}, {
+    "Moto": {
+        "desde": 21,
+        "hasta": 50,
+        "costo": 200
+    }
+}, {
+    "Camioneta": {
+        "desde": 51,
+        "hasta": 1000,
+        "costo": 500
+    }
+}];
+
 
 function repartidoresDisponibles() {
     var disponibles = new Array();
@@ -37,6 +67,7 @@ function repartidoresDisponibles() {
 function repartidoresDisponiblesPeso(peso) {
     var disponibles = new Array();
     var todos = repartidoresDisponibles();
+
 
     for (var x = 0; x < limitesPaquetes.length; x++) {
         for (var i in  limitesPaquetes[x]) {

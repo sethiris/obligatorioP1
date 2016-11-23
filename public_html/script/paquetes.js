@@ -1,4 +1,5 @@
 var paquetes = new Array();
+
 function precargaPaquetes() {
     var paquete1 = agregarPaquete(41987376, "Matias", "Gonzalez", 50555867, "Juan Jose", "Sethiris", "Amezaga 2230", 500);
     var paquete2 = agregarPaquete(55996612, "David", "Finzer", 41987376, "Matias", "Gonzalez", "8 de octubre 2211", 20);
@@ -17,15 +18,15 @@ function precargaPaquetes() {
 //sus datos que fueron ingresados.
 //Cada paquete es un array asociativo
 
-var numPaquete = 0//creo un contador que determinaré el número de cada paquete
+var numPaquete = 0; //creo un contador que determinaré el número de cada paquete
 
 //funcionalidad que agrega los datos de un paquete a un array llamado paquetes
 function agregarPaquete(pCIRemitente, pNomRemitente, pApeRemitente, pCIDestinat, pNomDestinat, pApeDestinat, pDirDestinat, pPeso) {
     var paqueteAgregado = false;
     if (validarCI(pCIRemitente) && validarSoloTexto(pNomRemitente) &&
-            validarSoloTexto(pApeRemitente) && validarCI(pCIDestinat)
-            && validarSoloTexto(pNomDestinat) && validarSoloTexto(pApeDestinat) &&
-            validarTexto(pDirDestinat) && validarPeso(pPeso)) {
+        validarSoloTexto(pApeRemitente) && validarCI(pCIDestinat) &&
+        validarSoloTexto(pNomDestinat) && validarSoloTexto(pApeDestinat) &&
+        validarTexto(pDirDestinat) && validarPeso(pPeso)) {
         numPaquete++;
         var paquete = {};
         paquete.codigo = numPaquete;
@@ -45,7 +46,16 @@ function agregarPaquete(pCIRemitente, pNomRemitente, pApeRemitente, pCIDestinat,
          paquetes.push(paquete);*/
         paqueteAgregado = true;
         var fechaActual = new Date();
-        entregas.push({"paquete": numPaquete, "repartidor": null, "RE": agregarHoraActual(), "ER": null, "EV": null, "ED": null, "costo": null});
+
+        entregas.push({
+            "paquete": numPaquete,
+            "repartidor": null,
+            "RE": agregarHoraActual(),
+            "ER": null,
+            "EV": null,
+            "ED": null,
+            "costo": null
+        });
     }
     return paqueteAgregado;
 }
@@ -78,6 +88,7 @@ function disponiblesPorPeso(_paquetes, medio) {
             }
         }
     }
+
     for (var x = 0; x < _paquetes.length; x++) {
         if (_paquetes[x].peso <= hasta && _paquetes[x].peso >= desde) {
             filtrados.push(_paquetes[x]);

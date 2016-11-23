@@ -13,13 +13,13 @@ function ListarPendEntrega() {
     var pendientes = new Array();
     for (var ite = 0; ite < entregas.length; ite++) {
         var entregaActual = entregas[ite];
-        if (entregaActual["ER"] !== null && entregaActual["ED"] === null) {
+        if (entregaActual.ER !== null && entregaActual.ED === null) {
             pendientes.push(getElementoPorParametro(paquetes, "codigo", entregaActual.paquete));
             cantPend++;
         }
     }
     if (mostrarPaquetes(pendientes) !== null) {
-        mensaje += mostrarPaquetes(pendientes) + "<li>Total: " + cantPend + "</li>";
+        mensaje += mostrarPaquetes(pendientes, "pendiente") + "<li>Total: " + cantPend + "</li>";
     }
     return mensaje;
 }
@@ -29,6 +29,7 @@ function mostrarPendEntrega() {
     $("#ulPendientes").html(paquetesPend);
     $("#ulPendientes").listview("refresh");
 }
+
 function calcularCostoEntrega(_entrega) {
     var costo = 0;
     var importeTotal = 0;
@@ -77,7 +78,11 @@ function entregadosPorRepartidor(pRepartidor) {
     for (var ite = 0; ite < entregas.length; ite++) {
         var entregaActual = entregas[ite];
         if (entregaActual.repartidor === pRepartidor && entregaActual.ED !== null) {
-            entregados.push({"paquete": entregaActual.paquete, "hora": entregaActual.ED, "costo": entregaActual.costo})
+            entregados.push({
+                "paquete": entregaActual.paquete,
+                "hora": entregaActual.ED,
+                "costo": entregaActual.costo
+            });
         }
     }
 
@@ -91,23 +96,22 @@ function mostrarEntregadosPorRepart() {
     //crearTabla(repartidores);
     /*var repartidor = $(this).attr();
      var entregados = entregadosPorRepartidor(repartidor);*/
-    $("#divRepart").html(mostrarRepartidores(repartidores));
+    $("#ulReporte").html(mostrarRepartidores(repartidores, "R"));
     for (var i = 0; i < repartidores.length; i++) {
         var repartidorActual = repartidores[i];
-        $("#" + repartidorActual.codigo).click(elijoRepartidor);
+        $("#R" + repartidorActual.codigo).click(seleccionoRepartidor);
     }
-//$("#divEntXRep").html(crearTabla(repartidores));
+    $("#ulReporte").listview("refresh");
 }
 
-function elijoRepartidor() {
 
-    var seleccionado = parseInt($(this).attr("id"));
+function seleccionoRepartidor() {
+    var seleccionado = quitarLetraID($(this).attr("id"));
     $("#divEntXRep").html(entregadosPorRepartidor(seleccionado));
 }
 
 function ordenarXHoraDescendente(pEntregaA, pEntregaB) {
     var orden = ordenarFechas(pEntregaA.hora, pEntregaB.hora);
-
     return orden;
 }
 
@@ -122,8 +126,6 @@ function crearTabla(pArray) {
     tablaDatos += "</div>";
 
     for (var ite = 0; ite < pArray.length; ite++) {
-//recorre la cant de elementos del array index. Cada elemento es un length
-//para cada elemento, creo una fila
         tablaDatos += "<div class='Row'>";
         //en cada celda voy a msotrar un dato de ese elemento por cada clave
         for (var clave in pArray[ite]) {
