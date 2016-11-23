@@ -264,3 +264,14 @@ function separarTiempo(string) {
     tiempo.push(minutos);
     return tiempo;
 }
+
+function validarDosDigitosNumericos(pStringNumero) {
+    //resibe un string
+    var validado = false;
+    if (pStringNumero !== undefined) {
+        if (pStringNumero.length === 2 && validarNumPositivo(pStringNumero)) {
+            validado = true;
+        }
+    }
+    return validado;
+}

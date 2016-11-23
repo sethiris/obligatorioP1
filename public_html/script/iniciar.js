@@ -44,7 +44,7 @@ function guardarEstado() {
     var entregadoHora = $("#txtEntregadoHora").val();
     var entregadoMin = $("#txtEntregadoMin").val();
     var mensaje = "";
-    if (validarNumPositivo(enViajeHora) && validarNumPositivo(enViajeMin)) {
+    if (validarDosDigitosNumericos(enViajeHora) && validarDosDigitosNumericos(enViajeMin)) {
 
         var horaFormato = enViajeHora + ":" + enViajeMin;
         if (ordenarFechas(horaFormato, entrega.ER) === -1) {
@@ -57,7 +57,7 @@ function guardarEstado() {
         }
 
     }
-    if (validarNumPositivo(entregadoHora) && validarNumPositivo(entregadoMin) && entrega.EV !== null) {
+    if (validarDosDigitosNumericos(entregadoHora) && validarDosDigitosNumericos(entregadoMin) && entrega.EV !== null) {
         var entregadoFormato = entregadoHora + ":" + entregadoMin;
         if (ordenarFechas(entregadoFormato, entrega.EV) === -1) {
             entrega.ED = entregadoHora + ":" + entregadoMin;
