@@ -190,9 +190,9 @@ function validarPesoPaquete() { //función que avisa si el peso ingresado por el
 
 function keyHora(keyCode, hora) {
     var validado = true;
-    if (keyCode != 8 && keyCode != 9) {
-        if (hora.length < 2) {
-            if (hora.length === 0) {
+    if (keyCode !== 8 && keyCode !== 9) {
+        if (hora.length <= 2) {
+            if (hora.length <=1) {
                 if (keyCode < 48 || keyCode > 50) validado = false;
             } else {
                 if (hora[0] === "2") {
@@ -213,9 +213,9 @@ function keyHora(keyCode, hora) {
 
 function keyMinutos(keyCode, hora) {
     var validado = true;
-    if (keyCode != 8 && keyCode != 9) {
-        if (hora.length < 2) {
-            if (hora.length === 0) {
+    if (keyCode !== 8 && keyCode !== 9) {
+        if (hora.length <=2) {
+            if (hora.length === 1) {
                 if (keyCode < 48 || keyCode > 53) validado = false;
             } else {
                 if (keyCode < 48 || keyCode > 57) validado = false;

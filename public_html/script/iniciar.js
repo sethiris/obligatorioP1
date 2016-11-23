@@ -43,6 +43,7 @@ function guardarEstado() {
     var entregadoMin = $("#txtEntregadoMin").val();
     var mensaje = "";
     if (validarNumPositivo(enViajeHora) && validarNumPositivo(enViajeMin)) {
+        
         var horaFormato = enViajeHora + ":" + enViajeMin;
         if (ordenarFechas(horaFormato, entrega.ER) === -1) {
             entrega.EV = horaFormato;
@@ -73,7 +74,9 @@ function guardarEstado() {
         }
 
     }
-
+    if( enViajeHora ==="" && enViajeMin==="" &&  entregadoHora === "" && entregadoMin==="" ){
+        mensaje="No ingreso ningun estado";
+    }
 
     $("#divMsgBuscarPaquete").html(mensaje);
 
@@ -101,30 +104,14 @@ function buscarPaquete() {
             $("#ulBuscarPaquete").listview('refresh');
             $("#divMsgBuscarPaquete").html("");
             $("#btnGuardarEstados" + codigo).click(guardarEstado);
-            $("#txtEnViajeHora").keydown(function(e) {
-                var hora = $(this).val();
-                if (!keyHora(e.keyCode, hora)) {
-                    e.preventDefault();
-                }
-            });
-            $("#txtEnViajeMin").keydown(function(e) {
-                var hora = $(this).val();
-                if (!keyMinutos(e.keyCode, hora)) {
-                    e.preventDefault();
-                }
-            });
-            $("#txtEntregadoHora").keydown(function(e) {
-                var hora = $(this).val();
-                if (!keyHora(e.keyCode, hora)) {
-                    e.preventDefault();
-                }
-            });
-            $("#txtEntregadoMin").keydown(function(e) {
-                var hora = $(this).val();
-                if (!keyMinutos(e.keyCode, hora)) {
-                    e.preventDefault();
-                }
-            });
+            $("#txtEnViajeHora").keydown(validarIngresoHora);
+            $("#txtEnViajeHora").keyup(validarIngresoHora);
+            $("#txtEnViajeMin").keydown(validarIngresoMin);
+            $("#txtEnViajeMin").keyup(validarIngresoMin);
+            $("#txtEntregadoHora").keydown(validarIngresoHora);
+            $("#txtEntregadoHora").keyup(validarIngresoHora);
+            $("#txtEntregadoMin").keydown(validarIngresoMin);
+            $("#txtEntregadoMin").keyup(validarIngresoMin);
         } else {
             mensaje = "Numero de paquete no encontrado";
             $("#divMsgBuscarPaquete").html(mensaje);
@@ -135,6 +122,24 @@ function buscarPaquete() {
         $("#divMsgBuscarPaquete").html(mensaje);
         $("#ulBuscarPaquete").html("");
     }
+}
+function validarIngresoHora(){
+    var id= $(this).attr("id");
+    var hora = $(this).val();
+     if (!keyHora(hora.charCodeAt(hora.length-1),hora)) {
+         hora=hora.slice(0,-1);
+         
+     }
+     $(this).val(hora);
+}
+function validarIngresoMin(){
+    var id= $(this).attr("id");
+    var hora = $(this).val();
+     if (!keyMinutos(hora.charCodeAt(hora.length-1),hora)) {
+         hora=hora.slice(0,-1);
+         
+     }
+     $(this).val(hora);
 }
 
 function precargaBlur() {
