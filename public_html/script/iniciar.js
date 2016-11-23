@@ -2,6 +2,7 @@ $('document').ready(iniciarPrograma);
 
 function iniciarPrograma() {
     precargaUsuarios();
+    $("#ulMenu1").click(limpiar);
     $(".banner").hide();
     $("#divMenu").hide();
     $("#divPendientes").hide();
@@ -37,7 +38,7 @@ function limpiarBusqueda() {
 
 function guardarEstado() {
     var codigo = parseInt(quitarLetraID($(this).attr("id")));
-    var entrega = getElementoPorParametro(entregas, "paquete", codigo);
+    var entrega = getElementoPorClave(entregas, "paquete", codigo);
     var enViajeHora = $("#txtEnViajeHora").val();
     var enViajeMin = $("#txtEnViajeMin").val();
     var entregadoHora = $("#txtEntregadoHora").val();
@@ -88,8 +89,8 @@ function buscarPaquete() {
     var codigo = parseInt($("#txtBuscarPaquete").val());
     var encontrado = false;
     if (validarNum(codigo)) {
-        var paquete = getElementosPorParametro(paquetes, "codigo", codigo);
-        var entrega = getElementosPorParametro(entregas, "paquete", codigo);
+        var paquete = getElementosPorClave(paquetes, "codigo", codigo);
+        var entrega = getElementosPorClave(entregas, "paquete", codigo);
         mensaje = mostrarReportePaquete(paquete, entrega, usuarioActual.tipo);
         if (mensaje !== null) {
             encontrado = true;
@@ -130,7 +131,9 @@ function validarIngresoHora() {
     var hora = $(this).val();
     if (!keyHora(hora.charCodeAt(hora.length - 1), hora)) {
         hora = hora.slice(0, -1);
-
+        $("#divMsgBuscarPaquete").html("Debe Ingresar una hora correcta");
+    } else {
+        $("#divMsgBuscarPaquete").empty();
     }
     $(this).val(hora);
 }
@@ -140,7 +143,9 @@ function validarIngresoMin() {
     var hora = $(this).val();
     if (!keyMinutos(hora.charCodeAt(hora.length - 1), hora)) {
         hora = hora.slice(0, -1);
-
+        $("#divMsgBuscarPaquete").html("Debe Ingresar una hora correcta");
+    } else {
+        $("#divMsgBuscarPaquete").empty();
     }
     $(this).val(hora);
 }
@@ -164,7 +169,7 @@ function mostrarDisponibles() {
     $("#ulRepartidoresDisponibles").listview('refresh');
 
     for (var x = 0; x < disponibles.length; x++) {
-        $("#" + disponibles[x].codigo).click(seleccionarRepartidor);
+        $("#a" + disponibles[x].codigo).click(seleccionarRepartidor);
     }
     $("#ulPaquetesPendientes").html(mostrarPaquetes(pendientes));
     $("#ulPaquetesPendientes").listview('refresh');
@@ -173,24 +178,48 @@ function mostrarDisponibles() {
     }
 }
 
+
 function seleccionarRepartidor() {
-    var id = quitarLetraID($(this).attr("id"));
-    var repartidor = getRepartidor(id);
-    var idPaquete = quitarLetraID($(".PaqueteSeleccionado").attr("id"));
+    var idRepartidorActual = quitarLetraID($(this).attr("id"));
+    var idRepartidorAnterior = quitarLetraID($(".RepartidorSeleccionado").attr("id"));
+    var repartidor = getRepartidor(idRepartidorActual);
+    var idPaqueteSelecionado = quitarLetraID($(".PaqueteSeleccionado").attr("id"));
     var paquetesDisponibles = new Array();
     $(".RepartidorSeleccionado").removeClass("RepartidorSeleccionado");
-    $("#a" + id).addClass("RepartidorSeleccionado");
-    if (!validarNum(idPaquete)) {
-        paquetesDisponibles = disponiblesPorPeso(paqueteSinRepartir(), repartidor.medio);
-        $("#ulPaquetesPendientes").html(mostrarPaquetes(paquetesDisponibles));
-        $("#ulPaquetesPendientes").listview('refresh');
-        for (var x = 0; x < paquetesDisponibles.length; x++) {
-            $("#P" + paquetesDisponibles[x].codigo).click(seleccionarPaquete);
+    if (idRepartidorActual !== idRepartidorAnterior) {
+        $("#a" + idRepartidorActual).addClass("RepartidorSeleccionado");
+        if (!validarNum(idPaqueteSelecionado)) {
+            paquetesDisponibles = disponiblesPorPeso(paqueteSinRepartir(), repartidor.medio);
+            ActualizarListaPaquetesPendientes(paquetesDisponibles);
         }
+
+    } else {
+        if (isNaN(idPaqueteSelecionado)) {
+            ActualizarListaRepartidores(repartidoresDisponibles());
+            ActualizarListaPaquetesPendientes(paqueteSinRepartir());
+        }
+    }
+    if (!isNaN(idPaqueteSelecionado)) {
+        $("#P" + idPaqueteSelecionado).addClass("PaqueteSeleccionado");
     }
 
 }
-var entregas = new Array();
+
+function ActualizarListaRepartidores(pRepartidores) {
+    $("#ulRepartidoresDisponibles").html(mostrarRepartidores(pRepartidores, "a"));
+    $("#ulRepartidoresDisponibles").listview('refresh');
+    for (var x = 0; x < pRepartidores.length; x++) {
+        $("#a" + pRepartidores[x].codigo).click(seleccionarRepartidor);
+    }
+}
+
+function ActualizarListaPaquetesPendientes(pPaquetes) {
+    $("#ulPaquetesPendientes").html(mostrarPaquetes(pPaquetes));
+    $("#ulPaquetesPendientes").listview('refresh');
+    for (var i = 0; i < pPaquetes.length; i++) {
+        $("#P" + pPaquetes[i].codigo).click(seleccionarPaquete);
+    }
+}
 
 function asignarRepartidor() {
     var idPaqueteTxt = quitarLetraID($(".PaqueteSeleccionado").attr("id"));
@@ -233,31 +262,39 @@ function quitarLetraID(_string) {
     //en las listas del ID del objeto, para poder asignar
     //la clase cuando esta seleccionado
     var sinletra = "";
-    for (var x = 0; x < _string.length; x++) {
-        if (!isNaN(_string[x])) {
-            sinletra += _string[x];
+    if (_string !== undefined) {
+        for (var x = 0; x < _string.length; x++) {
+            if (!isNaN(_string[x])) {
+                sinletra += _string[x];
+            }
         }
+    } else {
+        sinletra = null;
     }
+
     return parseInt(sinletra);
 }
 
 
 function seleccionarPaquete() {
-    var identificador = quitarLetraID($(this).attr("id"));
-    var repartidor = quitarLetraID($(".RepartidorSeleccionado").attr("id"));
+    var idPaqueteClickeadoActual = quitarLetraID($(this).attr("id"));
+    var idPaqueteSeleccionadoAnterior = quitarLetraID($(".PaqueteSeleccionado").attr("id"));
+    var idRepartidorSeleccionado = quitarLetraID($(".RepartidorSeleccionado").attr("id"));
+    var repartidoresAMostrar = new Array();
     $(".PaqueteSeleccionado").removeClass("PaqueteSeleccionado");
-    var mensaje = "";
-    $("#P" + identificador).addClass("PaqueteSeleccionado");
-    var paquete = getElementoPorParametro(paquetes, "codigo", identificador);
-    var repartidores = repartidoresDisponiblesPeso(paquete.peso);
-    $("#ulRepartidoresDisponibles").html(mostrarRepartidores(repartidores, "a"));
-    $("#ulRepartidoresDisponibles").listview('refresh');
+    if (idPaqueteClickeadoActual !== idPaqueteSeleccionadoAnterior) {
+        $("#P" + idPaqueteClickeadoActual).addClass("PaqueteSeleccionado");
+        var paquete = getElementoPorClave(paquetes, "codigo", idPaqueteClickeadoActual);
+        ActualizarListaRepartidores(repartidoresDisponiblesPeso(paquete.peso));
 
-    for (var x = 0; x < repartidores.length; x++) {
-        $("#" + repartidores[x].codigo).click(seleccionarRepartidor);
+    } else {
+        ActualizarListaRepartidores(repartidoresDisponibles());
+
     }
-    $("#a" + repartidor).addClass("RepartidorSeleccionado");
 
+    if (!isNaN(idRepartidorSeleccionado)) {
+        $("#a" + idRepartidorSeleccionado).addClass("RepartidorSeleccionado");
+    }
 
 
 }
@@ -275,7 +312,7 @@ function login() {
             mensaje = "El usuario no existe";
             break;
         case 1:
-            usuarioActual = getElementoPorParametro(usuarios, "cedula", usuario);
+            usuarioActual = getElementoPorClave(usuarios, "cedula", usuario);
             $(".banner").show();
             $("#divLogin").hide();
             $("#divMenu").show();
@@ -285,7 +322,7 @@ function login() {
             $("#divPendientes").show();
             break;
         case 2:
-            usuarioActual = getElementoPorParametro(usuarios, "cedula", usuario);
+            usuarioActual = getElementoPorClave(usuarios, "cedula", usuario);
             $(".banner").show();
             $("#divLogin").hide();
             $("#divMenu").show();
@@ -326,9 +363,15 @@ function logout() {
 }
 
 function limpiar() {
-    $("#divMsgBuscarPaquete").html("");
-    $("#divMsgNuevoPaquete").html("");
+    $("#divMsgBuscarPaquete").empty();
+    $("#divMsgNuevoPaquete").empty();
+    $("#divMsgLogin").empty();
+    $("#divMsgAsignar").empty();
     $("#ulBuscarPaquete").html("<a></a>");
+    $("#divEntXRep").empty();
+    $(".ReporteSeleccionado").removeClass("ReporteSeleccionado");
+    $(".RepartidorSeleccionado").removeClass("RepartidorSeleccionado");
+    $(".PaqueteSeleccionado").removeClass(".PaqueteSeleccionado");
     $("input").val("");
 }
 

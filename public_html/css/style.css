@@ -55,6 +55,11 @@ body{
     color: white !important;
 
 }
+.ReporteSeleccionado{
+    background: #38c !important;
+    color: white !important;
+
+}
 
 .hora{
   width: 30px !important;

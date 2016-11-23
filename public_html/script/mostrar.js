@@ -1,9 +1,8 @@
-
-function mostrarRepartidores(_array,pIdentificador) {
+function mostrarRepartidores(pRepartidores, pIdentificador) {
     var mensaje = "<li data-role='list-divider'>Repartidores</li>";
     var icono = "";
-    for (var x = 0; x < _array.length; x++) {
-        switch (_array[x].medio) {
+    for (var x = 0; x < pRepartidores.length; x++) {
+        switch (pRepartidores[x].medio) {
             case "Bicicleta":
                 icono = "<i class='fa fa-bicycle' aria-hidden='true'></i>";
                 break;
@@ -15,21 +14,21 @@ function mostrarRepartidores(_array,pIdentificador) {
                 break;
             default:
         }
-        mensaje += "<li id=" + pIdentificador + _array[x].codigo + ">" + icono;
-        mensaje += "  " + _array[x].nombre + "</li>";
+        mensaje += "<li id=" + pIdentificador + pRepartidores[x].codigo + ">" + icono;
+        mensaje += "  " + pRepartidores[x].nombre + "</li>";
     }
     return mensaje;
 }
 
 
-function mostrarPaquetes(_array, pIdentificador) {
+function mostrarPaquetes(pPaquetes, pIdentificador) {
     var mensaje = "<li data-role='list-divider'>Paquetes</li>";
     var icono = "<i class='fa fa-cube' aria-hidden='true'></i>";
     if (pIdentificador === undefined) pIdentificador = "";
-    if (_array.length > 0) {
-        for (var x=0;x <_array.length;x++) {
-            mensaje += "<li id=P" + pIdentificador + _array[x].codigo + "> " + icono;
-            mensaje += " Codigo:" + _array[x].codigo + " Remitente: " + _array[x].ciRemitente + " Destinatario:" + _array[x].ciDestinatario + "</li>";
+    if (pPaquetes.length > 0) {
+        for (var x = 0; x < pPaquetes.length; x++) {
+            mensaje += "<li id=P" + pIdentificador + pPaquetes[x].codigo + "> " + icono;
+            mensaje += " Codigo:" + pPaquetes[x].codigo + " Remitente: " + pPaquetes[x].ciRemitente + " Destinatario:" + pPaquetes[x].ciDestinatario + "</li>";
         }
     } else {
         mensaje = null;
@@ -37,6 +36,7 @@ function mostrarPaquetes(_array, pIdentificador) {
 
     return mensaje;
 }
+
 function mostrarReportePaquete(_paquetes, _entregas, _usuario) {
     var mensaje = "<li data-role='list-divider'>Paquetes</li>";
     var icono = "<i class='fa fa-cube' aria-hidden='true'";
@@ -71,7 +71,7 @@ function mostrarReportePaquete(_paquetes, _entregas, _usuario) {
                         enViaje = _entregas[x].EV;
                         entregado = _entregas[x].ED;
                         icono += "style='color:green'";
-                       var costo = _entregas[x].costo;
+                        var costo = _entregas[x].costo;
                     }
                 }
             }
@@ -101,4 +101,12 @@ function mostrarReportePaquete(_paquetes, _entregas, _usuario) {
     }
 
     return mensaje;
+}
+
+function PrimeraMayuscula(string) {
+    var aux = string.toUpperCase().charAt(0);
+    for (var i = 1; i < string.length; i++) {
+        aux += string.charAt(i);
+    }
+    return aux;
 }

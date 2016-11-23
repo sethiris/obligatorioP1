@@ -70,9 +70,9 @@ function repartidoresDisponiblesPeso(peso) {
 
 
     for (var x = 0; x < limitesPaquetes.length; x++) {
-        for (var i in  limitesPaquetes[x]) {
+        for (var i in limitesPaquetes[x]) {
             if (peso >= limitesPaquetes[x][i].desde && peso <= limitesPaquetes[x][i].hasta) {
-                var todosDelMedio = getElementosPorParametro(todos, "medio", i);
+                var todosDelMedio = getElementosPorClave(todos, "medio", i);
                 for (var y = 0; y < todosDelMedio.length; y++) {
                     disponibles.push(todosDelMedio[y]);
                 }

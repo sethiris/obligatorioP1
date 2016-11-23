@@ -1,7 +1,15 @@
 var entregas = new Array();
 
 function precargaEntregas() {
-    entregas[0] = {"paquete": 1, "repartidor": 2, "RE": "00:00", "ER": null, "EV": null, "ED": null, "costo": null};
+    entregas[0] = {
+        "paquete": 1,
+        "repartidor": null,
+        "RE": "00:00",
+        "ER": null,
+        "EV": null,
+        "ED": null,
+        "costo": null
+    };
 
 
     //entregas.push({"paquete":, "repartidor":, "RE":, "ER":, "EV":, "ED":, "costo":});
@@ -14,7 +22,7 @@ function ListarPendEntrega() {
     for (var ite = 0; ite < entregas.length; ite++) {
         var entregaActual = entregas[ite];
         if (entregaActual.ER !== null && entregaActual.ED === null) {
-            pendientes.push(getElementoPorParametro(paquetes, "codigo", entregaActual.paquete));
+            pendientes.push(getElementoPorClave(paquetes, "codigo", entregaActual.paquete));
             cantPend++;
         }
     }
@@ -33,8 +41,8 @@ function mostrarPendEntrega() {
 function calcularCostoEntrega(_entrega) {
     var costo = 0;
     var importeTotal = 0;
-    var repartidor = getElementoPorParametro(repartidores, "codigo", _entrega.repartidor);
-    var paquete = getElementoPorParametro(paquetes, "codigo", _entrega.paquete);
+    var repartidor = getElementoPorClave(repartidores, "codigo", _entrega.repartidor);
+    var paquete = getElementoPorClave(paquetes, "codigo", _entrega.paquete);
     for (var x = 0; x < limitesPaquetes.length; x++) {
         for (var i in limitesPaquetes[x])
             if (i === repartidor.medio) {
@@ -73,7 +81,7 @@ function calcularCostoEntrega(_entrega) {
  */
 
 function entregadosPorRepartidor(pRepartidor) {
-    var mensaje = "<b>Paquetes entregados por repartidor:</b><br><br>";
+    var mensaje = "";
     var entregados = new Array();
     for (var ite = 0; ite < entregas.length; ite++) {
         var entregaActual = entregas[ite];
@@ -88,9 +96,29 @@ function entregadosPorRepartidor(pRepartidor) {
 
     entregados.sort(ordenarXHoraDescendente);
 
-    mensaje += crearTabla(entregados);
+    mensaje += crearLista(entregados, "ulEntregadoPorRepartidor", "<b>Paquetes entregados por repartidor</b>", "No ha entregado ningun paquete aun");
     return mensaje;
 }
+
+function crearLista(_array, pIdLista, pTitulo, pError) {
+    var mensaje = "<ul data-role='listview' data-inset='true' id='" + pIdLista + "'>";
+    mensaje += "<li data-role='list-divider'>" + pTitulo + "</li>";
+    if (_array.length > 0 && _array !== undefined) {
+        for (var i = 0; i < _array.length; i++) {
+            mensaje += "<li>";
+            for (var x in _array[i]) {
+                mensaje += PrimeraMayuscula(x) + ":" + _array[i][x] + "&nbsp";
+            }
+            mensaje += "</li>";
+        }
+    } else {
+        mensaje += "<li>" + pError + "</li>";
+    }
+    mensaje += "</ul>";
+    return mensaje;
+
+}
+
 
 function mostrarEntregadosPorRepart() {
     //crearTabla(repartidores);
@@ -107,7 +135,10 @@ function mostrarEntregadosPorRepart() {
 
 function seleccionoRepartidor() {
     var seleccionado = quitarLetraID($(this).attr("id"));
+    $(".ReporteSeleccionado").removeClass("ReporteSeleccionado");
+    $("#R" + seleccionado).addClass("ReporteSeleccionado");
     $("#divEntXRep").html(entregadosPorRepartidor(seleccionado));
+    $("#ulEntregadoPorRepartidor").listview();
 }
 
 function ordenarXHoraDescendente(pEntregaA, pEntregaB) {
@@ -120,7 +151,7 @@ function crearTabla(pArray) {
     var tablaDatos = "<div class='Table'>"; //ingreso tabla
 
     tablaDatos += "<div class = 'Heading'>"; //creo los heading de cada columna
-    for (var clave in pArray[0]) {//creo para cada celda del heading, elnombre de la clave
+    for (var clave in pArray[0]) { //creo para cada celda del heading, elnombre de la clave
         tablaDatos += "<div class = 'Cell'>" + clave + "</div>";
     }
     tablaDatos += "</div>";

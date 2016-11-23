@@ -188,17 +188,17 @@ function validarPesoPaquete() { //función que avisa si el peso ingresado por el
 
 }
 
-function keyHora(keyCode, hora) {
+function keyHora(pKeyCode, pHora) {
     var validado = true;
-    if (keyCode !== 8 && keyCode !== 9) {
-        if (hora.length <= 2) {
-            if (hora.length <=1) {
-                if (keyCode < 48 || keyCode > 50) validado = false;
+    if (pKeyCode !== 8 && pKeyCode !== 9) {
+        if (pHora.length <= 2) {
+            if (pHora.length <= 1) {
+                if (pKeyCode < 48 || pKeyCode > 50) validado = false;
             } else {
-                if (hora[0] === "2") {
-                    if (keyCode < 48 || keyCode > 51) validado = false;
+                if (pHora[0] === "2") {
+                    if (pKeyCode < 48 || pKeyCode > 51) validado = false;
                 } else {
-                    if (keyCode < 48 || keyCode > 57) validado = false;
+                    if (pKeyCode < 48 || pKeyCode > 57) validado = false;
                 }
 
             }
@@ -211,14 +211,14 @@ function keyHora(keyCode, hora) {
 }
 
 
-function keyMinutos(keyCode, hora) {
+function keyMinutos(ppKeyCode, pHora) {
     var validado = true;
-    if (keyCode !== 8 && keyCode !== 9) {
-        if (hora.length <=2) {
-            if (hora.length === 1) {
-                if (keyCode < 48 || keyCode > 53) validado = false;
+    if (ppKeyCode !== 8 && ppKeyCode !== 9) {
+        if (pHora.length <= 2) {
+            if (pHora.length === 1) {
+                if (ppKeyCode < 48 || ppKeyCode > 53) validado = false;
             } else {
-                if (keyCode < 48 || keyCode > 57) validado = false;
+                if (ppKeyCode < 48 || ppKeyCode > 57) validado = false;
 
             }
         } else {

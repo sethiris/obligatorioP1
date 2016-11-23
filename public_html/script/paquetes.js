@@ -69,7 +69,7 @@ function paqueteSinRepartir() {
     var sinRepartir = new Array();
     for (var x = 0; x < entregas.length; x++) {
         if (entregas[x].ER === null) {
-            sinRepartir.push(getElementoPorParametro(paquetes, "codigo", entregas[x].paquete));
+            sinRepartir.push(getElementoPorClave(paquetes, "codigo", entregas[x].paquete));
         }
     }
     return sinRepartir;
