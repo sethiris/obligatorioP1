@@ -1,7 +1,8 @@
-function mostrarRepartidores(_array, indentificador) {
+
+function mostrarRepartidores(_array,pIdentificador) {
     var mensaje = "<li data-role='list-divider'>Repartidores</li>";
     var icono = "";
-    for (var x in _array) {
+    for (var x = 0; x < _array.length; x++) {
         switch (_array[x].medio) {
             case "Bicicleta":
                 icono = "<i class='fa fa-bicycle' aria-hidden='true'></i>";
@@ -14,19 +15,20 @@ function mostrarRepartidores(_array, indentificador) {
                 break;
             default:
         }
-        mensaje += "<li id=" + indentificador + _array[x].codigo + ">" + icono;
+        mensaje += "<li id=" + pIdentificador + _array[x].codigo + ">" + icono;
         mensaje += "  " + _array[x].nombre + "</li>";
     }
     return mensaje;
 }
 
-function mostrarPaquetes(_array, identificador) {
+
+function mostrarPaquetes(_array, pIdentificador) {
     var mensaje = "<li data-role='list-divider'>Paquetes</li>";
     var icono = "<i class='fa fa-cube' aria-hidden='true'></i>";
-    if (identificador === undefined) identificador = "";
+    if (pIdentificador === undefined) pIdentificador = "";
     if (_array.length > 0) {
-        for (var x in _array) {
-            mensaje += "<li id=P" + identificador + _array[x].codigo + "> " + icono;
+        for (var x=0;x <_array.length;x++) {
+            mensaje += "<li id=P" + pIdentificador + _array[x].codigo + "> " + icono;
             mensaje += " Codigo:" + _array[x].codigo + " Remitente: " + _array[x].ciRemitente + " Destinatario:" + _array[x].ciDestinatario + "</li>";
         }
     } else {
@@ -35,12 +37,11 @@ function mostrarPaquetes(_array, identificador) {
 
     return mensaje;
 }
-
 function mostrarReportePaquete(_paquetes, _entregas, _usuario) {
     var mensaje = "<li data-role='list-divider'>Paquetes</li>";
     var icono = "<i class='fa fa-cube' aria-hidden='true'";
     if (_paquetes.length > 0) {
-        for (var x in _paquetes) {
+        for (var x = 0; x < _paquetes.length; x++) {
             var entregadoR = "--";
             var enViaje = "--";
             var entregado = "--";
@@ -50,10 +51,10 @@ function mostrarReportePaquete(_paquetes, _entregas, _usuario) {
                 if (_entregas[x].EV === null) {
                     entregadoR = _entregas[x].ER;
                     if (_usuario === 1) {
-                        enViaje = "<br><input class='ui-input-text hora' id='txtEnViajeHora' placeholder='HH'></input>:";
-                        enViaje += "<input class='ui-input-text hora' id='txtEnViajeMin' placeholder='MM'></input>";
-                        entregado = "<br><input class='ui-input-text hora' id='txtEntregadoHora' placeholder='HH'></input>:";
-                        entregado += "<input class='ui-input-text hora' id='txtEntregadoMin' placeholder='MM'></input>";
+                        enViaje = "<br><input class='ui-input-text' id='txtEnViajeHora' placeholder='HH'></input>:";
+                        enViaje += "<input class='ui-input-text' id='txtEnViajeMin' placeholder='MM'></input>";
+                        entregado = "<br><input class='ui-input-text' id='txtEntregadoHora' placeholder='HH'></input>:";
+                        entregado += "<input class='ui-input-text' id='txtEntregadoMin' placeholder='MM'></input>";
                     }
                     icono += "style='color:yellow'";
                 } else {
@@ -61,8 +62,8 @@ function mostrarReportePaquete(_paquetes, _entregas, _usuario) {
                         entregadoR = _entregas[x].ER;
                         enViaje = _entregas[x].EV;
                         if (_usuario === 1) {
-                            entregado = "<br><input class='ui-input-text hora' id='txtEntregadoHora' placeholder='HH'></input>:";
-                            entregado += "<input class='ui-input-text hora' id='txtEntregadoMin' placeholder='MM'></input>";
+                            entregado = "<br><input class='ui-input-text' id='txtEntregadoHora' placeholder='HH'></input>:";
+                            entregado += "<input class='ui-input-text' id='txtEntregadoMin' placeholder='MM'></input>";
                         }
                         icono += "style='color:blue'";
                     } else {
@@ -70,8 +71,7 @@ function mostrarReportePaquete(_paquetes, _entregas, _usuario) {
                         enViaje = _entregas[x].EV;
                         entregado = _entregas[x].ED;
                         icono += "style='color:green'";
-
-                        var costo = _entregas[x].costo;
+                       var costo = _entregas[x].costo;
                     }
                 }
             }
@@ -92,7 +92,8 @@ function mostrarReportePaquete(_paquetes, _entregas, _usuario) {
             mensaje += "<div class='ui-block-c'> En viaje" + enViaje + "</div>";
             mensaje += "<div class='ui-block-d'> Entregado:" + entregado + "</div>";
             mensaje += "</div> ";
-            if (_usuario === 1 && _entregas[x].ED === null && _entregas[x].ER !== null) mensaje += "</li><li><input class='ui-btn ui shadow' id='btnGuardarEstados" + _paquetes[x].codigo + "' type='button' value='Guardar'></input>";
+            if (_usuario === 1 && _entregas[x].ED === null && _entregas[x].ER !== null)
+                mensaje += "</li><li><input class='ui-btn ui shadow' id='btnGuardarEstados" + _paquetes[x].codigo + "' type='button' value='Guardar'></input>";
         }
         mensaje += "</div></li>";
     } else {

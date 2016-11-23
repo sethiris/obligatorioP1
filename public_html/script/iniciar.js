@@ -19,6 +19,7 @@ function iniciarPrograma() {
     precargaBlur(); //asigna todas las validaciones con blur al cargar el sitio
     precargaPaquetes();
     precargaRepartidores();
+    precargaEntregas();
     $("#liAsignar").click(mostrarDisponibles);
     $("#btnNuevoPaquete").click(ingresarNuevoPaquete);
     $("#btnAsignarRepartidor").click(asignarRepartidor);
@@ -43,7 +44,7 @@ function guardarEstado() {
     var entregadoMin = $("#txtEntregadoMin").val();
     var mensaje = "";
     if (validarNumPositivo(enViajeHora) && validarNumPositivo(enViajeMin)) {
-        
+
         var horaFormato = enViajeHora + ":" + enViajeMin;
         if (ordenarFechas(horaFormato, entrega.ER) === -1) {
             entrega.EV = horaFormato;
@@ -74,8 +75,8 @@ function guardarEstado() {
         }
 
     }
-    if( enViajeHora ==="" && enViajeMin==="" &&  entregadoHora === "" && entregadoMin==="" ){
-        mensaje="No ingreso ningun estado";
+    if (enViajeHora === "" && enViajeMin === "" && entregadoHora === "" && entregadoMin === "") {
+        mensaje = "No ingreso ningun estado";
     }
 
     $("#divMsgBuscarPaquete").html(mensaje);
@@ -123,23 +124,25 @@ function buscarPaquete() {
         $("#ulBuscarPaquete").html("");
     }
 }
-function validarIngresoHora(){
-    var id= $(this).attr("id");
+
+function validarIngresoHora() {
+    var id = $(this).attr("id");
     var hora = $(this).val();
-     if (!keyHora(hora.charCodeAt(hora.length-1),hora)) {
-         hora=hora.slice(0,-1);
-         
-     }
-     $(this).val(hora);
+    if (!keyHora(hora.charCodeAt(hora.length - 1), hora)) {
+        hora = hora.slice(0, -1);
+
+    }
+    $(this).val(hora);
 }
-function validarIngresoMin(){
-    var id= $(this).attr("id");
+
+function validarIngresoMin() {
+    var id = $(this).attr("id");
     var hora = $(this).val();
-     if (!keyMinutos(hora.charCodeAt(hora.length-1),hora)) {
-         hora=hora.slice(0,-1);
-         
-     }
-     $(this).val(hora);
+    if (!keyMinutos(hora.charCodeAt(hora.length - 1), hora)) {
+        hora = hora.slice(0, -1);
+
+    }
+    $(this).val(hora);
 }
 
 function precargaBlur() {
@@ -159,12 +162,13 @@ function mostrarDisponibles() {
     var pendientes = paqueteSinRepartir();
     $("#ulRepartidoresDisponibles").html(mostrarRepartidores(disponibles, "a"));
     $("#ulRepartidoresDisponibles").listview('refresh');
-    for (var x in disponibles) {
-        $("#a" + disponibles[x].codigo).click(seleccionarRepartidor);
+
+    for (var x = 0; x < disponibles.length; x++) {
+        $("#" + disponibles[x].codigo).click(seleccionarRepartidor);
     }
     $("#ulPaquetesPendientes").html(mostrarPaquetes(pendientes));
     $("#ulPaquetesPendientes").listview('refresh');
-    for (var i in pendientes) {
+    for (var i = 0; i < pendientes.length; i++) {
         $("#P" + pendientes[i].codigo).click(seleccionarPaquete);
     }
 }
@@ -180,7 +184,7 @@ function seleccionarRepartidor() {
         paquetesDisponibles = disponiblesPorPeso(paqueteSinRepartir(), repartidor.medio);
         $("#ulPaquetesPendientes").html(mostrarPaquetes(paquetesDisponibles));
         $("#ulPaquetesPendientes").listview('refresh');
-        for (var x in paquetesDisponibles) {
+        for (var x = 0; x < paquetesDisponibles.length; x++) {
             $("#P" + paquetesDisponibles[x].codigo).click(seleccionarPaquete);
         }
     }
@@ -229,7 +233,7 @@ function quitarLetraID(_string) {
     //en las listas del ID del objeto, para poder asignar
     //la clase cuando esta seleccionado
     var sinletra = "";
-    for (var x in _string) {
+    for (var x = 0; x < _string.length; x++) {
         if (!isNaN(_string[x])) {
             sinletra += _string[x];
         }
@@ -248,8 +252,9 @@ function seleccionarPaquete() {
     var repartidores = repartidoresDisponiblesPeso(paquete.peso);
     $("#ulRepartidoresDisponibles").html(mostrarRepartidores(repartidores, "a"));
     $("#ulRepartidoresDisponibles").listview('refresh');
-    for (var x in repartidores) {
-        $("#a" + repartidores[x].codigo).click(seleccionarRepartidor);
+
+    for (var x = 0; x < repartidores.length; x++) {
+        $("#" + repartidores[x].codigo).click(seleccionarRepartidor);
     }
     $("#a" + repartidor).addClass("RepartidorSeleccionado");
 

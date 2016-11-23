@@ -41,11 +41,12 @@ limitesPaquetes = [{
     }
 }];
 
+
 function repartidoresDisponibles() {
     var disponibles = new Array();
     var encontrado = false;
     var i = 0;
-    for (var x in repartidores) {
+    for (var x = 0; x < repartidores.length; x++) {
         while (i < entregas.length && !encontrado) {
             if (entregas[i].repartidor === repartidores[x].codigo && entregas[i].ED === null) {
                 encontrado = true;
@@ -67,11 +68,12 @@ function repartidoresDisponiblesPeso(peso) {
     var disponibles = new Array();
     var todos = repartidoresDisponibles();
 
-    for (var x in limitesPaquetes) {
-        for (var i in limitesPaquetes[x]) {
+
+    for (var x = 0; x < limitesPaquetes.length; x++) {
+        for (var i in  limitesPaquetes[x]) {
             if (peso >= limitesPaquetes[x][i].desde && peso <= limitesPaquetes[x][i].hasta) {
                 var todosDelMedio = getElementosPorParametro(todos, "medio", i);
-                for (var y in todosDelMedio) {
+                for (var y = 0; y < todosDelMedio.length; y++) {
                     disponibles.push(todosDelMedio[y]);
                 }
             }
@@ -85,7 +87,7 @@ function repartidoresDisponiblesPeso(peso) {
 
 function getRepartidor(pCodigo) {
     var repartidor = new Array();
-    for (var x in repartidores) {
+    for (var x = 0; x < repartidores.length; x++) {
         if (repartidores[x].codigo === parseInt(pCodigo)) {
             repartidor = repartidores[x];
         }
