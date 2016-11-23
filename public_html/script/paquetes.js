@@ -41,17 +41,14 @@ function agregarPaquete(pCIRemitente, pNomRemitente, pApeRemitente, pCIDestinat,
         /*
          paquete.push({"codigo": numPaquete, "ciRemitente": pCIRemitente, "nomRemitente": pNomRemitente,
          "apeRemitente": pApeRemitente, "ciDestinatario": pCIDestinat, "nomDestinatario": pNomDestinat,
-         "apeDestinatario": pApeDestinat, "dirDestinatario": pDirDestinat, "peso": pPeso, "repartidor": null});
+         "apeDestinatario": pApeDestinat, "dirDestinatario": pDirDestinat, "peso": pPeso});
          paquetes.push(paquete);*/
         paqueteAgregado = true;
         var fechaActual = new Date();
-        entregas.push({"paquete": numPaquete, "repartidor": null, "RE": agregarHoraActual(), "ER": null, "EV": null, "ED": null,"costo":null});
+        entregas.push({"paquete": numPaquete, "repartidor": null, "RE": agregarHoraActual(), "ER": null, "EV": null, "ED": null, "costo": null});
     }
     return paqueteAgregado;
 }
-
-
-
 
 // RE recepcionado en la empresa
 // ER entregado al repartidor
@@ -60,8 +57,7 @@ function agregarPaquete(pCIRemitente, pNomRemitente, pApeRemitente, pCIDestinat,
 
 function paqueteSinRepartir() {
     var sinRepartir = new Array();
-    var ite = 0;
-    for (var x in entregas) {
+    for (var x = 0; x < entregas.length; x++) {
         if (entregas[x].ER === null) {
             sinRepartir.push(getElementoPorParametro(paquetes, "codigo", entregas[x].paquete));
         }
@@ -74,7 +70,7 @@ function disponiblesPorPeso(_paquetes, medio) {
     var filtrados = new Array();
     var desde = 0;
     var hasta = 0;
-    for (var x in limitesPaquetes) {
+    for (var x = 0; x < limitesPaquetes.length; x++) {
         for (var i in limitesPaquetes[x]) {
             if (i === medio) {
                 desde = limitesPaquetes[x][i].desde;
@@ -82,7 +78,7 @@ function disponiblesPorPeso(_paquetes, medio) {
             }
         }
     }
-    for (var x in _paquetes) {
+    for (var x = 0; x < _paquetes.length; x++) {
         if (_paquetes[x].peso <= hasta && _paquetes[x].peso >= desde) {
             filtrados.push(_paquetes[x]);
         }

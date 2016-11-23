@@ -9,7 +9,7 @@ function precargaUsuarios() {
             {"cedula": 55996612, "clave": "pass004", "tipo": 2},
             {"cedula": 50555867, "clave": "pass004", "tipo": 2},
             {"cedula": 1, "clave": "1", "tipo": 1},
-          {"cedula": 2, "clave": "2", "tipo": 2});
+            {"cedula": 2, "clave": "2", "tipo": 2});
 }
 function cargaInicial() {
 
@@ -21,7 +21,7 @@ function validarLogin(pUsuario, pClave) {
     //Funcion que comprueba si el usuario y la clave existe, devuelve 1 o 2 segun el tipo si el login es correcto
     // 0 si el usuario no existe y -1 si la contraseña no es correcta
     var resultado = 0;
-    for (var i in usuarios) {
+    for (var i = 0; i < usuarios.length; i++) {
         if (pUsuario === usuarios[i].cedula) {
             if (pClave === usuarios[i].clave) {
                 switch (usuarios[i].tipo) {
